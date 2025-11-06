@@ -1,0 +1,9 @@
+AddOptionMenu "OptionsMenu"
+{
+	SubMenu "SoM's GunBonsai eXtensions", "som_gbx"
+}
+
+OptionMenu "som_gbx"
+{
+	Title "SoM's GunBonsai eXtensions"
+}

@@ -1,0 +1,12 @@
+Class som_gbx_eventhandler : EventHandler
+{
+	void hello_world()
+	{
+		Console.Printf("Hello, World!");
+	}
+	
+	override void WorldLoaded(WorldEvent e)
+	{
+		hello_world();
+	}
+}

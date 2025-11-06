@@ -1,0 +1,17 @@
+Scripting
+---------
+Author, SoM GBX - StainedOfMind
+https://github.com/stainedofmind/som-gunbonsai-extensions
+
+Author, GunBonsai - ToxicFrog
+https://github.com/ToxicFrog/doom-mods/tree/main/gun-bonsai
+
+Sprites
+-------
+PDA - scalliano
+https://www.realm667.com/component/docman/?task=doc_download&gid=439&Itemid=
+
+Fonts
+-----
+Mementwo Small - Jimmy / Memento Mori 2 Team
+https://www.realm667.com/component/docman/?task=doc_download&gid=964&Itemid=
