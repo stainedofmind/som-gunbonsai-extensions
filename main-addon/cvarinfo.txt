@@ -2,6 +2,8 @@
 
 // Upgrades
 // Flak Shot
+server bool som_gbx_upgr_flak_shot_enabled = true;
+
 server bool som_gbx_upgr_flak_shot_simple = false;
 server float som_gbx_upgr_flak_shot_dmg_mult = 1.0;
 
@@ -13,3 +15,6 @@ server int som_gbx_upgr_flak_shot_flaks_inc = 1;
 
 server int som_gbx_upgr_flak_shot_dmg_base = 1;
 server int som_gbx_upgr_flak_shot_dmg_inc = 1;
+
+// Bandoliers
+server bool som_gbx_upgr_bandoliers_enabled = false;

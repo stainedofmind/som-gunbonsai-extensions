@@ -10,6 +10,8 @@ OptionMenu "som_gbx"
 	//StaticText " "
 	StaticText "Upgrades", FIRE
 	StaticText "Flak Shot", YELLOW
+	Option "Enabled", "som_gbx_upgr_flak_shot_enabled", "OnOff"
+	StaticText " "
 	Option "Use Simple Version", "som_gbx_upgr_flak_shot_simple", "YesNo"
 	TextField "Global Damage Multiplier", "som_gbx_upgr_flak_shot_dmg_mult"
 	StaticText " "
@@ -19,4 +21,7 @@ OptionMenu "som_gbx"
 	TextField "Flak Damage - Per Level", "som_gbx_upgr_flak_shot_dmg_inc"
 	TextField "Max Time to Live - Base (Seconds)", "som_gbx_upgr_flak_shot_ttl_base"
 	TextField "Max Time to Live - Per Level (Seconds)", "som_gbx_upgr_flak_shot_ttl_inc"
+	StaticText " "
+	StaticText "Bandoliers", YELLOW
+	Option "Enabled", "som_gbx_upgr_bandoliers_enabled", "OnOff"
 }

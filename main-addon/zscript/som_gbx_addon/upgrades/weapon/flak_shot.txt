@@ -56,7 +56,8 @@ class SOM_GBX_Upgrade_FlakShot_Main: TFLV_Upgrade_BaseUpgrade
 
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
-		return !info.IsMelee()
+		return som_gbx_upgr_flak_shot_enabled
+			&& !info.IsMelee()
 			&& !som_gbx_upgr_flak_shot_simple
 			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") == 0;
 	}
@@ -101,7 +102,8 @@ class SOM_GBX_Upgrade_FlakShot_Simple: TFLV_Upgrade_BaseUpgrade
 
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
-		return !info.IsMelee()
+		return som_gbx_upgr_flak_shot_enabled
+			&& !info.IsMelee()
 			&& som_gbx_upgr_flak_shot_simple;
 	}
 
@@ -194,7 +196,8 @@ class SOM_GBX_Upgrade_FlakShot_Qty: TFLV_Upgrade_BaseUpgrade
 {
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
-		return !info.IsMelee()
+		return som_gbx_upgr_flak_shot_enabled
+			&& !info.IsMelee()
 			&& !som_gbx_upgr_flak_shot_simple
 			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") > 0;
 	}
@@ -211,7 +214,8 @@ class SOM_GBX_Upgrade_FlakShot_Dmg: TFLV_Upgrade_BaseUpgrade
 {
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
-		return !info.IsMelee()
+		return som_gbx_upgr_flak_shot_enabled
+			&& !info.IsMelee()
 			&& !som_gbx_upgr_flak_shot_simple
 			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") > 0;
 	}
@@ -229,7 +233,8 @@ class SOM_GBX_Upgrade_FlakShot_Ttl: TFLV_Upgrade_BaseUpgrade
 {
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
-		return !info.IsMelee()
+		return som_gbx_upgr_flak_shot_enabled
+			&& !info.IsMelee()
 			&& !som_gbx_upgr_flak_shot_simple
 			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") > 0;
 	}

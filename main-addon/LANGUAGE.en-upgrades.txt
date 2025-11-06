@@ -18,3 +18,7 @@ SOM_GBX_Upgrade_FlakShot_Ttl_TT = "Upgrades Flak Shot Core flaks to last up to a
 SOM_GBX_Upgrade_FlakShot_Simple_Name = "Flak Shot";
 SOM_GBX_Upgrade_FlakShot_Simple_Desc = "Killing an enemy releases a bunch of firey flaks.";
 SOM_GBX_Upgrade_FlakShot_Simple_TT = "Does @damage of target health + 100% of overkill damage (split across @count flaks) + @bonusdamage damage per flak. The flaks last up to @ttl.";
+
+SOM_GBX_Upgrade_Bandoliers_Name = "Bandoliers";
+SOM_GBX_Upgrade_Bandoliers_Desc = "Increases ammo capacity.";
+SOM_GBX_Upgrade_Bandoliers_TT = "Ammo capacity @ammo-bonus. Stacks with the backpack.\nNOTE: If you pick up a new ammo type after getting this upgrade, it may not get the bonus until your next level transition.";
