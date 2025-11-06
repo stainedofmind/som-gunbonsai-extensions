@@ -10,6 +10,7 @@ OptionMenu "som_gbx"
 	//StaticText " "
 	StaticText "Upgrades", FIRE
 	StaticText "Flak Shot", YELLOW
+	Option "Use Simple Version", "som_gbx_upgr_flak_shot_simple", "YesNo"
 	TextField "Global Damage Multiplier", "som_gbx_upgr_flak_shot_dmg_mult"
 	StaticText " "
 	TextField "Number of Flaks - Base", "som_gbx_upgr_flak_shot_flaks_base"

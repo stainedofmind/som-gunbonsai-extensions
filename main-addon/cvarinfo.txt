@@ -2,12 +2,13 @@
 
 // Upgrades
 // Flak Shot
+server bool som_gbx_upgr_flak_shot_simple = false;
 server float som_gbx_upgr_flak_shot_dmg_mult = 1.0;
 
 server float som_gbx_upgr_flak_shot_ttl_base = 1.0;
 server float som_gbx_upgr_flak_shot_ttl_inc = 0.25;
 
-server int som_gbx_upgr_flak_shot_flaks_base = 2;
+server int som_gbx_upgr_flak_shot_flaks_base = 3;
 server int som_gbx_upgr_flak_shot_flaks_inc = 1;
 
 server int som_gbx_upgr_flak_shot_dmg_base = 1;

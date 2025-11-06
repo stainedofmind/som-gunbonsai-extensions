@@ -4,13 +4,35 @@ class SOM_GBX_Upgrade_FlakShot_Main: TFLV_Upgrade_BaseUpgrade
 	float ttl;
 	int dmg;
 	
+	uint Level(TFLV_WeaponInfo info, string cls) const
+	{
+		for (uint i = 0; i < info.upgrades.upgrades.Size(); ++i)
+		{
+			if (info.upgrades.upgrades[i].GetClassName() == cls)
+			{
+				if (!info.upgrades.upgrades[i].enabled)
+				{
+					return (0);
+				}
+				
+				return info.upgrades.upgrades[i].level;
+			}
+		}
+		return 0;
+	}
+
 	override void Tick(Actor owner)
 	{
+		if (som_gbx_upgr_flak_shot_simple)
+		{
+			enabled = false;
+		}
+		
 		let info = TFLV_PerPlayerStats.GetStatsFor(owner).GetInfoForCurrentWeapon();
 		
-		qty = som_gbx_upgr_flak_shot_flaks_base + (som_gbx_upgr_flak_shot_flaks_inc * info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Qty"));
-		ttl = som_gbx_upgr_flak_shot_ttl_base + (som_gbx_upgr_flak_shot_ttl_inc * float(info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Ttl")));
-		dmg = som_gbx_upgr_flak_shot_dmg_base + (som_gbx_upgr_flak_shot_dmg_inc * info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Dmg"));
+		qty = som_gbx_upgr_flak_shot_flaks_base + (som_gbx_upgr_flak_shot_flaks_inc * Level(info, "SOM_GBX_Upgrade_FlakShot_Qty"));
+		ttl = som_gbx_upgr_flak_shot_ttl_base + (som_gbx_upgr_flak_shot_ttl_inc * float(Level(info, "SOM_GBX_Upgrade_FlakShot_Ttl")));
+		dmg = som_gbx_upgr_flak_shot_dmg_base + (som_gbx_upgr_flak_shot_dmg_inc * Level(info, "SOM_GBX_Upgrade_FlakShot_Dmg"));
 	}
 	
 	override TFLV_Upgrade_UpgradePriority Priority()
@@ -35,19 +57,60 @@ class SOM_GBX_Upgrade_FlakShot_Main: TFLV_Upgrade_BaseUpgrade
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
 		return !info.IsMelee()
+			&& !som_gbx_upgr_flak_shot_simple
 			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") == 0;
 	}
 
 	override void GetTooltipFields(Dictionary fields, uint level)
 	{
-		if (!qty) { qty = som_gbx_upgr_flak_shot_flaks_base; }
-		if (!dmg) { dmg = som_gbx_upgr_flak_shot_dmg_base; }
-		if (!ttl) { ttl = som_gbx_upgr_flak_shot_ttl_base; }
-		
-		fields.insert("count", ""..(qty));
-		fields.insert("bonusdamage", ""..int(round((dmg * 4) * som_gbx_upgr_flak_shot_dmg_mult)));
-		fields.insert("damage", AsPercent((1.0 - 0.8 ** dmg) * som_gbx_upgr_flak_shot_dmg_mult));
-		fields.insert("ttl", AsSeconds(ttl * 35));
+		fields.insert("count", ""..(som_gbx_upgr_flak_shot_flaks_base));
+		fields.insert("bonusdamage", ""..int(round((som_gbx_upgr_flak_shot_dmg_base * 4) * som_gbx_upgr_flak_shot_dmg_mult)));
+		fields.insert("damage", AsPercent((1.0 - 0.8 ** som_gbx_upgr_flak_shot_dmg_base) * som_gbx_upgr_flak_shot_dmg_mult));
+		fields.insert("ttl", AsSeconds(som_gbx_upgr_flak_shot_ttl_base * 35));
+	}
+}
+
+class SOM_GBX_Upgrade_FlakShot_Simple: TFLV_Upgrade_BaseUpgrade
+{
+	override void Tick(Actor owner)
+	{
+		if (!som_gbx_upgr_flak_shot_simple)
+		{
+			enabled = false;
+		}
+	}
+	
+	override TFLV_Upgrade_UpgradePriority Priority()
+	{
+		return TFLV_Upgrade_PRI_EXPLOSIVE;
+	}
+
+	override void OnKill(PlayerPawn player, Actor shot, Actor target)
+	{
+		if (shot is "SOM_GBX_Upgrade_FlakShot_Grenade") return;
+		let aux = SOM_GBX_Upgrade_FlakShot_Spawner(target.Spawn("SOM_GBX_Upgrade_FlakShot_Spawner", target.pos));
+		aux.weaponspecial = Priority();
+		aux.target = player;
+		let count = som_gbx_upgr_flak_shot_flaks_base + (level - 1);	// -1 to make it the same as Skill Tree Version
+		aux.ReactionTime = count;
+		aux.damage = ((target.SpawnHealth() + abs(target.health)) * (1.0 - 0.8 ** level)) / count + 4 * level;
+		aux.damage *= som_gbx_upgr_flak_shot_dmg_mult;
+		aux.blast_radius = target.radius * 2.5;
+		aux.ttl = som_gbx_upgr_flak_shot_ttl_base;
+	}
+
+	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
+	{
+		return !info.IsMelee()
+			&& som_gbx_upgr_flak_shot_simple;
+	}
+
+	override void GetTooltipFields(Dictionary fields, uint level)
+	{
+		fields.insert("count", ""..(som_gbx_upgr_flak_shot_flaks_base + (level - 1)));
+		fields.insert("bonusdamage", ""..int((level * 4) * som_gbx_upgr_flak_shot_dmg_mult));
+		fields.insert("damage", AsPercent((1.0 - 0.8 ** level) * som_gbx_upgr_flak_shot_dmg_mult));
+		fields.insert("ttl", AsSeconds(som_gbx_upgr_flak_shot_ttl_base * 35));
 	}
 }
 
@@ -132,12 +195,13 @@ class SOM_GBX_Upgrade_FlakShot_Qty: TFLV_Upgrade_BaseUpgrade
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
 		return !info.IsMelee()
+			&& !som_gbx_upgr_flak_shot_simple
 			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") > 0;
 	}
 	
 	override void GetTooltipFields(Dictionary fields, uint level)
 	{
-		int qty = som_gbx_upgr_flak_shot_flaks_base + (som_gbx_upgr_flak_shot_flaks_inc * level);
+		int qty = som_gbx_upgr_flak_shot_flaks_inc * level;
 		
 		fields.insert("count", ""..(qty));
 	}
@@ -148,12 +212,13 @@ class SOM_GBX_Upgrade_FlakShot_Dmg: TFLV_Upgrade_BaseUpgrade
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
 		return !info.IsMelee()
+			&& !som_gbx_upgr_flak_shot_simple
 			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") > 0;
 	}
 	
 	override void GetTooltipFields(Dictionary fields, uint level)
 	{
-		int dmg = som_gbx_upgr_flak_shot_dmg_base + (som_gbx_upgr_flak_shot_dmg_inc * level);
+		int dmg = som_gbx_upgr_flak_shot_dmg_inc * level;
 		
 		fields.insert("bonusdamage", ""..int(round((dmg * 4) * som_gbx_upgr_flak_shot_dmg_mult)));
 		fields.insert("damage", AsPercent((1.0 - 0.8 ** dmg) * som_gbx_upgr_flak_shot_dmg_mult));
@@ -165,12 +230,13 @@ class SOM_GBX_Upgrade_FlakShot_Ttl: TFLV_Upgrade_BaseUpgrade
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
 		return !info.IsMelee()
+			&& !som_gbx_upgr_flak_shot_simple
 			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") > 0;
 	}
 	
 	override void GetTooltipFields(Dictionary fields, uint level)
 	{
-		float ttl = som_gbx_upgr_flak_shot_ttl_base + (som_gbx_upgr_flak_shot_ttl_inc * float(level));
+		float ttl = som_gbx_upgr_flak_shot_ttl_inc * float(level);
 		
 		fields.insert("ttl", AsSeconds(ttl * 35));
 	}
