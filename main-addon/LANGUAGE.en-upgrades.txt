@@ -1,0 +1,4 @@
+[en default]
+SOM_GBX_Upgrade_FlakShot_Name = "Flak Shot";
+SOM_GBX_Upgrade_FlakShot_Desc = "Killing an enemy releases a bunch of bouncy explosives.";
+SOM_GBX_Upgrade_FlakShot_TT = "Does @damage of target health + 100% of overkill damage (split across @count explosives) + @bonusdamage damage per explosive. The explosives last up to @ttl.";

@@ -6,4 +6,11 @@ AddOptionMenu "OptionsMenu"
 OptionMenu "som_gbx"
 {
 	Title "SoM's GunBonsai eXtensions"
+	//StaticText "Settings"
+	//StaticText " "
+	StaticText "Upgrades", FIRE
+	StaticText "Flak Shot"
+	TextField "Time to Live (Seconds)", "som_gbx_upgr_flak_shot_ttl"
+	TextField "Base Number of Flaks", "som_gbx_upgr_flak_shot_base_flaks"
+	TextField "Damage Multiplier (Default: 1.0)", "som_gbx_upgr_flak_shot_dmg_mult"
 }

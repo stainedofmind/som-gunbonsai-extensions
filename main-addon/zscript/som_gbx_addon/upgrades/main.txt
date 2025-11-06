@@ -1,0 +1,2 @@
+#include "zscript/som_gbx_addon/upgrades/player/main.txt"
+#include "zscript/som_gbx_addon/upgrades/weapon/main.txt"

@@ -1,1 +1,4 @@
 #include "zscript/som_gbx_addon/event_handler.txt"
+
+// Upgrades
+#include "zscript/som_gbx_addon/upgrades/main.txt"
