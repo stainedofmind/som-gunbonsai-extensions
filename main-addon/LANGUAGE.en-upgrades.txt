@@ -1,4 +1,16 @@
 [en default]
-SOM_GBX_Upgrade_FlakShot_Name = "Flak Shot";
-SOM_GBX_Upgrade_FlakShot_Desc = "Killing an enemy releases a bunch of bouncy explosives.";
-SOM_GBX_Upgrade_FlakShot_TT = "Does @damage of target health + 100% of overkill damage (split across @count explosives) + @bonusdamage damage per explosive. The explosives last up to @ttl.";
+SOM_GBX_Upgrade_FlakShot_Main_Name = "Flak Shot";
+SOM_GBX_Upgrade_FlakShot_Main_Desc = "Killing an enemy releases a bunch of firey flaks.";
+SOM_GBX_Upgrade_FlakShot_Main_TT = "Does @damage of target health + 100% of overkill damage (split across @count flaks) + @bonusdamage damage per flak. The flaks last up to @ttl.";
+
+SOM_GBX_Upgrade_FlakShot_Qty_Name = "Fragment Cascade";
+SOM_GBX_Upgrade_FlakShot_Qty_Desc = "Flak Shot Upgrade: Increase number of flaks.";
+SOM_GBX_Upgrade_FlakShot_Qty_TT = "Expels @count flaks.";
+
+SOM_GBX_Upgrade_FlakShot_Dmg_Name = "Fusion Matrix";
+SOM_GBX_Upgrade_FlakShot_Dmg_Desc = "Flak Shot Upgrade: Increase flak damage.";
+SOM_GBX_Upgrade_FlakShot_Dmg_TT = "Does @damage of target health + 100% of overkill damage (split across all flaks) + @bonusdamage damage per flak.";
+
+SOM_GBX_Upgrade_FlakShot_Ttl_Name = "Decay Lattice";
+SOM_GBX_Upgrade_FlakShot_Ttl_Desc = "Flak Shot Upgrade: Increase maximum flak time to live.";
+SOM_GBX_Upgrade_FlakShot_Ttl_TT = "The flaks last up to @ttl.";

@@ -11,6 +11,8 @@ Sprites
 PDA - scalliano
 https://www.realm667.com/component/docman/?task=doc_download&gid=439&Itemid=
 
+Flak Shot - Ripped from (SNES) Super Mario World
+
 Fonts
 -----
 Mementwo Small - Jimmy / Memento Mori 2 Team

@@ -1,3 +1,6 @@
 register
-  SOM_GBX_Upgrade_FlakShot
+  SOM_GBX_Upgrade_FlakShot_Main
+  SOM_GBX_Upgrade_FlakShot_Qty
+  SOM_GBX_Upgrade_FlakShot_Dmg
+  SOM_GBX_Upgrade_FlakShot_Ttl
   ;

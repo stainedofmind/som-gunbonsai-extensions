@@ -9,8 +9,13 @@ OptionMenu "som_gbx"
 	//StaticText "Settings"
 	//StaticText " "
 	StaticText "Upgrades", FIRE
-	StaticText "Flak Shot"
-	TextField "Time to Live (Seconds)", "som_gbx_upgr_flak_shot_ttl"
-	TextField "Base Number of Flaks", "som_gbx_upgr_flak_shot_base_flaks"
-	TextField "Damage Multiplier (Default: 1.0)", "som_gbx_upgr_flak_shot_dmg_mult"
+	StaticText "Flak Shot", YELLOW
+	TextField "Global Damage Multiplier", "som_gbx_upgr_flak_shot_dmg_mult"
+	StaticText " "
+	TextField "Number of Flaks - Base", "som_gbx_upgr_flak_shot_flaks_base"
+	TextField "Number of Flaks - Per Level", "som_gbx_upgr_flak_shot_flaks_inc"
+	TextField "Flak Damage - Base", "som_gbx_upgr_flak_shot_dmg_base"
+	TextField "Flak Damage - Per Level", "som_gbx_upgr_flak_shot_dmg_inc"
+	TextField "Max Time to Live - Base (Seconds)", "som_gbx_upgr_flak_shot_ttl_base"
+	TextField "Max Time to Live - Per Level (Seconds)", "som_gbx_upgr_flak_shot_ttl_inc"
 }
