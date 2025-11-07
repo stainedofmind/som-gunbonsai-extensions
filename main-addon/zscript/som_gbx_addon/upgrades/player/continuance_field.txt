@@ -1,0 +1,65 @@
+class SOM_GBX_Upgrade_ContinuanceField : TFLV_Upgrade_BaseUpgrade
+{
+	override bool IsSuitableForPlayer(TFLV_PerPlayerStats stats)
+	{
+		return (som_gbx_upgr_continuance_field_enabled);
+	}
+	
+	override void GetTooltipFields(Dictionary fields, uint level)
+	{
+		fields.insert("dur-boost", AsPercent((double(som_gbx_upgr_continuance_field_amt / 100.0) * level)));
+	}
+	
+	String tics_to_time(int _tics)
+	{
+		int _secs = floor(_tics / 35);
+		int _mins = floor(_secs / 60);
+		
+		_secs -= _mins * 60;
+		
+		Return (String.Format("%d:%2d", _mins, _secs));
+	}
+
+	override void OnPickup(PlayerPawn pawn, Inventory item)
+	{
+		if (item is "PowerupGiver")
+		{
+			Let _type = PowerupGiver(item).PowerupType;
+			
+			Inventory _pow = pawn.FindInventory(_type.GetClassName());
+			
+			if ((_pow) && (!_pow.bAdditiveTime))
+			{
+				int _tics = Powerup(_pow).MaxEffectTics;
+				
+				if (_tics > 35)
+				{
+					//Console.Printf("(Re) Power up '%s': %s -> %s", _type.GetClassName(), tics_to_time(Powerup(_pow).MaxEffectTics), tics_to_time(_tics));
+					
+					Powerup(_pow).EffectTics = Powerup(_pow).MaxEffectTics;
+				}
+			}
+		}
+
+		if (item is "Powerup")
+		{
+			String _id = item.GetClassName();
+			
+			Inventory _pow = pawn.FindInventory(_id);
+		
+			if (!_pow)
+			{
+				int _tics = Powerup(item).EffectTics;
+				
+				if (_tics > 35)
+				{
+					_tics *= 1.0 + (double(som_gbx_upgr_continuance_field_amt / 100.0) * double(level));
+					
+					//Console.Printf("(New) Power up '%s': %s -> %s", _id, tics_to_time(Powerup(item).EffectTics), tics_to_time(_tics));
+					
+					Powerup(item).EffectTics = _tics;
+				}
+			}
+		}
+	}
+}

@@ -10,13 +10,17 @@ Version 0.0.1:
 Weapon Upgrades
 ---------------
 Flak Shot: Configurable version of Submunitions. Works like the classic version.
-Flak Shot Core: Configurable version of Submunitions, upgraded with a skill
+Shatterdrive: Configurable version of Submunitions, upgraded with a skill
 tree.
-Fragment Cascade: Flak Shot Upgrade: Increase number of flaks.
-Fusion Matrix: Flak Shot Upgrade: Increase flak damage.
-Decay Lattice: Flak Shot Upgrade: Increase maximum flak time to live.
+Fragment Cascade: Shatterdrive Upgrade: Increase number of flaks.
+Fusion Matrix: Shatterdrive Upgrade: Increase flak damage.
+Decay Lattice: Shatterdrive Upgrade: Increase maximum flak time to live.
+
+Player Upgrades
+---------------
 Bandoliers: Classic version from 0.10.6.
 Pulse Reliquary: Max health booster.
+Continuance Field: Powerup Duration Booster.
 
 Usage and Configuration
 -----------------------

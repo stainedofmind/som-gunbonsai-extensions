@@ -1,12 +1,10 @@
 Upgrades:
-Bandoliers
-	-Classic Implemented
+Ammuneux (Bandoliers)
 	-Need to add bugfixing/config for Redux
 Pulse Reliquary (HP Boost)
-	-Basic version implemented
 	-Need to investigate adding support for other gameplay mods, as needed
 Continuance Field (Powerup Boost)
-	-
+	-Need to figure out a way to fix Addative Powerups
 LOL Rockitz
 	-Dumb
 Ammo Reserves

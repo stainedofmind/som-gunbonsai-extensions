@@ -1,7 +1,7 @@
 // Main
 
 // Upgrades
-// Flak Shot
+// Shatterdrive/Flak Shot
 server bool som_gbx_upgr_flak_shot_enabled = true;
 
 server bool som_gbx_upgr_flak_shot_simple = false;
@@ -21,6 +21,11 @@ server bool som_gbx_upgr_pulse_reliquary_enabled = true;
 
 server int som_gbx_upgr_pulse_reliquary_amt = 25;
 server int som_gbx_upgr_pulse_reliquary_proc_time = 5;
+
+// Continuance Field
+server bool som_gbx_upgr_continuance_field_enabled = true;
+
+server int som_gbx_upgr_continuance_field_amt = 25;
 
 // Bandoliers
 server bool som_gbx_upgr_bandoliers_enabled = false;

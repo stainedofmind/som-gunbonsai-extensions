@@ -9,7 +9,7 @@ OptionMenu "som_gbx"
 	//StaticText "Settings"
 	//StaticText " "
 	StaticText "Upgrades", FIRE
-	StaticText "Flak Shot", YELLOW
+	StaticText "Shatterdrive", YELLOW
 	Option "Enabled", "som_gbx_upgr_flak_shot_enabled", "OnOff"
 	StaticText " "
 	Option "Use Simple Version", "som_gbx_upgr_flak_shot_simple", "YesNo"
@@ -21,11 +21,17 @@ OptionMenu "som_gbx"
 	TextField "Flak Damage - Per Level", "som_gbx_upgr_flak_shot_dmg_inc"
 	TextField "Max Time to Live - Base (Seconds)", "som_gbx_upgr_flak_shot_ttl_base"
 	TextField "Max Time to Live - Per Level (Seconds)", "som_gbx_upgr_flak_shot_ttl_inc"
+	StaticText " "
 	StaticText "Pulse Reliquary", YELLOW
 	Option "Enabled", "som_gbx_upgr_pulse_reliquary_enabled", "OnOff"
 	StaticText " "
 	TextField "Bonus Health per Level", "som_gbx_upgr_pulse_reliquary_amt"
 	Slider "Processing Interval (tics)", "som_gbx_upgr_pulse_reliquary_proc_time", 1, 350, 1, 0
+	StaticText " "
+	StaticText "Continuance Field", YELLOW
+	Option "Enabled", "som_gbx_upgr_continuance_field_enabled", "OnOff"
+	StaticText " "
+	TextField "Time Extention per Level (percent)", "som_gbx_upgr_continuance_field_amt"
 	StaticText " "
 	StaticText "Bandoliers", YELLOW
 	Option "Enabled", "som_gbx_upgr_bandoliers_enabled", "OnOff"
