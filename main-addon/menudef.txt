@@ -21,6 +21,11 @@ OptionMenu "som_gbx"
 	TextField "Flak Damage - Per Level", "som_gbx_upgr_flak_shot_dmg_inc"
 	TextField "Max Time to Live - Base (Seconds)", "som_gbx_upgr_flak_shot_ttl_base"
 	TextField "Max Time to Live - Per Level (Seconds)", "som_gbx_upgr_flak_shot_ttl_inc"
+	StaticText "Pulse Reliquary", YELLOW
+	Option "Enabled", "som_gbx_upgr_pulse_reliquary_enabled", "OnOff"
+	StaticText " "
+	TextField "Bonus Health per Level", "som_gbx_upgr_pulse_reliquary_amt"
+	Slider "Processing Interval (tics)", "som_gbx_upgr_pulse_reliquary_proc_time", 1, 350, 1, 0
 	StaticText " "
 	StaticText "Bandoliers", YELLOW
 	Option "Enabled", "som_gbx_upgr_bandoliers_enabled", "OnOff"

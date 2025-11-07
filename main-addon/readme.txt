@@ -16,6 +16,7 @@ Fragment Cascade: Flak Shot Upgrade: Increase number of flaks.
 Fusion Matrix: Flak Shot Upgrade: Increase flak damage.
 Decay Lattice: Flak Shot Upgrade: Increase maximum flak time to live.
 Bandoliers: Classic version from 0.10.6.
+Pulse Reliquary: Max health booster.
 
 Usage and Configuration
 -----------------------

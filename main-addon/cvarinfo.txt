@@ -16,5 +16,12 @@ server int som_gbx_upgr_flak_shot_flaks_inc = 1;
 server int som_gbx_upgr_flak_shot_dmg_base = 1;
 server int som_gbx_upgr_flak_shot_dmg_inc = 1;
 
+// Pulse Reliquary
+server bool som_gbx_upgr_pulse_reliquary_enabled = true;
+
+server int som_gbx_upgr_pulse_reliquary_amt = 25;
+server int som_gbx_upgr_pulse_reliquary_proc_time = 5;
+
 // Bandoliers
 server bool som_gbx_upgr_bandoliers_enabled = false;
+

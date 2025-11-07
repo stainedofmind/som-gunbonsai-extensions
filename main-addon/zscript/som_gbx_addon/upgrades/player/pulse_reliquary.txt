@@ -1,0 +1,37 @@
+class SOM_GBX_Upgrade_PulseReliquary : TFLV_Upgrade_BaseUpgrade
+{
+	override bool IsSuitableForPlayer(TFLV_PerPlayerStats stats)
+	{
+		return (som_gbx_upgr_pulse_reliquary_enabled);
+	}
+	
+	override void Tick(Actor owner)
+	{
+		if (enabled)
+		{
+			if (owner.GetAge() % som_gbx_upgr_pulse_reliquary_proc_time == 0)
+			{
+				UpdateHealth(owner, level);
+			}
+		}
+	}
+	
+	void UpdateHealth(Actor player, int bonus)
+	{
+		Let p = PlayerPawn(player);
+		
+		p.BonusHealth = som_gbx_upgr_pulse_reliquary_amt * bonus;
+	}
+
+	override void OnDeactivate(TFLV_PerPlayerStats stats, TFLV_WeaponInfo info)
+	{
+		super.OnDeactivate(stats, info);
+
+		UpdateHealth(stats.owner, 0);
+	}
+
+	override void GetTooltipFields(Dictionary fields, uint level)
+	{
+		fields.insert("hp-increase", ""..(som_gbx_upgr_pulse_reliquary_amt * level));
+	}
+}

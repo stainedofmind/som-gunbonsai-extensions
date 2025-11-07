@@ -2,10 +2,15 @@ Upgrades:
 Bandoliers
 	-Classic Implemented
 	-Need to add bugfixing/config for Redux
-Health Boost
-Powerup Boost
+Pulse Reliquary (HP Boost)
+	-Basic version implemented
+	-Need to investigate adding support for other gameplay mods, as needed
+Continuance Field (Powerup Boost)
+	-
 LOL Rockitz
+	-Dumb
 Ammo Reserves
+	-
 
 Systems:
 Progress Keeper

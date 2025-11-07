@@ -1,1 +1,2 @@
 #include "zscript/som_gbx_addon/upgrades/player/bandoliers.txt"
+#include "zscript/som_gbx_addon/upgrades/player/pulse_reliquary.txt"

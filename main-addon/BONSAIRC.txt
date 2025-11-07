@@ -5,4 +5,5 @@ register
 	SOM_GBX_Upgrade_FlakShot_Dmg
 	SOM_GBX_Upgrade_FlakShot_Ttl
 	SOM_GBX_Upgrade_Bandoliers
+	SOM_GBX_Upgrade_PulseReliquary
 	;
