@@ -1,0 +1,366 @@
+LegenDoom Inspired Effects
+--------------------------
+Key:
+[X] Can't or Won't Implement
+[GB] GunBonsai Upgrade
+[] Pending
+[*] Done or Similarly Implmented
+[?] Needs investigation/Maybe
+[.] Perhaps Later
+[!] Needs framework implementation
+
+HSFW: Hitscan Framework
+PDFW: Projectile Detection Framework
+MSFW: Map Start Framework
+StFW: Stacking Framework
+
+Note 1: Instead of being forced to implement HSFW+PDFW, we could just have a
+	counter that detects the last time OnDamageDealt was triggered. Player could
+	still technically fire their weapon so long as they don't do damage of
+	course, but it's a start.
+Note 2: Might be able to implement a feature in HSFW that collects information about
+	the HSs and work from that. Would require HSFW.
+
+To Implement
+------------
+[] Violent "Enemies gib, damaging and scaring nearby enemies\n\n\ci''Haha, what a mess...''";
+[] Raging "Damage is tripled while berserk is active";
+[] Unknown "Has unlimited ammo while invisibility is active";
+	Implement by adding InfiniteAmmo powerup.
+[] Pristine "While at 100+ health, does double damage\n\n\ci''*Guncaster Secret Sound*''";
+[] AntiAir "Attacks do triple damage to aerial monsters\n\crLOST SOUL \ccI\cr CACODEMON \ccI\cr PAIN ELEMENTAL\c-\n\n\ci''CACO SEASON''";
+[] Berserker "Does more damage the lower your health is\n\n\ci''[insert doom comic quote here]''";
+[] WarmUp "Killing five enemies on the level gives you berserk";
+[] Nuclear "Does less damage, has infinite ammo";
+[] Desperate "When attacking below 26% health, gives moments of invincibility";
+[] Accelerator "Fires instant hitting attacks";
+[] Vampiric "Attacks drain life from enemies";
+[] Scavenging "Attacks give you armor from enemies";
+[] Spamtastic "Projectiles rapidly fire smaller projectiles randomly";
+[] Hopeful "Killing an enemy while below 33% health restores you to 33%";
+[] Intimidating "Invulnerability also gives you damage and fright effects\n\ch[PASSIVE]";
+[] Ghostly "Invisibility gives 90% damage resistance and AOE immunity\n\ch[PASSIVE]";
+[] Heroic "Attacks do triple damage to bosses\n\crCYBERDEMON \ccI\cr SPIDER MASTERMIND\c-\n\n\ci''That's gotta be worth like, 5 EXPs''";
+	Unlike other similar upgrades, this one can actually work, as we can detect the boss flag.
+[] Champion "Berserks give an additional five extra powerups\n\ch[PASSIVE]   \ct[STACKS]\n\n\ci''Berserk, now with added vitamins and minerals!''";
+[] Vacuum "Projectiles pull in enemies as they travel";
+
+Framework Needed
+----------------
+[!] Determined "While not attacking, makes you 50% tougher";
+	Requires HSFW+PDFW.  *See Note 1*
+[!] Battlerage "Killing enemies gives you an extendible attack speed boost\n\n\ci''I have to kill fast, and- Oh, we already used that?''";
+	Requires StFW.
+[!] Renegade "Fires 50% more pellets";
+	Requires HSFW.
+[!] Spreadfire "Fires spreads of three smaller projectiles in patterns\n\n\ci''Guaranteed to defend materials well.''";	
+	Requires HSFW and/or PDFW.
+[!] Recursive "Fires more shots from their originally fired position for a short time";
+	Requires HSFW.
+[!] Blastwave "Does additional damage at close range";
+	Requires HSFW and PDFW.
+[!] Restoring "Start maps or respawn with 200 health\n\ch[PASSIVE]";
+	Requires MSFW.
+[!] Vanguard "Start maps or respawn with 200 blue armor\n\ch[PASSIVE]";
+	Requires MSFW.
+[!] Resupplying "Start maps or respawn with max ammo\n\ch[PASSIVE]";
+	Requires MSFW.
+[!] Chargeup "Can store multiple attacks and unleash them at once";
+	Requires HSFW and PDFW.
+[!] Focusing "Increases in damage and accuracy the longer you shoot";
+	Requires HSFW+PDFW.
+[!] Burst "Fires three rapid attacks";
+	Requires HSFW+PDFW.
+[!] Bloody "Every 5 enemies killed with this increases damage for the level";
+	Requires StFW.
+[!] Infiltrator "Killing enemies gives you a short extendable invisibility";
+	Requires StFW.
+[!] Killstreaker "Killing enemies gives you a short, extendable speed boost\n\n\ci''I have to kill fast, and bullets too slow''";
+	Requires StFW.
+[!] Lucky "Has a chance of firing a max damage 5x strength attack";
+	Might not be able to implement the "max damage" part.
+	Requires HSFW+PDFW.
+[!] Whittling "Each attack applies a stacking damage resistance debuff to your targets";
+	Requires StFW.
+[!] Sniper "100% accurate\n\n\ci''This one is fun with a super shotty.''";
+	Requires HSFW+PDFW.
+[!] Extended "Has longer range";
+	Requires HSFW.
+[!] CQC "Triple damage, but with greatly decreased accuracy\n\n\ci''This is great for things less\n\cithan a foot in front of you.''";
+	Requires HSFW.
+[!] Perfect "Shots do max double damage, 100% accuracy, misses jam the gun";
+	Requires HSFW+PDFW. *See Note 2*
+[!] Entrenched "While firing, makes you immobile and gives you 50% resist and 2x damage";
+	Requires HSFW+PDFW. *See Note 1*
+[!] Patient "Builds up damage multipliers slowly, consumed upon firing";
+	Requires HSFW+PDFW. *See Note 2*
+[!] SteadyShot "While crouching, do triple damage and have perfect accuracy";
+	Accuracy part requires HSFW+PDFW. *See Note 2*
+[!] Suspenseful "Each missed shot gives you a damage boost for your next shot";
+	Requires HSFW+PDFW.
+[!] Wildfire "Start maps or respawn FUCKING INVINCIBLE\n\ch[PASSIVE]   \ct[STACKS]";
+	Requires MSFW.
+[!] Chronostrike "Start maps or respawn with 10 seconds of timefreeze\n\ch[PASSIVE]   \ct[STACKS]\n\n\ci''Brought to you by Albert Einstein!''";
+	Requires MSFW.
+[!] Murderous "Killing enemies gives you a short, extendable 3x damage boost\n\n\ci''I'm a freight train o' death!''";
+	Requires StFW.
+[!] Unstoppable "Killing enemies gives you a short, extendable 50% damage resistance\n\n\ci''The best defence is a good defence.''";
+	Requires StFW.
+[!] TripleThreat "Fires a spread of three shots\n\n\ci''Bill Rizer's been looking for this!''";
+	Requires HSFW+PDFW.
+[!] ShortRange "Fires multiple attacks that disappear very quickly\n\n\ci''Realistic!''";
+	Requires HSFW+PDFW.
+[!] Divine "Killing an enemy gives you momentary stackable invulnerability\n\n\ci''Hallelujah!''";
+	Requires StFW.
+[!] Endless "Killing an enemy gives you a burst of stackable infinite ammo\n\n\ci''Action Hero 2: This time, it's personal!''";
+	Requires StFW.
+[!] Regenerating "Slowly generates health bonuses when not fired";
+	Might need HSFW and PDFW. *See Note 1*
+
+Maybe/Investigate
+-----------------
+[?] Kinetic "Projectiles do not explode, instead do all impact damage";
+	Might not be possible
+[?] Nova "Unleashes a cascade of energy from the blast itself";
+	Don't know exactly what this is
+[?] Replicating "Slowly generates ammo type when not fired";
+	Maybe, could be an alternative to Ammo Leech, might require HSFW and PDFW. *See Note 1*
+[?] Agitating "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n\n\ci''AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA''";
+	Don't know what this does.
+[?] Painful "Attacks always flinch enemies\n\n\ci''That's gotta hurt!''";
+	Not sure how it works.
+[?] Scattering "Fires BFG rays directly for less ammo";
+[?] Energetic "Emits twice as many BFG rays";
+[?] Shockwave "Explodes instead of emitting BFG rays\n\n\ci''Hope you like splash damage!''";
+	Previous three, need to investigate BFG mechanics closer.
+[?] Mysterious "It is a mystery";
+	Don't know what this does.
+[?] GroupTherapy "Does no splash damage, but if it kills, nearby enemies explode\n\n\ci''Peer Pressure, now weaponised.''";
+	Much like Slug, not sure this is possible
+[?] Incinerating "Killed enemies burn up after a short time, destroying corpse";
+	Should work, but I'll investigate
+[?] Vidmaster "Explosions do full damage over their entire radius\n\n\ci''FROG BLAST THE VENT CORE!''";
+	Might not be possible.
+[?] HighExplosive "Explosions are twice as big";
+	Might not be possible.
+[?] Concentrating "Projectiles increase in damage the longer they fly";
+	Should be doable, but dunno if I want to.
+[?] Decaying "Extreme damage randomization\n\n\ci''The DM says to use D100s.''";
+	Maybe? Could do a +/-X% on damage. Need to see how it's implemented.
+[?] Irradiated "Fires radiation pulses that do AOE damage constantly\n\n\ci''If you think this is bad,\n\ciyou should see my cellphone''";
+	Seems similar to HE Shots?
+[?] Persistent "Does a stacking DoT to enemies when hit\n\n\ci''Causes severe leaking, handle with care.''";
+	Sounds like it COULD be a non-elemental DoT attack, but also technically implemented through Elements.
+[?] Prototype "Sprays huge amounts of plasma projectiles\n\n\ci''Looks like Christmas!''";
+	Not sure how this works, might be too niche.
+[?] Gyrojet "Fires mini-missiles\n\n\ci''Increases pauldron size by 30%.''";
+	Investiagte implementation, perhaps any projectile can be made to work with this.
+[?] Goldeneye "Direct hits cause constant explosions around enemies\n\n\ci''The names Guy, DOOM Guy.''";
+	Not sure how this works
+[?] Raycaster "Rockets emit BFG rays\n\n\ci''No, this doesn't add pushwalls.''";
+	Could work with all projectiles
+[?] Unfathomable "Fires all your ammo in one shot\n\n\ci''Very, very extended mag.''";
+	Not sure exactly how this works, will have to check implementation
+[?] Overflowing "Gains a bonus effect for each ammo type maxed\n\n\ci''No, it's my ammo, you can't have it!''";
+	Seems like this should work just fine, but could be overpowered.
+[?] Artifact "Gain a random powerup on kill every 30 seconds\n\n\ci''It's not a pulsing heart-thing, but it's close!''";
+	Should work, need to investigate.
+	Requires StFW.
+[?] Crippling "Attacks give the enemy a 50% damage debuff\n\n\ci''Vault Boy Approved!''";
+	Check implementation, otherwise seems doable.
+[?] Augmented "Armor bonuses give damage resist, health gives 1.5x damage\n\ch[PASSIVE]\n\n\ci''Why contain it?''";
+	Requires StFW, but not sure how to make it universal without specific actors.
+
+Implement Later
+---------------
+[.] ColdBlooded "Damage starts off at Berserk levels, Berserk reduces it";
+	Interesting idea, but I want to focus on purely positive upgrades
+[.] Trailblazing "Fires faster the lower your health is";
+	Can be easily done, but not that interesting to me
+[.] Scanner "Computer maps give tracking map\n\ch[PASSIVE]";
+	Not interesting to me.
+[.] Heavy "Greatly increased knockback\n\n\ci''Kickback and relax.''";
+	Tried this, kinda worked, but TF is also looking into this
+[.] Hunting "Slower firerate, but higher damage and knockback";
+	Defintely able to do, but the knockback implementation is an issue
+
+Finished
+--------
+[*] Sustained "Powerup items have +50% of original length\n\ch[PASSIVE]   \ct[STACKS]";
+	Implemented as "Continuance Field".
+
+Implemented by GunBonsai
+------------------------
+[GB] Penetrating "Projectiles rip through enemies, have lowered damage\n\n\ci''I hope Otto Giftmacher doesn't sue.''";
+[GB] Tricky "Projectiles bounce off surfaces";
+[GB] Quickdraw "Weapon switches instantly, has no prefire time";
+[GB] Scrambling "Seeker missiles can't lock onto you\n\ch[PASSIVE]";
+[GB] Cluster "Projectiles explode into smaller projectiles\n\n\ci''Remember to stand back, okay?''";
+	Submunisions/Flak Shot/Shatterdrive.
+[GB] Redirecting "Shots bounce off surfaces towards enemies once";
+[GB] Bouncy "Projectiles start bouncing on impact";
+[GB] Sluggish "Projectiles deaccelerate constantly, rip through enemies";
+[GB] Hyper "Projectiles accelerate constantly";
+[GB] Shielding "While attacking, deploys an energy shield in front of you";
+[GB] Sensing "Displays nearby enemies, barrels and items on the map";
+[GB] Igniting "Enemies periodically generate an AOE fire after being hit";
+[GB] Seeker "Shots home in on enemies\n\n\ci''Fire and forget.''";
+[GB] Explosive "Shots explode for small radius damage";
+[GB] ShapedCharge "Explosions won't harm owner\n\n\ci''This way towards enemy, this way not towards you''";
+[GB] Rapid "Fires twice as fast";
+[GB] TORGUE "Amplified explosion, causes enemies to explode on death";
+[GB] Convincing "Does no damage, but can mindcontrol enemies you hit\n\n\ci''Perhaps my friend Mister Bullet\n\ciwill change your mind...?''";
+	Two Elements have monster control.
+[GB] Gauss "Shots pierce through enemies\n\n\ci''Ever watch 'Eraser'?''";
+[GB] Freezing "Impacts cause constant low AOE damage to enemies and slows them\n\n\ci''Chill out!''";
+
+Non Implementing
+----------------
+[X] Exorcist "Attacks do triple damage to Former Humans\n\crFORMER HUMAN \ccI\cr FORMER HUMAN SERGEANT \ccI\cr FORMER HUMAN COMMANDO\c-\n\n\ci''The power of Christ disembowels you!''";
+	Specific actors
+[X] Extinguishing "Attacks do triple damage to Imps and Arch-viles\n\crIMP \ccI\cr ARCH-VILE\c-";
+	Specific actors
+[X] Wrangler "Attacks do triple damage to Demons\n\crDEMON \ccI\cr SPECTRE\c-";
+	Specific actors
+[X] Spiritual "Health and Armor bonuses give +1 more\n\ch[PASSIVE]   \ct[STACKS]";
+	Specific actors
+[X] Survivor "Healing items heal for an extra +100% of normal\n\ch[PASSIVE]   \ct[STACKS]";
+	Detecting healing items are tough
+[X] Hoarder "Pickup extra ammo of this weapon's type from sources of that type\n\ch[PASSIVE]   \ct[STACKS]\n\n\ci''I can quit ammo any time i want!''";
+	Ammo detection.
+[X] RazorEdge "Doesn't move the player when attacking enemies";
+	Too specific
+[X] Choked "Shotguns have fixed spread instead of random shots";
+	Too specific
+[X] Slug "Fire accurate single shots with strong knockback";
+	Too specific
+[X] Stasis "Does no damage, stuns enemies forever, bosses for a short time";
+	Too niche, is somewhat implemented by Lightning Element
+[X] Energizing "After impact, creates an anomaly that gives health bonuses to nearby players";
+	Too niche
+[X] Stealth "Attacks do not alert enemies at long range";
+	Don't think this is possible dynamically
+[X] Gravitic "Damaged enemies move slower and cannot fly";
+	Mostly implemented by Lightning.
+[X] Annoying "Flinches enemies and doesn't use ammo, but only does 1 damage";
+	Too Niche
+[X] Upgrading "Picking up ammo when maxed will upgrade your gun's stats at certain thresholds\n\n\ci''Man, this DRLA update is weird.''";
+	Ammo detection.
+[X] AntiTree "Counts all trees in the level and increases weapon damage accordingly";
+	Too niche.
+[X] Quartermaster "You share ammo pickups with other players\n\ch[PASSIVE]";
+	Multiplayer.
+[X] Armorer "You share armors with other players\n\ch[PASSIVE]";
+	Multiplayer.
+[X] Unlikely "Shots have a 33% chance of not consuming ammo\n\n\ci''Did I fire six shots, or only five?''";
+	Ammo detection.
+[X] Efficient "Uses only half ammo per attack\n\n\ci''TODAY ONLY! HALF OFF!''";
+	Ammo detection.
+[X] Medic "You share health items with other players\n\ch[PASSIVE]\n\n\ci''Now don't go and waste this\n\ciby eating a rocket, okay?''";
+	Multiplayer.
+[X] Optional "Can fire weaker shots without ammo";
+	Not possible.
+[X] Arcing "Fires grenades that bounce off surfaces";
+	Too niche
+[X] Recycling "Gives small amounts of all other ammo types when fired";
+	Would need HSFW+PDFW, but not a fan of implementing this.
+[X] Flak "Aerial enemies are surrounded by explosions on hit\n\n\ci''How do I launch the shells again?''";
+	Too niche.
+[X] Thieving "Gain small amounts of random ammo when hitting enemies";
+	Very similar to Recycling, plus we have multiple methods for getting ammo
+[X] Proximity "Fires stationary projectiles that float towards nearby enemies";
+	Don't think it's possible, plus sounds boring.
+[X] Transmogrifier "Uses other ammo types when it runs out of main ammo type";
+	Ammo detection.
+[X] Illuminating "Projectiles light up levels greatly, glow while idle";
+	Dumb.
+[X] Lunging "Launches you fist extended in the direction you are looking";
+	Too specific.
+[X] Rampaging "While holding forwards, does 2x damage";
+[X] Serious "While holding backwards, does 2x damage\n\n\ci''I smell some SERIOUS firepower!''";
+[X] ProStrat "While strafing, does 2x damage";
+	Previous three, don't like these upgrades, but would be simple enough.
+[X] Comrade "Increases in damage the more players are in the game";
+	Multiplayer.
+[X] Hardened "Green armors count as Blue armors\n\ch[PASSIVE]";
+	Specific actors
+[X] Scrounger "Pickup 20% more ammo from ammo items\n\ch[PASSIVE]   \ct[STACKS]";
+	Ammo detection.
+[X] ActionHero "Ammo pickups give 1 stacking second of infinite ammo\n\ch[PASSIVE]   \ct[STACKS]";
+	Ammo detection.
+[X] Improbable "Shots have a 66% chance of not consuming ammo";
+	Ammo detection.
+[X] Scrapper "Attacks do triple damage to cybernetic enemies\n\crARACHNOTRON \ccI\cr REVENANT \ccI\cr MANCUBUS\c-";
+	Specific actors.
+[X] Blessed "Attacks do triple damage to Hell Nobles\n\crHELL KNIGHT \ccI\cr BARON OF HELL\c-";
+	Specific actors.
+[X] Shaman "Powerups affect all players\n\ch[PASSIVE]\n\n\ci''Sharing is caring''";
+	Multiplayer.
+[X] Marksman "Always does maximum damage";
+	Not possible. *See Note 2*
+[X] PointBlank "Decreased accuracy, but any shots that hit don't consume ammo\n\n\ci''I'm not missing, that wall just looked at me funny.''";
+	Ammo detection.
+[X] Doubletap "Attack twice before reloading, costs only 1 shot";
+	Not possible.
+[X] Blazing "Fires a constant, short range, flamethrower";
+	Too niche.
+[X] WindUp "Starts slowly, winds up to 1 tic firing speed";
+	Many other rapid fire style upgrades.
+[X] Suppression "Fires inaccurate miniplasma, but only uses 1 ammo per 5 shots";
+	Too Niche.
+[X] Waveform "Fires a double wave of plasma back and forth\n\n\ci''Wave Beam Acquired''";
+	Too Niche.
+[X] Beam "Fires a constant, high damage energy beam";
+	Too Niche.
+[X] Illegal "Can attack without ammo, but makes enemies angry\n\n\ci''You wouldn't download a shotgun shell.''";
+	Not possible.
+[X] Advanced "Fires rapidly, does more damage, but needs reloading";
+	Not possible.
+[X] DualWield "Twin pistols with increased stats\n\n\ci''No Payne, No Gain.''";
+	Not possible.
+[X] Blaster "Holding fire will cause you to fire plasma balls slowly";
+	Too Niche.
+[X] Sadistic "Each shot that hits an enemy without killing gives you a health bonus\n\n\ci''You are become Yholl's avatar.''";
+	Simple enough, but there's others like it, and a bit niche.
+[X] Resourceful "Health and Armor Bonuses also give their alternate bonus type\n\ch[PASSIVE]";
+	Specific actors.
+[X] Impossible "Shots have a 50% chance of generating ammo instead of using ammo\n\n\ci''What next, bullets bringing demons back to life?''";
+	Ammo detection.
+[X] Bloodthirsty "Killing enemies gives you multiple health bonuses\n\n\ci''Keep that garlic outta here.''";
+	Simple, but too similar to other upgrades.
+[X] Plasmatic "Fires powerful plasma projectiles\n\n\ci''Requires: Power Mod, Sniper Mod.''";
+	Too niche.
+[X] TwinShot "Fires two shots for the price of one\n\n\ci''It's like that other perk, but better!''";
+	Ammo detection.
+[X] OnePunch "Attack has a huge cooldown, unleashes a line of destruction\n\n\ci''*Citation Needed''";
+	Too niche.
+[X] NorthernStar "Rapid punching that stuns and delays damage\n\n\ci''You are already gibbed.''";
+	Too Niche
+[X] Facekicking "Kicks enemies, can do jump kicks in midair\n\n\ci''Still on hiatus, sorry.''";
+	Too Niche
+[X] Lacerating "Does more damage the longer you saw enemies\n\n\ci''Made in Texas!''";
+	Niche.
+[X] Imaginary "Uses the power of your mind\n\n\ci''Constructed by mimes.''";
+	Niche.
+[X] SixShooter "Does 10x damage, slower fire rate\n\n\ci''This techbase ain't big enough for the both of us!''";
+	Niche.
+[X] Machine "Fires extremely rapidly and does double damage\n\n\ci''Just call me 'The Cleaner'.''";
+	Niche.
+[X] Overkill "Fires giga-missiles that use 5x the ammo\n\n\ci''Pillowblaster? Is that you?''";
+	Niche
+[X] Annihilating "Dangerous explosion on impact, rays also explode\n\n\ci''Removes demons from the timeline.''";
+	Niche
+[X] Cursed "Does 4x damage, but any missed shot hurts you\n\n\ci''Haunted by the ghost of a sniper.''";
+	Not sure this would work, even with HSFW+PDFW
+[X] DemonSlayer "Does quad damage to Legendary enemies\n\n\ci''In the first age, in the first battle, etc. etc.''";
+	Doesn't mean anything outside LD
+[X] NanoCircuit "Attacks have a chance of giving a health and armor bonus\n\n\ci''What, no glowing cyan lines?''";
+	Similar to other upgrades.
+[X] Favoured "Does more damage the less weapons you have\n\n\ci''Why I'm So Great - This gun's autobiography''";
+	Could be done, but feels niche.
+[X] Thematic "Does more damage the more Thematic weapons you have\n\n\ci''Gotta catch 'em all!''";
+	Means nothing outside LD. Could be repurposed to simply deal extra damage for each unique weapon upgrade you have.
+[X] Soulstorm "Soulspheres and Megaspheres are enhanced\n\ch[PASSIVE]\n\n\ci''You could stop at several powerups, or just one.''";
+	Specific actors
+[X] Collector "Gain a health bonus from picking up ammo\n\ch[PASSIVE]   \ct[STACKS]\n\n\ci''I guess they dunked the ammo in that blue stuff.''";
+	Ammo detection.
