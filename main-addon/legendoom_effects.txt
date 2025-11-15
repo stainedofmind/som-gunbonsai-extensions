@@ -44,6 +44,57 @@ To Implement
 	Unlike other similar upgrades, this one can actually work, as we can detect the boss flag.
 [] Champion "Berserks give an additional five extra powerups\n\ch[PASSIVE]   \ct[STACKS]\n\n\ci''Berserk, now with added vitamins and minerals!''";
 [] Vacuum "Projectiles pull in enemies as they travel";
+[] Painful "Attacks always flinch enemies\n\n\ci''That's gotta hurt!''";
+	?: Not sure how it works.
+	: Uses FORCEPAIN flag on puff:
+	ACTOR LDPainfulBulletPuff : LDBulletPuff
+	{
+	   +FORCEPAIN
+	}
+	Can probalby just spawn a puff on damage via HE Shots logic, might not work for 0 damage attacks
+[] Mysterious "It is a mystery";
+	?: Don't know what this does.
+	: Projectile only, projectiles jump around randomly, between 2 and 12 tics between warps:
+    TNT1 A 0 A_Warp (AAPTR_DEFAULT, frandom(-32.0,32.0),frandom(-32.0,32.0),frandom(-32.0,32.0), frandom(0.0,360.0))
+	Inventory item that triggers.
+[] Concentrating "Projectiles increase in damage the longer they fly";
+	?: Should be doable, but dunno if I want to.
+	: Could use GetAge as a counter, reading it in OnDamageDealt to trigger extra damage
+[] Decaying "Extreme damage randomization\n\n\ci''The DM says to use D100s.''";
+	?: Maybe? Could do a +/-X% on damage. Need to see how it's implemented.
+	: Seems like the randomization is min 1, max dmg x2
+[] Irradiated "Fires radiation pulses that do AOE damage constantly\n\n\ci''If you think this is bad,\n\ciyou should see my cellphone''";
+	?: Seems similar to HE Shots?
+	: Projectile does dmg x rnd(1, 8) AoE dmg (Radius 256:256) every 18 tics, emitting "rad" particles periodically 
+
+Implement Later
+---------------
+[.] Crippling "Attacks give the enemy a 50% damage debuff\n\n\ci''Vault Boy Approved!''";
+	?: Check implementation, otherwise seems doable.
+	.: Just gives the monster a powerup:
+	actor LDCripplingDebuff : PowerDamage
+	{
+	  Powerup.Duration -8
+	  DamageFactor "Normal", 0.5
+	  Inventory.Icon ""
+	}
+[.] Artifact "Gain a random powerup on kill every 30 seconds\n\n\ci''It's not a pulsing heart-thing, but it's close!''";
+	?: Should work, need to investigate.
+	?: Requires StFW (Does it?).
+	.: Very complicated the way it's implemented, but I could probably do it
+[.] Raycaster "Rockets emit BFG rays\n\n\ci''No, this doesn't add pushwalls.''";
+	?: Could work with all projectiles
+	.: Can probably be done with inv items, proj only, but would be a bit complicated
+[.] ColdBlooded "Damage starts off at Berserk levels, Berserk reduces it";
+	Interesting idea, but I want to focus on purely positive upgrades
+[.] Trailblazing "Fires faster the lower your health is";
+	Can be easily done, but not that interesting to me
+[.] Scanner "Computer maps give tracking map\n\ch[PASSIVE]";
+	Not interesting to me.
+[.] Heavy "Greatly increased knockback\n\n\ci''Kickback and relax.''";
+	Tried this, kinda worked, but TF is also looking into this
+[.] Hunting "Slower firerate, but higher damage and knockback";
+	Defintely able to do, but the knockback implementation is an issue
 
 Framework Needed
 ----------------
@@ -116,73 +167,8 @@ Framework Needed
 	Requires StFW.
 [!] Regenerating "Slowly generates health bonuses when not fired";
 	Might need HSFW and PDFW. *See Note 1*
-
-Maybe/Investigate
------------------
-[?] Kinetic "Projectiles do not explode, instead do all impact damage";
-	Might not be possible
-[?] Nova "Unleashes a cascade of energy from the blast itself";
-	Don't know exactly what this is
-[?] Replicating "Slowly generates ammo type when not fired";
+[!] Replicating "Slowly generates ammo type when not fired";
 	Maybe, could be an alternative to Ammo Leech, might require HSFW and PDFW. *See Note 1*
-[?] Agitating "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n\n\ci''AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA''";
-	Don't know what this does.
-[?] Painful "Attacks always flinch enemies\n\n\ci''That's gotta hurt!''";
-	Not sure how it works.
-[?] Scattering "Fires BFG rays directly for less ammo";
-[?] Energetic "Emits twice as many BFG rays";
-[?] Shockwave "Explodes instead of emitting BFG rays\n\n\ci''Hope you like splash damage!''";
-	Previous three, need to investigate BFG mechanics closer.
-[?] Mysterious "It is a mystery";
-	Don't know what this does.
-[?] GroupTherapy "Does no splash damage, but if it kills, nearby enemies explode\n\n\ci''Peer Pressure, now weaponised.''";
-	Much like Slug, not sure this is possible
-[?] Incinerating "Killed enemies burn up after a short time, destroying corpse";
-	Should work, but I'll investigate
-[?] Vidmaster "Explosions do full damage over their entire radius\n\n\ci''FROG BLAST THE VENT CORE!''";
-	Might not be possible.
-[?] HighExplosive "Explosions are twice as big";
-	Might not be possible.
-[?] Concentrating "Projectiles increase in damage the longer they fly";
-	Should be doable, but dunno if I want to.
-[?] Decaying "Extreme damage randomization\n\n\ci''The DM says to use D100s.''";
-	Maybe? Could do a +/-X% on damage. Need to see how it's implemented.
-[?] Irradiated "Fires radiation pulses that do AOE damage constantly\n\n\ci''If you think this is bad,\n\ciyou should see my cellphone''";
-	Seems similar to HE Shots?
-[?] Persistent "Does a stacking DoT to enemies when hit\n\n\ci''Causes severe leaking, handle with care.''";
-	Sounds like it COULD be a non-elemental DoT attack, but also technically implemented through Elements.
-[?] Prototype "Sprays huge amounts of plasma projectiles\n\n\ci''Looks like Christmas!''";
-	Not sure how this works, might be too niche.
-[?] Gyrojet "Fires mini-missiles\n\n\ci''Increases pauldron size by 30%.''";
-	Investiagte implementation, perhaps any projectile can be made to work with this.
-[?] Goldeneye "Direct hits cause constant explosions around enemies\n\n\ci''The names Guy, DOOM Guy.''";
-	Not sure how this works
-[?] Raycaster "Rockets emit BFG rays\n\n\ci''No, this doesn't add pushwalls.''";
-	Could work with all projectiles
-[?] Unfathomable "Fires all your ammo in one shot\n\n\ci''Very, very extended mag.''";
-	Not sure exactly how this works, will have to check implementation
-[?] Overflowing "Gains a bonus effect for each ammo type maxed\n\n\ci''No, it's my ammo, you can't have it!''";
-	Seems like this should work just fine, but could be overpowered.
-[?] Artifact "Gain a random powerup on kill every 30 seconds\n\n\ci''It's not a pulsing heart-thing, but it's close!''";
-	Should work, need to investigate.
-	Requires StFW.
-[?] Crippling "Attacks give the enemy a 50% damage debuff\n\n\ci''Vault Boy Approved!''";
-	Check implementation, otherwise seems doable.
-[?] Augmented "Armor bonuses give damage resist, health gives 1.5x damage\n\ch[PASSIVE]\n\n\ci''Why contain it?''";
-	Requires StFW, but not sure how to make it universal without specific actors.
-
-Implement Later
----------------
-[.] ColdBlooded "Damage starts off at Berserk levels, Berserk reduces it";
-	Interesting idea, but I want to focus on purely positive upgrades
-[.] Trailblazing "Fires faster the lower your health is";
-	Can be easily done, but not that interesting to me
-[.] Scanner "Computer maps give tracking map\n\ch[PASSIVE]";
-	Not interesting to me.
-[.] Heavy "Greatly increased knockback\n\n\ci''Kickback and relax.''";
-	Tried this, kinda worked, but TF is also looking into this
-[.] Hunting "Slower firerate, but higher damage and knockback";
-	Defintely able to do, but the knockback implementation is an issue
 
 Finished
 --------
@@ -191,6 +177,9 @@ Finished
 
 Implemented by GunBonsai
 ------------------------
+[GB] Nova "Unleashes a cascade of energy from the blast itself";
+	?: Don't know exactly what this is
+	GB: BFG Onlt, Ball emits a ring of FastProjectiles on explosion, Frangmentatyion Shots
 [GB] Penetrating "Projectiles rip through enemies, have lowered damage\n\n\ci''I hope Otto Giftmacher doesn't sue.''";
 [GB] Tricky "Projectiles bounce off surfaces";
 [GB] Quickdraw "Weapon switches instantly, has no prefire time";
@@ -216,6 +205,49 @@ Implemented by GunBonsai
 
 Non Implementing
 ----------------
+[X] Augmented "Armor bonuses give damage resist, health gives 1.5x damage\n\ch[PASSIVE]\n\n\ci''Why contain it?''";
+	Specific actors
+[X] Overflowing "Gains a bonus effect for each ammo type maxed\n\n\ci''No, it's my ammo, you can't have it!''";
+	?: Seems like this should work just fine, but could be overpowered.
+	X: Adds AoE effect if Rockets max, extra dmg if Cells max, and adds spread if Shells max, sounds meh
+[X] Unfathomable "Fires all your ammo in one shot\n\n\ci''Very, very extended mag.''";
+	?: Not sure exactly how this works, will have to check implementation
+	X: Continuously fires in a loop until ammo is expended, could be done, but would likely require HSFW+PDFW, and wouldn't be as good.
+[X] Goldeneye "Direct hits cause constant explosions around enemies\n\n\ci''The names Guy, DOOM Guy.''";
+	?: Not sure how this works
+	X: Very cool, but Niche
+[X] Gyrojet "Fires mini-missiles\n\n\ci''Increases pauldron size by 30%.''";
+	?: Investiagte implementation, perhaps any projectile can be made to work with this.
+	X: Made for bullet weapons, plus it seems way over complicated for what it does
+[X] Prototype "Sprays huge amounts of plasma projectiles\n\n\ci''Looks like Christmas!''";
+	?: Not sure how this works, might be too niche.
+	X: BFG, Too Niche
+[X] Persistent "Does a stacking DoT to enemies when hit\n\n\ci''Causes severe leaking, handle with care.''";
+	?: Sounds like it COULD be a non-elemental DoT attack, but also technically implemented through Elements.
+	X: Pretty much as said above, but might as well just create an elemental tree like I've been wanting
+[X] Vidmaster "Explosions do full damage over their entire radius\n\n\ci''FROG BLAST THE VENT CORE!''";
+	?: Might not be possible.
+	X: Not possible.
+[X] HighExplosive "Explosions are twice as big";
+	?: Might not be possible.
+	X: Not possible
+[X] Incinerating "Killed enemies burn up after a short time, destroying corpse";
+	?: Should work, but I'll investigate
+	X: Could be done with inventory items, but doesn't seem worth the effort.
+[X] GroupTherapy "Does no splash damage, but if it kills, nearby enemies explode\n\n\ci''Peer Pressure, now weaponised.''";
+	?: Much like Slug, not sure this is possible
+	X: Not possible
+[X] Energetic "Emits twice as many BFG rays";
+[X] Shockwave "Explodes instead of emitting BFG rays\n\n\ci''Hope you like splash damage!''";
+[X] Scattering "Fires BFG rays directly for less ammo";
+	?: Previous three, need to investigate BFG mechanics closer.
+	X: Too Niche
+[X] Agitating "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n\n\ci''AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA''";
+	?: Don't know what this does.
+	X: I guess it just makes annoying sounds when fired
+[X] Kinetic "Projectiles do not explode, instead do all impact damage";
+	?: Might not be possible
+	X: It's not
 [X] Exorcist "Attacks do triple damage to Former Humans\n\crFORMER HUMAN \ccI\cr FORMER HUMAN SERGEANT \ccI\cr FORMER HUMAN COMMANDO\c-\n\n\ci''The power of Christ disembowels you!''";
 	Specific actors
 [X] Extinguishing "Attacks do triple damage to Imps and Arch-viles\n\crIMP \ccI\cr ARCH-VILE\c-";
