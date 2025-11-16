@@ -1,5 +1,0 @@
-// Upgrades
-#include "zscript/som_gbx_addon/upgrades/weapon/shatterdrive.txt"
-
-// Bonus Upgrades
-#include "zscript/som_gbx_addon/upgrades/weapon/lol_rawkitz.txt"

@@ -22,8 +22,6 @@ class SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo : object play
 		{
 			ammo_name = _id;
 		}
-		
-		//Console.Printf("Ammo Type '%s' added!", ammo_name);
 	}
 	
 	void update_data(Actor owner, uint level)
@@ -72,6 +70,16 @@ class SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo : object play
 		
 		return (abs(amt));
 	}
+	
+	bool reserve_is_full()
+	{
+		return (res_curr_amt >= res_max_amt);
+	}
+	
+	bool reserve_is_empty()
+	{
+		return (res_curr_amt <= 0);
+	}
 }
 
 class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
@@ -94,7 +102,6 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 	bool is_valid_ammo(Ammo ammo)
 	{
 		bool valid = (GetDefaultByType(ammo.GetClass()).BackpackAmount != 0) || (GetDefaultByType(ammo.GetClass()).FindState("Spawn").Sprite != 0);
-		//GetDefaultByType(ammo.GetClass()).FindState("Spawn").Sprite != 0;
 		
 		return (valid);
 	}
@@ -134,7 +141,7 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 	
 	override void Tick(Actor owner)
 	{
-		string evt = "som-gbext-amres-display-info";
+		string evt = "som-gbx-upgr-ordinance-array-send-info";
 		
 		if (enabled)
 		{
@@ -144,8 +151,7 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 			
 			SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo info;
 			int ammo = 0;
-			int hi = 0;
-			//int lo = 0;
+			int pivot = 0;
 			int amt = 0;
 			
 			for (int i = 0; i < ammo_info.Size(); i++)
@@ -156,48 +162,30 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 				
 				ammo = p.CountInv(info.ammo_id);
 				
-				hi = round(info.ammo_max_amt * som_gbx_upgr_ordinance_array_si_per);
-				//lo = round(info.ammo_max_amt * som_gbx_upgr_ordinance_array_re_per);
+				pivot = floor(info.ammo_max_amt * som_gbx_upgr_ordinance_array_pivot);
 				
-				/*if (lo >= hi)
-				{ 
-					continue;
-				}*/
-				
-				if (ammo > hi)
+				if ((ammo > pivot) && (!info.reserve_is_full()))
 				{
-					amt = ammo - hi;
+					amt = ammo - pivot;
 					
 					amt = info.modify_reserve(amt);
 					
 					p.TakeInventory(info.ammo_id, amt);
+				}
+
+				if ((ammo < pivot) && (!info.reserve_is_empty()))
+				{
+					amt = pivot - ammo;
 					
 					if (amt > 0)
 					{
-						//Console.Printf("Added %d %s to reserve (%d/%d).", amt, info.ammo_name, info.res_curr_amt, info.res_max_amt);
-					}
-				}
-				else
-				{
-					if ((info.res_curr_amt > 0) && (ammo < hi))
-					{
-						amt = hi - ammo;
-						
-						if (amt > 0)
-						{
-							amt = info.modify_reserve(-amt);
-							p.GiveInventory(info.ammo_id, amt);
-
-							if (amt > 0)
-							{
-								//Console.Printf("Took %d %s from reserve (%d/%d).", amt, info.ammo_name, info.res_curr_amt, info.res_max_amt);
-							}
-						}
+						amt = info.modify_reserve(-amt);
+						p.GiveInventory(info.ammo_id, amt);
 					}
 				}
 			}
 			
-			// Send info (gross...)
+			// Gross Hack
 			let pp = players[consoleplayer];
 			let weap = pp.readyweapon;
 			
@@ -241,7 +229,8 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 	{
 		super.OnDeactivate(stats, info);
 		
-		EventHandler.SendNetworkEvent("som-gbext-amres-display-info");
+		// EventHandler.SendNetworkEvent("som-gbext-amres-display-info");
+		EventHandler.SendNetworkEvent("som-gbx-upgr-ordinance-array-send-info");
 	}
 
 	override void GetTooltipFields(Dictionary fields, uint level)

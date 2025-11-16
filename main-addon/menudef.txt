@@ -94,21 +94,19 @@ OptionMenu "som_gbx_ordinance_array"
 	Title "Ordinance Array"
 	Option "Enabled", "som_gbx_upgr_ordinance_array_enabled", "OnOff"
 	StaticText " "
-	StaticText "Note: All three options below are Percentage based on the current MaxAmount per ammo type"
-	Slider "Reserve Size per Level", "som_gbx_upgr_ordinance_array_inc", 0.00, 100.00, 0.01, 2
-	Slider "Siphon Threshold", "som_gbx_upgr_ordinance_array_si_per", 0.00, 100.00, 0.01, 2
-	//Slider "Replenish Threshold", "som_gbx_upgr_ordinance_array_re_per", 0.00, 100.00, 0.01, 2
+	Slider "Reserve Size per Level", "som_gbx_upgr_ordinance_array_inc", 0.00, 1.00, 0.01, 2
+	Slider "Pivot Threshold", "som_gbx_upgr_ordinance_array_pivot", 0.00, 1.00, 0.01, 2
 	StaticText " "
-	Option "Show Display", "som_gbx_upgr_ordinance_array_disp_enabled", "YesNo"
-	Slider "Display Scale", "som_gbx_upgr_ordinance_array_disp_scale", 1, 4, 1, 0
-	Option "Display X Alignment", "som_gbx_upgr_ordinance_array_disp_align_x", "som_gbx_align_x"
-	Option "Display Y Alignment", "som_gbx_upgr_ordinance_array_disp_align_y", "som_gbx_align_y"
+	Option "Show Display", "som_gbx_upgr_ordinance_array_hud_enabled", "YesNo"
+	Slider "Display Scale", "som_gbx_upgr_ordinance_array_hud_scale", 1, 4, 1, 0
+	Option "Display X Alignment", "som_gbx_upgr_ordinance_array_hud_align_x", "som_gbx_align_x"
+	Option "Display Y Alignment", "som_gbx_upgr_ordinance_array_hud_align_y", "som_gbx_align_y"
 	StaticText " "
-	Slider "X Offset", "som_gbx_upgr_ordinance_array_disp_x", -1920, 1920, 8, 0
-	Slider "Y Offset", "som_gbx_upgr_ordinance_array_disp_y", -1080, 1080, 8, 0
+	Slider "X Offset", "som_gbx_upgr_ordinance_array_hud_x", -1920, 1920, 8, 0
+	Slider "Y Offset", "som_gbx_upgr_ordinance_array_hud_y", -1080, 1080, 8, 0
 	StaticText " "
-	TextField "X Offset", "som_gbx_upgr_ordinance_array_disp_x"
-	TextField "Y Offset", "som_gbx_upgr_ordinance_array_disp_y"
+	TextField "X Offset", "som_gbx_upgr_ordinance_array_hud_x"
+	TextField "Y Offset", "som_gbx_upgr_ordinance_array_hud_y"
 }
 
 // Bonus Upgrades

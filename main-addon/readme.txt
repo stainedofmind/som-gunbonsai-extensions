@@ -1,5 +1,5 @@
-StainedOfMind's GunBonsai eXtensions - Addon [Version 0.0.1]
-------------------------------------------------------------
+StainedOfMind's GunBonsai eXtensions [Version 0.0.1]
+----------------------------------------------------
 
 
 Changelog
@@ -23,6 +23,8 @@ Ammuneux: Classic Bandoliers version from 0.10.6.
 Pulse Reliquary: Max health booster.
 Continuance Field: Powerup Duration Booster.
 LOL Rawkitz: Dumb. Do not use.
+Ordinance Array: Syphons excess ammo into a reserve to allow for greater ammo
+capacity, whilst improving compatibility over the old Bandoliers method.
 
 Usage and Configuration
 -----------------------

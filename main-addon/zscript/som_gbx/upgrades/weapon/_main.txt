@@ -1,0 +1,5 @@
+// Upgrades
+#include "zscript/som_gbx/upgrades/weapon/shatterdrive.txt"
+
+// Bonus Upgrades
+#include "zscript/som_gbx/upgrades/weapon/lol_rawkitz.txt"

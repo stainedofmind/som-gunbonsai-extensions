@@ -10,14 +10,14 @@ Class som_gbx_eventhandler : EventHandler
 		hello_world();
 	}
 	
-	// TODO: Implment this dynamically, and modular for reuse
+	// TODO: Implement this dynamically, and modular for reuse
 	// Ordinance Array (TEMP)
 	Array<String> display_data;
 	
 	clearscope bool can_process_ui()
 	{
 		if (!som_gbx_upgr_ordinance_array_enabled) { return (false); }
-		if (!som_gbx_upgr_ordinance_array_disp_enabled) { return (false); }
+		if (!som_gbx_upgr_ordinance_array_hud_enabled) { return (false); }
 		if (!players[consoleplayer].mo) { return (false); }
 		if (Level.MapName ~== "TITLEMAP") { return (false); }
 		
@@ -30,7 +30,7 @@ Class som_gbx_eventhandler : EventHandler
 		e.Name.Split (command, ":");
 
 		// 0 = command, 1 = ammo name, 2 = curr res, 3 = max res
-		if (command[0] ~== "som-gbext-amres-display-info")
+		if (command[0] ~== "som-gbx-upgr-ordinance-array-send-info")
 		{
 			display_data.Clear();
 			
@@ -55,8 +55,8 @@ Class som_gbx_eventhandler : EventHandler
 		
 		Font font = "AILIFONT";
 		
-		int w = screen.GetWidth() / som_gbx_upgr_ordinance_array_disp_scale;
-		int h = screen.GetHeight() / som_gbx_upgr_ordinance_array_disp_scale;
+		int w = screen.GetWidth() / som_gbx_upgr_ordinance_array_hud_scale;
+		int h = screen.GetHeight() / som_gbx_upgr_ordinance_array_hud_scale;
 		// Actual Coords
 		int x = 0;
 		int y = 0;
@@ -67,7 +67,7 @@ Class som_gbx_eventhandler : EventHandler
 		
 		String _disp;
 		
-		switch (som_gbx_upgr_ordinance_array_disp_align_y)
+		switch (som_gbx_upgr_ordinance_array_hud_align_y)
 		{
 			case 0:	// Top
 				y = 0;
@@ -88,7 +88,7 @@ Class som_gbx_eventhandler : EventHandler
 		{
 			_disp = display_data[i];
 			
-			switch (som_gbx_upgr_ordinance_array_disp_align_x)
+			switch (som_gbx_upgr_ordinance_array_hud_align_x)
 			{
 				case 0:	// Left
 					x = 0;
@@ -105,8 +105,8 @@ Class som_gbx_eventhandler : EventHandler
 					break;
 			}
 			
-			x1 = clamp(x + som_gbx_upgr_ordinance_array_disp_x, 0, w - font.StringWidth(_disp));
-			y1 = clamp(y + som_gbx_upgr_ordinance_array_disp_y, 0 + (font.GetHeight() * i), h - (font.GetHeight() * (display_data.Size() - i)));
+			x1 = clamp(x + som_gbx_upgr_ordinance_array_hud_x, 0, w - font.StringWidth(_disp));
+			y1 = clamp(y + som_gbx_upgr_ordinance_array_hud_y, 0 + (font.GetHeight() * i), h - (font.GetHeight() * (display_data.Size() - i)));
 
 			screen.DrawText(font, Font.CR_UNTRANSLATED, x1, y1, _disp, DTA_KeepRatio, true, DTA_VirtualWidth, w, DTA_VirtualHeight, h);
 			

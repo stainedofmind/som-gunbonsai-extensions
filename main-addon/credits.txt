@@ -1,17 +1,18 @@
 Scripting
 ---------
-Author, SoM GBX - StainedOfMind
-https://github.com/stainedofmind/som-gunbonsai-extensions
-
 Author, GunBonsai - ToxicFrog
 https://github.com/ToxicFrog/doom-mods/tree/main/gun-bonsai
+
+Author, SoM's GunBonsai eXtensions - StainedOfMind
+https://github.com/stainedofmind/som-gunbonsai-extensions
 
 Sprites
 -------
 PDA - scalliano
 https://www.realm667.com/component/docman/?task=doc_download&gid=439&Itemid=
 
-Flak Shot - Ripped from (SNES) Super Mario World
+Flak Shot/Shatterdrive Projectile - StainedOfMind
+Ripped from (SNES) Super Mario World
 
 Fonts
 -----

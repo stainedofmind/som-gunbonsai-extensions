@@ -1,0 +1,7 @@
+// Upgrades
+#include "zscript/som_gbx/upgrades/player/pulse_reliquary.txt"
+#include "zscript/som_gbx/upgrades/player/continuance_field.txt"
+#include "zscript/som_gbx/upgrades/player/ordinance_array.txt"
+
+// Bonus Upgrades
+#include "zscript/som_gbx/upgrades/player/bandoliers.txt"

@@ -1,0 +1,4 @@
+class som_gbx_hud_data : Object
+{
+
+}
