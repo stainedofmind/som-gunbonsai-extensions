@@ -30,3 +30,9 @@ server int som_gbx_upgr_continuance_field_amt = 25;
 // Bandoliers
 server bool som_gbx_upgr_bandoliers_enabled = false;
 
+// LOL Rawkitz
+server bool som_gbx_upgr_lol_rawkitz_enabled = false;
+
+server float som_gbx_upgr_lolrawkitz_ttl = 1.0;
+server int som_gbx_upgr_lolrawkitz_base_num = 2;
+server float som_gbx_upgr_lolrawkitz_dmg_mult = 1.0;

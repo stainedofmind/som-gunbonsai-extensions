@@ -9,7 +9,21 @@ OptionMenu "som_gbx"
 	//StaticText "Settings"
 	//StaticText " "
 	StaticText "Upgrades", FIRE
-	StaticText "Shatterdrive", YELLOW
+	SubMenu "Shatterdrive", "som_gbx_shatterdrive"
+	SubMenu "Pulse Reliquary", "som_gbx_pulse_reliquary"
+	SubMenu "Continuance Field", "som_gbx_continuance_field"
+	StaticText " "
+	SubMenu "Bonus Upgrades", "som_gbx_bonus_upgrades"
+	StaticText " "
+}
+
+OptionMenu "som_gbx_"
+{
+}
+
+OptionMenu "som_gbx_shatterdrive"
+{
+	Title "Shatterdrive"
 	Option "Enabled", "som_gbx_upgr_flak_shot_enabled", "OnOff"
 	StaticText " "
 	Option "Use Simple Version", "som_gbx_upgr_flak_shot_simple", "YesNo"
@@ -21,18 +35,47 @@ OptionMenu "som_gbx"
 	TextField "Flak Damage - Per Level", "som_gbx_upgr_flak_shot_dmg_inc"
 	TextField "Max Time to Live - Base (Seconds)", "som_gbx_upgr_flak_shot_ttl_base"
 	TextField "Max Time to Live - Per Level (Seconds)", "som_gbx_upgr_flak_shot_ttl_inc"
-	StaticText " "
-	StaticText "Pulse Reliquary", YELLOW
+}
+
+OptionMenu "som_gbx_pulse_reliquary"
+{
+	Title "Pulse Reliquary"
 	Option "Enabled", "som_gbx_upgr_pulse_reliquary_enabled", "OnOff"
 	StaticText " "
 	TextField "Bonus Health per Level", "som_gbx_upgr_pulse_reliquary_amt"
 	Slider "Processing Interval (tics)", "som_gbx_upgr_pulse_reliquary_proc_time", 1, 350, 1, 0
-	StaticText " "
-	StaticText "Continuance Field", YELLOW
+}
+
+OptionMenu "som_gbx_continuance_field"
+{
+	Title "Continuance Field"
 	Option "Enabled", "som_gbx_upgr_continuance_field_enabled", "OnOff"
 	StaticText " "
 	TextField "Time Extention per Level (percent)", "som_gbx_upgr_continuance_field_amt"
-	StaticText " "
-	StaticText "Bandoliers", YELLOW
+}
+
+OptionMenu "som_gbx_bonus_upgrades"
+{
+	Title "Bonus Upgrades"
+	StaticText "Note: Bonus Upgrades are disabled by default."
+	SubMenu "Ammuneux", "som_gbx_ammuneux"
+	SubMenu "LOL Rawkitz", "som_gbx_lol_rawkitz"
+}
+
+OptionMenu "som_gbx_ammuneux"
+{
+	Title "Ammuneux"
+	StaticText "Legacy Upgrade: Bandoliers"
 	Option "Enabled", "som_gbx_upgr_bandoliers_enabled", "OnOff"
+}
+
+OptionMenu "som_gbx_lol_rawkitz"
+{
+	Title "LOL Rawkitz"
+	StaticText "Joke Upgrade: Not meant for serious gameplay."
+	Option "Rawkitz?", "som_gbx_upgr_lol_rawkitz_enabled", "OnOff"
+	StaticText " "
+	TextField "RAWKITZ", "som_gbx_upgr_lolrawkitz_dmg_mult"
+	TextField "RawkitzRawkitzRawkitz", "som_gbx_upgr_lolrawkitz_base_num"
+	TextField "Rrrrrrrrrrrrawkitzzzzzzzzz", "som_gbx_upgr_lolrawkitz_ttl"
 }

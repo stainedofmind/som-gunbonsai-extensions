@@ -1,23 +1,23 @@
 [en default]
-SOM_GBX_Upgrade_FlakShot_Main_Name = "Shatterdrive";
-SOM_GBX_Upgrade_FlakShot_Main_Desc = "Killing an enemy releases a bunch of firey flaks.";
-SOM_GBX_Upgrade_FlakShot_Main_TT = "Does @damage of target health + 100% of overkill damage (split across @count flaks) + @bonusdamage damage per flak. The flaks last up to @ttl.";
+SOM_GBX_Upgrade_Shatterdrive_Main_Name = "Shatterdrive";
+SOM_GBX_Upgrade_Shatterdrive_Main_Desc = "Killing an enemy releases a bunch of firey flaks.";
+SOM_GBX_Upgrade_Shatterdrive_Main_TT = "Does @damage of target health + 100% of overkill damage (split across @count flaks) + @bonusdamage damage per flak. The flaks last up to @ttl.";
 
-SOM_GBX_Upgrade_FlakShot_Qty_Name = "Fragment Cascade";
-SOM_GBX_Upgrade_FlakShot_Qty_Desc = "Shatterdrive Upgrade: Increase number of flaks.";
-SOM_GBX_Upgrade_FlakShot_Qty_TT = "Upgrades Shatterdrive to expel @count additional flaks.";
+SOM_GBX_Upgrade_Shatterdrive_Qty_Name = "Fragment Cascade";
+SOM_GBX_Upgrade_Shatterdrive_Qty_Desc = "Shatterdrive Upgrade: Increase number of flaks.";
+SOM_GBX_Upgrade_Shatterdrive_Qty_TT = "Upgrades Shatterdrive to expel @count additional flaks.";
 
-SOM_GBX_Upgrade_FlakShot_Dmg_Name = "Fusion Matrix";
-SOM_GBX_Upgrade_FlakShot_Dmg_Desc = "Shatterdrive Upgrade: Increase flak damage.";
-SOM_GBX_Upgrade_FlakShot_Dmg_TT = "Upgrades Shatterdrive to do additional @damage of target health + 100% of overkill damage (split across all flaks) + @bonusdamage damage per flak.";
+SOM_GBX_Upgrade_Shatterdrive_Dmg_Name = "Fusion Matrix";
+SOM_GBX_Upgrade_Shatterdrive_Dmg_Desc = "Shatterdrive Upgrade: Increase flak damage.";
+SOM_GBX_Upgrade_Shatterdrive_Dmg_TT = "Upgrades Shatterdrive to do additional @damage of target health + 100% of overkill damage (split across all flaks) + @bonusdamage damage per flak.";
 
-SOM_GBX_Upgrade_FlakShot_Ttl_Name = "Decay Lattice";
-SOM_GBX_Upgrade_FlakShot_Ttl_Desc = "Shatterdrive Upgrade: Increase maximum flak time to live.";
-SOM_GBX_Upgrade_FlakShot_Ttl_TT = "Upgrades Shatterdrive flaks to last up to an additional @ttl.";
+SOM_GBX_Upgrade_Shatterdrive_Ttl_Name = "Decay Lattice";
+SOM_GBX_Upgrade_Shatterdrive_Ttl_Desc = "Shatterdrive Upgrade: Increase maximum flak time to live.";
+SOM_GBX_Upgrade_Shatterdrive_Ttl_TT = "Upgrades Shatterdrive flaks to last up to an additional @ttl.";
 
-SOM_GBX_Upgrade_FlakShot_Simple_Name = "Flak Shot";
-SOM_GBX_Upgrade_FlakShot_Simple_Desc = "Killing an enemy releases a bunch of firey flaks.";
-SOM_GBX_Upgrade_FlakShot_Simple_TT = "Does @damage of target health + 100% of overkill damage (split across @count flaks) + @bonusdamage damage per flak. The flaks last up to @ttl.";
+SOM_GBX_Upgrade_FlakShot_Name = "Flak Shot";
+SOM_GBX_Upgrade_FlakShot_Desc = "Killing an enemy releases a bunch of firey flaks.";
+SOM_GBX_Upgrade_FlakShot_TT = "Does @damage of target health + 100% of overkill damage (split across @count flaks) + @bonusdamage damage per flak. The flaks last up to @ttl.";
 
 SOM_GBX_Upgrade_Bandoliers_Name = "Ammuneux";
 SOM_GBX_Upgrade_Bandoliers_Desc = "Increases ammo capacity.";
@@ -30,3 +30,7 @@ SOM_GBX_Upgrade_PulseReliquary_TT = "Maximum health boost + @hp-increase.";
 SOM_GBX_Upgrade_ContinuanceField_Name = "Continuance Field";
 SOM_GBX_Upgrade_ContinuanceField_Desc = "Increase duration of powerups.";
 SOM_GBX_Upgrade_ContinuanceField_TT = "Powerup duration increased by @dur-boost.";
+
+SOM_GBX_Upgrade_LolRawkitz_Name = "LOL Rawkitz";
+SOM_GBX_Upgrade_LolRawkitz_Desc = "LOL! RAWKITZ!!!!";
+SOM_GBX_Upgrade_LolRawkitz_TT = "Rawkitz go BOOM! LMFAO!";

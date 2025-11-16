@@ -1,1 +1,2 @@
-#include "zscript/som_gbx_addon/upgrades/weapon/flak_shot.txt"
+#include "zscript/som_gbx_addon/upgrades/weapon/shatterdrive.txt"
+#include "zscript/som_gbx_addon/upgrades/weapon/lol_rawkitz.txt"

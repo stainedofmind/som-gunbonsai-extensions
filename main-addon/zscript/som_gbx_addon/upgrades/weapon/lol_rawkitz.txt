@@ -1,0 +1,67 @@
+class SOM_GBX_Upgrade_LolRawkitz: TFLV_Upgrade_BaseUpgrade
+{
+	override TFLV_Upgrade_UpgradePriority Priority()
+	{
+		return TFLV_Upgrade_PRI_EXPLOSIVE;
+	}
+
+	override void OnKill(PlayerPawn player, Actor shot, Actor target)
+	{
+		if (shot is "SOM_GBX_Upgrade_LolRawkitz_Grenade") return;
+		let aux = SOM_GBX_Upgrade_LolRawkitz_Spawner(target.Spawn("SOM_GBX_Upgrade_LolRawkitz_Spawner", target.pos));
+		aux.weaponspecial = Priority();
+		aux.target = player;
+		let count = som_gbx_upgr_lolrawkitz_base_num + level;
+		aux.ReactionTime = count;
+		aux.damage = ((target.SpawnHealth() + abs(target.health)) * (1.0 - 0.8 ** level)) / count + 4 * level;
+		aux.damage *= som_gbx_upgr_lolrawkitz_dmg_mult;
+		aux.blast_radius = target.radius * 2.5;
+		aux.ttl = som_gbx_upgr_lolrawkitz_ttl;
+	}
+
+	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
+	{
+		return (som_gbx_upgr_lol_rawkitz_enabled);
+	}
+}
+
+class SOM_GBX_Upgrade_LolRawkitz_Spawner: Actor
+{
+	uint damage;
+	uint blast_radius;
+	uint ttl;
+
+	States
+	{
+		Spawn:
+			TNT1 A 7;
+		SpawnMunition:
+			TNT1 A 1 SpawnMunition();
+			TNT1 A 0 A_CountDown();
+			LOOP;
+	}
+
+	void SpawnMunition()
+	{
+		let aux = SOM_GBX_Upgrade_LolRawkitz_Grenade(A_SpawnProjectile(
+			"SOM_GBX_Upgrade_LolRawkitz_Grenade", 32, 0, random(0, 360),
+			CMF_AIMDIRECTION | CMF_ABSOLUTEANGLE));
+		aux.weaponspecial = weaponspecial;
+		aux.target = target;
+		aux.damage = damage;
+		aux.blast_radius = blast_radius;
+		aux.ReactionTime = random(1, round(ttl * 5));
+	}
+}
+
+class SOM_GBX_Upgrade_LolRawkitz_Grenade: Rocket
+{
+	uint damage;
+	uint blast_radius;
+	property UpgradePriority: weaponspecial;
+
+	Default
+	{
+		SOM_GBX_Upgrade_LolRawkitz_Grenade.UpgradePriority TFLV_Upgrade_PRI_EXPLOSIVE;
+	}
+}

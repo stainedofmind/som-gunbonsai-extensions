@@ -1,4 +1,4 @@
-class SOM_GBX_Upgrade_FlakShot_Main: TFLV_Upgrade_BaseUpgrade
+class SOM_GBX_Upgrade_Shatterdrive_Main: TFLV_Upgrade_BaseUpgrade
 {
 	int qty;
 	float ttl;
@@ -30,9 +30,9 @@ class SOM_GBX_Upgrade_FlakShot_Main: TFLV_Upgrade_BaseUpgrade
 		
 		let info = TFLV_PerPlayerStats.GetStatsFor(owner).GetInfoForCurrentWeapon();
 		
-		qty = som_gbx_upgr_flak_shot_flaks_base + (som_gbx_upgr_flak_shot_flaks_inc * Level(info, "SOM_GBX_Upgrade_FlakShot_Qty"));
-		ttl = som_gbx_upgr_flak_shot_ttl_base + (som_gbx_upgr_flak_shot_ttl_inc * float(Level(info, "SOM_GBX_Upgrade_FlakShot_Ttl")));
-		dmg = som_gbx_upgr_flak_shot_dmg_base + (som_gbx_upgr_flak_shot_dmg_inc * Level(info, "SOM_GBX_Upgrade_FlakShot_Dmg"));
+		qty = som_gbx_upgr_flak_shot_flaks_base + (som_gbx_upgr_flak_shot_flaks_inc * Level(info, "SOM_GBX_Upgrade_Shatterdrive_Qty"));
+		ttl = som_gbx_upgr_flak_shot_ttl_base + (som_gbx_upgr_flak_shot_ttl_inc * float(Level(info, "SOM_GBX_Upgrade_Shatterdrive_Ttl")));
+		dmg = som_gbx_upgr_flak_shot_dmg_base + (som_gbx_upgr_flak_shot_dmg_inc * Level(info, "SOM_GBX_Upgrade_Shatterdrive_Dmg"));
 	}
 	
 	override TFLV_Upgrade_UpgradePriority Priority()
@@ -42,8 +42,8 @@ class SOM_GBX_Upgrade_FlakShot_Main: TFLV_Upgrade_BaseUpgrade
 
 	override void OnKill(PlayerPawn player, Actor shot, Actor target)
 	{
-		if (shot is "SOM_GBX_Upgrade_FlakShot_Grenade") return;
-		let aux = SOM_GBX_Upgrade_FlakShot_Spawner(target.Spawn("SOM_GBX_Upgrade_FlakShot_Spawner", target.pos));
+		if (shot is "SOM_GBX_Upgrade_Shatterdrive_Grenade") return;
+		let aux = SOM_GBX_Upgrade_Shatterdrive_Spawner(target.Spawn("SOM_GBX_Upgrade_Shatterdrive_Spawner", target.pos));
 		aux.weaponspecial = Priority();
 		aux.target = player;
 		let count = qty;
@@ -59,7 +59,7 @@ class SOM_GBX_Upgrade_FlakShot_Main: TFLV_Upgrade_BaseUpgrade
 		return som_gbx_upgr_flak_shot_enabled
 			&& !info.IsMelee()
 			&& !som_gbx_upgr_flak_shot_simple
-			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") == 0;
+			&& info.upgrades.Level("SOM_GBX_Upgrade_Shatterdrive_Main") == 0;
 	}
 
 	override void GetTooltipFields(Dictionary fields, uint level)
@@ -71,7 +71,7 @@ class SOM_GBX_Upgrade_FlakShot_Main: TFLV_Upgrade_BaseUpgrade
 	}
 }
 
-class SOM_GBX_Upgrade_FlakShot_Simple: TFLV_Upgrade_BaseUpgrade
+class SOM_GBX_Upgrade_FlakShot: TFLV_Upgrade_BaseUpgrade
 {
 	override void Tick(Actor owner)
 	{
@@ -88,8 +88,8 @@ class SOM_GBX_Upgrade_FlakShot_Simple: TFLV_Upgrade_BaseUpgrade
 
 	override void OnKill(PlayerPawn player, Actor shot, Actor target)
 	{
-		if (shot is "SOM_GBX_Upgrade_FlakShot_Grenade") return;
-		let aux = SOM_GBX_Upgrade_FlakShot_Spawner(target.Spawn("SOM_GBX_Upgrade_FlakShot_Spawner", target.pos));
+		if (shot is "SOM_GBX_Upgrade_Shatterdrive_Grenade") return;
+		let aux = SOM_GBX_Upgrade_Shatterdrive_Spawner(target.Spawn("SOM_GBX_Upgrade_Shatterdrive_Spawner", target.pos));
 		aux.weaponspecial = Priority();
 		aux.target = player;
 		let count = som_gbx_upgr_flak_shot_flaks_base + (level - 1);	// -1 to make it the same as Skill Tree Version
@@ -116,7 +116,7 @@ class SOM_GBX_Upgrade_FlakShot_Simple: TFLV_Upgrade_BaseUpgrade
 	}
 }
 
-class SOM_GBX_Upgrade_FlakShot_Spawner: Actor
+class SOM_GBX_Upgrade_Shatterdrive_Spawner: Actor
 {
 	uint damage;
 	uint blast_radius;
@@ -134,8 +134,8 @@ class SOM_GBX_Upgrade_FlakShot_Spawner: Actor
 
 	void SpawnMunition()
 	{
-		let aux = SOM_GBX_Upgrade_FlakShot_Grenade(A_SpawnProjectile(
-			"SOM_GBX_Upgrade_FlakShot_Grenade", 32, 0, random(0, 360),
+		let aux = SOM_GBX_Upgrade_Shatterdrive_Grenade(A_SpawnProjectile(
+			"SOM_GBX_Upgrade_Shatterdrive_Grenade", 32, 0, random(0, 360),
 			CMF_AIMDIRECTION | CMF_ABSOLUTEANGLE));
 		aux.weaponspecial = weaponspecial;
 		aux.target = target;
@@ -146,7 +146,7 @@ class SOM_GBX_Upgrade_FlakShot_Spawner: Actor
 	}
 }
 
-class SOM_GBX_Upgrade_FlakShot_Grenade: Actor
+class SOM_GBX_Upgrade_Shatterdrive_Grenade: Actor
 {
 	uint damage;
 	uint blast_radius;
@@ -154,7 +154,7 @@ class SOM_GBX_Upgrade_FlakShot_Grenade: Actor
 
 	Default
 	{
-		SOM_GBX_Upgrade_FlakShot_Grenade.UpgradePriority TFLV_Upgrade_PRI_EXPLOSIVE;
+		SOM_GBX_Upgrade_Shatterdrive_Grenade.UpgradePriority TFLV_Upgrade_PRI_EXPLOSIVE;
 		Radius 12;
 		Height 24;
 		Speed 15;
@@ -192,14 +192,14 @@ class SOM_GBX_Upgrade_FlakShot_Grenade: Actor
 	}
 }
 
-class SOM_GBX_Upgrade_FlakShot_Qty: TFLV_Upgrade_BaseUpgrade
+class SOM_GBX_Upgrade_Shatterdrive_Qty: TFLV_Upgrade_BaseUpgrade
 {
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
 		return som_gbx_upgr_flak_shot_enabled
 			&& !info.IsMelee()
 			&& !som_gbx_upgr_flak_shot_simple
-			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") > 0;
+			&& info.upgrades.Level("SOM_GBX_Upgrade_Shatterdrive_Main") > 0;
 	}
 	
 	override void GetTooltipFields(Dictionary fields, uint level)
@@ -210,14 +210,14 @@ class SOM_GBX_Upgrade_FlakShot_Qty: TFLV_Upgrade_BaseUpgrade
 	}
 }
 
-class SOM_GBX_Upgrade_FlakShot_Dmg: TFLV_Upgrade_BaseUpgrade
+class SOM_GBX_Upgrade_Shatterdrive_Dmg: TFLV_Upgrade_BaseUpgrade
 {
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
 		return som_gbx_upgr_flak_shot_enabled
 			&& !info.IsMelee()
 			&& !som_gbx_upgr_flak_shot_simple
-			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") > 0;
+			&& info.upgrades.Level("SOM_GBX_Upgrade_Shatterdrive_Main") > 0;
 	}
 	
 	override void GetTooltipFields(Dictionary fields, uint level)
@@ -229,14 +229,14 @@ class SOM_GBX_Upgrade_FlakShot_Dmg: TFLV_Upgrade_BaseUpgrade
 	}
 }
 
-class SOM_GBX_Upgrade_FlakShot_Ttl: TFLV_Upgrade_BaseUpgrade
+class SOM_GBX_Upgrade_Shatterdrive_Ttl: TFLV_Upgrade_BaseUpgrade
 {
 	override bool IsSuitableForWeapon(TFLV_WeaponInfo info)
 	{
 		return som_gbx_upgr_flak_shot_enabled
 			&& !info.IsMelee()
 			&& !som_gbx_upgr_flak_shot_simple
-			&& info.upgrades.Level("SOM_GBX_Upgrade_FlakShot_Main") > 0;
+			&& info.upgrades.Level("SOM_GBX_Upgrade_Shatterdrive_Main") > 0;
 	}
 	
 	override void GetTooltipFields(Dictionary fields, uint level)

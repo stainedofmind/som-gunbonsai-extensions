@@ -6,8 +6,8 @@ Pulse Reliquary (HP Boost)
 Continuance Field (Powerup Boost)
 	-Need to figure out a way to fix Addative Powerups
 LOL Rockitz
-	-Dumb
-Ammo Reserves
+	-Dumb. Don't use. Fun actually. Deadly.
+Ordinance Array (Ammo Reserves)
 	-
 
 Systems:

@@ -1,5 +1,5 @@
 StainedOfMind's GunBonsai eXtensions - Addon [Version 0.0.1]
------------------------------------------------------------
+------------------------------------------------------------
 
 
 Changelog
@@ -9,7 +9,8 @@ Version 0.0.1:
 
 Weapon Upgrades
 ---------------
-Flak Shot: Configurable version of Submunitions. Works like the classic version.
+Flak Shot: Configurable version of Submunitions. Works like the classic SoM 
+version.
 Shatterdrive: Configurable version of Submunitions, upgraded with a skill
 tree.
 Fragment Cascade: Shatterdrive Upgrade: Increase number of flaks.
@@ -18,9 +19,10 @@ Decay Lattice: Shatterdrive Upgrade: Increase maximum flak time to live.
 
 Player Upgrades
 ---------------
-Bandoliers: Classic version from 0.10.6.
+Ammuneux: Classic Bandoliers version from 0.10.6.
 Pulse Reliquary: Max health booster.
 Continuance Field: Powerup Duration Booster.
+LOL Rawkitz: Dumb. Do not use.
 
 Usage and Configuration
 -----------------------

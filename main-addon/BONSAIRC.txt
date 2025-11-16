@@ -1,10 +1,11 @@
 register
-	SOM_GBX_Upgrade_FlakShot_Simple
-	SOM_GBX_Upgrade_FlakShot_Main
-	SOM_GBX_Upgrade_FlakShot_Qty
-	SOM_GBX_Upgrade_FlakShot_Dmg
-	SOM_GBX_Upgrade_FlakShot_Ttl
+	SOM_GBX_Upgrade_FlakShot
+	SOM_GBX_Upgrade_Shatterdrive_Main
+	SOM_GBX_Upgrade_Shatterdrive_Qty
+	SOM_GBX_Upgrade_Shatterdrive_Dmg
+	SOM_GBX_Upgrade_Shatterdrive_Ttl
 	SOM_GBX_Upgrade_Bandoliers
 	SOM_GBX_Upgrade_PulseReliquary
 	SOM_GBX_Upgrade_ContinuanceField
+	SOM_GBX_Upgrade_LolRawkitz
 	;
