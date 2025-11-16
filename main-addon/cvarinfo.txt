@@ -1,6 +1,11 @@
-// Main
+// *****************************************************************************
+// * Main                                                                      *
+// *****************************************************************************
 
-// Upgrades
+// *****************************************************************************
+// * Upgrades                                                                  *
+// *****************************************************************************
+
 // Shatterdrive/Flak Shot
 server bool som_gbx_upgr_flak_shot_enabled = true;
 
@@ -27,6 +32,28 @@ server bool som_gbx_upgr_continuance_field_enabled = true;
 
 server int som_gbx_upgr_continuance_field_amt = 25;
 
+// Ordinance Array
+server bool som_gbx_upgr_ordinance_array_enabled = true;
+
+server float som_gbx_upgr_ordinance_array_inc = 0.5;
+server float som_gbx_upgr_ordinance_array_si_per = 0.8;
+server float som_gbx_upgr_ordinance_array_re_per = 0.25;
+
+server bool som_gbx_upgr_ordinance_array_disp_enabled = true;
+server float som_gbx_upgr_ordinance_array_disp_x = 0;
+server float som_gbx_upgr_ordinance_array_disp_y = 0;
+server int som_gbx_upgr_ordinance_array_disp_scale = 1;
+
+// 0: Left,  1: Center, 2: Right
+server int som_gbx_upgr_ordinance_array_disp_align_x = 0;
+
+// 0: Top, 1: Middle, 2: Bottom
+server int som_gbx_upgr_ordinance_array_disp_align_y = 1;
+
+// *****************************************************************************
+// * Bonus Upgrades                                                            *
+// *****************************************************************************
+
 // Bandoliers
 server bool som_gbx_upgr_bandoliers_enabled = false;
 
@@ -36,3 +63,4 @@ server bool som_gbx_upgr_lol_rawkitz_enabled = false;
 server float som_gbx_upgr_lolrawkitz_ttl = 1.0;
 server int som_gbx_upgr_lolrawkitz_base_num = 2;
 server float som_gbx_upgr_lolrawkitz_dmg_mult = 1.0;
+

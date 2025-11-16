@@ -1,11 +1,15 @@
 register
+	// Upgrades
 	SOM_GBX_Upgrade_FlakShot
 	SOM_GBX_Upgrade_Shatterdrive_Main
 	SOM_GBX_Upgrade_Shatterdrive_Qty
 	SOM_GBX_Upgrade_Shatterdrive_Dmg
 	SOM_GBX_Upgrade_Shatterdrive_Ttl
-	SOM_GBX_Upgrade_Bandoliers
 	SOM_GBX_Upgrade_PulseReliquary
 	SOM_GBX_Upgrade_ContinuanceField
+	SOM_GBX_Upgrade_OrdinanceArray
+	
+	// Bonus Upgrades
 	SOM_GBX_Upgrade_LolRawkitz
+	SOM_GBX_Upgrade_Bandoliers
 	;

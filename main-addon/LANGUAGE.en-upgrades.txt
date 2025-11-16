@@ -34,3 +34,7 @@ SOM_GBX_Upgrade_ContinuanceField_TT = "Powerup duration increased by @dur-boost.
 SOM_GBX_Upgrade_LolRawkitz_Name = "LOL Rawkitz";
 SOM_GBX_Upgrade_LolRawkitz_Desc = "LOL! RAWKITZ!!!!";
 SOM_GBX_Upgrade_LolRawkitz_TT = "Rawkitz go BOOM! LMFAO!";
+
+SOM_GBX_Upgrade_OrdinanceArray_Name = "Ordinance Array";
+SOM_GBX_Upgrade_OrdinanceArray_Desc = "Gives player an ammo reserve.";
+SOM_GBX_Upgrade_OrdinanceArray_TT = "Ammo reserve size @ammo-pool of max (including backpack + upgrades).";

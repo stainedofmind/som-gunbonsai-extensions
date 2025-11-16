@@ -8,7 +8,8 @@ Continuance Field (Powerup Boost)
 LOL Rockitz
 	-Dumb. Don't use. Fun actually. Deadly.
 Ordinance Array (Ammo Reserves)
-	-
+	-Classic version implemented.
+	-Need to generalize display system
 
 Systems:
 Progress Keeper

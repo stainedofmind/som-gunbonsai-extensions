@@ -37,6 +37,6 @@ class SOM_GBX_Upgrade_Bandoliers: TFLV_Upgrade_BaseUpgrade
 
 	override bool IsSuitableForPlayer(TFLV_PerPlayerStats stats)
 	{
-		return true;
+		return (som_gbx_upgr_bandoliers_enabled);
 	}
 }

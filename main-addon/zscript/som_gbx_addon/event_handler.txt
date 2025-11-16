@@ -9,4 +9,108 @@ Class som_gbx_eventhandler : EventHandler
 	{
 		hello_world();
 	}
+	
+	// TODO: Implment this dynamically, and modular for reuse
+	// Ordinance Array (TEMP)
+	Array<String> display_data;
+	
+	clearscope bool can_process_ui()
+	{
+		if (!som_gbx_upgr_ordinance_array_enabled) { return (false); }
+		if (!som_gbx_upgr_ordinance_array_disp_enabled) { return (false); }
+		if (!players[consoleplayer].mo) { return (false); }
+		if (Level.MapName ~== "TITLEMAP") { return (false); }
+		
+		return (true);
+	}
+	
+    override void NetworkProcess(ConsoleEvent e)
+    {
+		Array<string> command;
+		e.Name.Split (command, ":");
+
+		// 0 = command, 1 = ammo name, 2 = curr res, 3 = max res
+		if (command[0] ~== "som-gbext-amres-display-info")
+		{
+			display_data.Clear();
+			
+			if (command.Size() != 1)
+			{
+				display_data.Push("Ammo Reserves");
+				display_data.Push(String.Format("%s:", command[1]));
+				display_data.Push(String.Format("%s/%s", command[2], command[3]));
+				
+				if (command.Size() > 4)
+				{
+					display_data.Push(String.Format("%s:", command[4]));
+					display_data.Push(String.Format("%s/%s", command[5], command[6]));
+				}
+			}
+		}
+	}
+	
+	override void RenderOverlay (RenderEvent e)
+	{
+		if (!can_process_ui()) { return; }
+		
+		Font font = "AILIFONT";
+		
+		int w = screen.GetWidth() / som_gbx_upgr_ordinance_array_disp_scale;
+		int h = screen.GetHeight() / som_gbx_upgr_ordinance_array_disp_scale;
+		// Actual Coords
+		int x = 0;
+		int y = 0;
+		
+		// Adjusted Coords with Offset values
+		int x1 = 0;
+		int y1 = 0;
+		
+		String _disp;
+		
+		switch (som_gbx_upgr_ordinance_array_disp_align_y)
+		{
+			case 0:	// Top
+				y = 0;
+				break;
+			case 1:	// Middle
+				y = (h / 2) - (font.GetHeight() / 2);
+				break;
+			case 2:	// Bottom
+				y = h - (font.GetHeight() * display_data.Size());
+				break;
+			default:
+				// Error, default to "0"
+				y = 0;
+				break;
+		}
+
+		for (int i = 0; i < display_data.Size(); i++)
+		{
+			_disp = display_data[i];
+			
+			switch (som_gbx_upgr_ordinance_array_disp_align_x)
+			{
+				case 0:	// Left
+					x = 0;
+					break;
+				case 1:	// Center
+					x = (w / 2) - (font.StringWidth(_disp) / 2);
+					break;
+				case 2:	// Right
+					x = w - font.StringWidth(_disp);
+					break;
+				default:
+					// Error, default to "0"
+					x = 0;
+					break;
+			}
+			
+			x1 = clamp(x + som_gbx_upgr_ordinance_array_disp_x, 0, w - font.StringWidth(_disp));
+			y1 = clamp(y + som_gbx_upgr_ordinance_array_disp_y, 0 + (font.GetHeight() * i), h - (font.GetHeight() * (display_data.Size() - i)));
+
+			screen.DrawText(font, Font.CR_UNTRANSLATED, x1, y1, _disp, DTA_KeepRatio, true, DTA_VirtualWidth, w, DTA_VirtualHeight, h);
+			
+			y += font.GetHeight();
+		}
+	}
 }

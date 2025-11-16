@@ -3,24 +3,58 @@ AddOptionMenu "OptionsMenu"
 	SubMenu "SoM's GunBonsai eXtensions", "som_gbx"
 }
 
+// Base Menues
 OptionMenu "som_gbx"
 {
 	Title "SoM's GunBonsai eXtensions"
 	//StaticText "Settings"
 	//StaticText " "
-	StaticText "Upgrades", FIRE
+	StaticText "Weapon Upgrades", FIRE
 	SubMenu "Shatterdrive", "som_gbx_shatterdrive"
+	StaticText " "
+	StaticText "Player Upgrades", FIRE
 	SubMenu "Pulse Reliquary", "som_gbx_pulse_reliquary"
 	SubMenu "Continuance Field", "som_gbx_continuance_field"
+	SubMenu "Ordinance Array", "som_gbx_ordinance_array"
 	StaticText " "
 	SubMenu "Bonus Upgrades", "som_gbx_bonus_upgrades"
 	StaticText " "
 }
 
+OptionMenu "som_gbx_bonus_upgrades"
+{
+	Title "Bonus Upgrades"
+	StaticText "Note: Bonus Upgrades are disabled by default."
+	StaticText " "
+	StaticText "Weapon Upgrades", FIRE
+	SubMenu "LOL Rawkitz", "som_gbx_lol_rawkitz"
+	StaticText " "
+	StaticText "Player Upgrades", FIRE
+	SubMenu "Ammuneux", "som_gbx_ammuneux"
+}
+
+// Option Values
+OptionValue "som_gbx_align_x"
+{
+	0, "Left"
+	1, "Center"
+	2, "Right"
+}
+
+OptionValue "som_gbx_align_y"
+{
+	0, "Top"
+	1, "Middle"
+	2, "Bottom"
+}
+
+/* Template
 OptionMenu "som_gbx_"
 {
 }
+*/
 
+// Weapon Upgrades
 OptionMenu "som_gbx_shatterdrive"
 {
 	Title "Shatterdrive"
@@ -37,6 +71,7 @@ OptionMenu "som_gbx_shatterdrive"
 	TextField "Max Time to Live - Per Level (Seconds)", "som_gbx_upgr_flak_shot_ttl_inc"
 }
 
+// Player Upgrades
 OptionMenu "som_gbx_pulse_reliquary"
 {
 	Title "Pulse Reliquary"
@@ -54,14 +89,29 @@ OptionMenu "som_gbx_continuance_field"
 	TextField "Time Extention per Level (percent)", "som_gbx_upgr_continuance_field_amt"
 }
 
-OptionMenu "som_gbx_bonus_upgrades"
+OptionMenu "som_gbx_ordinance_array"
 {
-	Title "Bonus Upgrades"
-	StaticText "Note: Bonus Upgrades are disabled by default."
-	SubMenu "Ammuneux", "som_gbx_ammuneux"
-	SubMenu "LOL Rawkitz", "som_gbx_lol_rawkitz"
+	Title "Ordinance Array"
+	Option "Enabled", "som_gbx_upgr_ordinance_array_enabled", "OnOff"
+	StaticText " "
+	StaticText "Note: All three options below are Percentage based on the current MaxAmount per ammo type"
+	Slider "Reserve Size per Level", "som_gbx_upgr_ordinance_array_inc", 0.00, 100.00, 0.01, 2
+	Slider "Siphon Threshold", "som_gbx_upgr_ordinance_array_si_per", 0.00, 100.00, 0.01, 2
+	Slider "Replenish Threshold", "som_gbx_upgr_ordinance_array_re_per", 0.00, 100.00, 0.01, 2
+	StaticText " "
+	Option "Show Display", "som_gbx_upgr_ordinance_array_disp_enabled", "YesNo"
+	Slider "Display Scale", "som_gbx_upgr_ordinance_array_disp_scale", 1, 4, 1, 0
+	Option "Display X Alignment", "som_gbx_upgr_ordinance_array_disp_align_x", "som_gbx_align_x"
+	Option "Display Y Alignment", "som_gbx_upgr_ordinance_array_disp_align_y", "som_gbx_align_y"
+	StaticText " "
+	Slider "X Offset", "som_gbx_upgr_ordinance_array_disp_x", -1920, 1920, 8, 0
+	Slider "Y Offset", "som_gbx_upgr_ordinance_array_disp_y", -1080, 1080, 8, 0
+	StaticText " "
+	TextField "X Offset", "som_gbx_upgr_ordinance_array_disp_x"
+	TextField "Y Offset", "som_gbx_upgr_ordinance_array_disp_y"
 }
 
+// Bonus Upgrades
 OptionMenu "som_gbx_ammuneux"
 {
 	Title "Ammuneux"
