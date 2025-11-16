@@ -17,8 +17,8 @@ Respec
 Starting Player Levels
 XP Bonuses
 
-Patch-Mod Todo
---------------
+Patches Todo
+------------
 Upgrades:
 Ammo Leech (Bugfixed)
 HE Shots (Bugfixed, investigate unstable)

@@ -37,7 +37,7 @@ server bool som_gbx_upgr_ordinance_array_enabled = true;
 
 server float som_gbx_upgr_ordinance_array_inc = 0.5;
 server float som_gbx_upgr_ordinance_array_si_per = 0.8;
-server float som_gbx_upgr_ordinance_array_re_per = 0.25;
+//server float som_gbx_upgr_ordinance_array_re_per = 0.25;
 
 server bool som_gbx_upgr_ordinance_array_disp_enabled = true;
 server float som_gbx_upgr_ordinance_array_disp_x = 0;

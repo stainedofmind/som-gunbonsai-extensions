@@ -97,7 +97,7 @@ OptionMenu "som_gbx_ordinance_array"
 	StaticText "Note: All three options below are Percentage based on the current MaxAmount per ammo type"
 	Slider "Reserve Size per Level", "som_gbx_upgr_ordinance_array_inc", 0.00, 100.00, 0.01, 2
 	Slider "Siphon Threshold", "som_gbx_upgr_ordinance_array_si_per", 0.00, 100.00, 0.01, 2
-	Slider "Replenish Threshold", "som_gbx_upgr_ordinance_array_re_per", 0.00, 100.00, 0.01, 2
+	//Slider "Replenish Threshold", "som_gbx_upgr_ordinance_array_re_per", 0.00, 100.00, 0.01, 2
 	StaticText " "
 	Option "Show Display", "som_gbx_upgr_ordinance_array_disp_enabled", "YesNo"
 	Slider "Display Scale", "som_gbx_upgr_ordinance_array_disp_scale", 1, 4, 1, 0

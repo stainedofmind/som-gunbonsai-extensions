@@ -145,7 +145,7 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 			SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo info;
 			int ammo = 0;
 			int hi = 0;
-			int lo = 0;
+			//int lo = 0;
 			int amt = 0;
 			
 			for (int i = 0; i < ammo_info.Size(); i++)
@@ -157,12 +157,12 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 				ammo = p.CountInv(info.ammo_id);
 				
 				hi = round(info.ammo_max_amt * som_gbx_upgr_ordinance_array_si_per);
-				lo = round(info.ammo_max_amt * som_gbx_upgr_ordinance_array_re_per);
+				//lo = round(info.ammo_max_amt * som_gbx_upgr_ordinance_array_re_per);
 				
-				if (lo >= hi)
+				/*if (lo >= hi)
 				{ 
 					continue;
-				}
+				}*/
 				
 				if (ammo > hi)
 				{
@@ -177,19 +177,21 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 						//Console.Printf("Added %d %s to reserve (%d/%d).", amt, info.ammo_name, info.res_curr_amt, info.res_max_amt);
 					}
 				}
-				
-				if ((info.res_curr_amt > 0) && (ammo <= lo))
+				else
 				{
-					amt = hi - ammo;
-					
-					if (amt > 0)
+					if ((info.res_curr_amt > 0) && (ammo < hi))
 					{
-						amt = info.modify_reserve(-amt);
-						p.GiveInventory(info.ammo_id, amt);
-
+						amt = hi - ammo;
+						
 						if (amt > 0)
 						{
-							//Console.Printf("Took %d %s from reserve (%d/%d).", amt, info.ammo_name, info.res_curr_amt, info.res_max_amt);
+							amt = info.modify_reserve(-amt);
+							p.GiveInventory(info.ammo_id, amt);
+
+							if (amt > 0)
+							{
+								//Console.Printf("Took %d %s from reserve (%d/%d).", amt, info.ammo_name, info.res_curr_amt, info.res_max_amt);
+							}
 						}
 					}
 				}
