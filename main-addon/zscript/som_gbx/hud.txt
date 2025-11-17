@@ -1,4 +1,178 @@
-class som_gbx_hud_data : Object
+class som_gbx_hud_widget : Object
 {
+	string cvar_id;
+	bool draw;
+	double scale;
+	int align_x;
+	int align_y;
+	int x;
+	int y;
+	Array<String> lines;
+	
+	void init(string cid)
+	{
+		cvar_id = cid;
 
+		draw = false;
+		scale = 1;
+		align_x = 0;
+		align_y = 0;
+		x = 0;
+		y = 0;
+		lines.Clear();
+
+		update_values();
+	}
+	
+	void update_values()
+	{
+		if (cvar_id)
+		{
+			Cvar cv;
+			
+			// Disabling for now. Causes a few problems.
+			//cv = CVar.GetCVar(cvar_id.."enabled");
+			//draw = cv.GetBool();
+			
+			cv = CVar.GetCVar(cvar_id.."scale");
+			scale = cv.GetFloat();
+			
+			cv = CVar.GetCVar(cvar_id.."align_x");
+			align_x = cv.GetInt();
+			
+			cv = CVar.GetCVar(cvar_id.."align_y");
+			align_y = cv.GetInt();
+			
+			cv = CVar.GetCVar(cvar_id.."x");
+			x = cv.GetInt();
+			
+			cv = CVar.GetCVar(cvar_id.."y");
+			y = cv.GetInt();
+		}
+	}
+}
+
+class som_gbx_hud_eventhandler : StaticEventHandler
+{
+	Array<som_gbx_hud_widget> widgets;
+	
+	static clearscope som_gbx_hud_eventhandler Fetch()
+	{
+		return som_gbx_hud_eventhandler(Find("som_gbx_hud_eventhandler"));
+	}
+	
+	override void OnRegister()
+	{
+		// Initialize crap
+	}
+	
+	int new_widget(string cid = "")
+	{
+		Let wid = new("som_gbx_hud_widget");
+		
+		wid.init(cid);
+		widgets.Push(wid);
+		
+		return (widgets.Size() - 1);
+	}
+	
+	som_gbx_hud_widget get_widget(int idx)
+	{
+		if (widgets.Size() == 0)
+		{
+			console.printf("SoM GBX: No widgets defined!");
+			return (null);
+		}
+		
+		if (idx < 0 || idx >= widgets.Size())
+		{
+			console.printf("SoM GBX: Widget index out of range!");
+			return (null);
+		}
+		
+		return (widgets[idx]);
+	}
+	
+	ui bool ShouldDrawHUD(uint p) const
+	{
+		return playeringame[p] &&
+			som_gbx_hud_enabled &&
+			!(Level.MapName ~== "TITLEMAP") &&
+			!automapactive;
+	}
+
+	override void RenderOverlay(RenderEvent evt)
+	{
+		if (!ShouldDrawHUD(consoleplayer)) return;
+		
+		for (int ii = 0; ii < widgets.Size(); ii++)
+		{
+			som_gbx_hud_widget wid = widgets[ii];
+			
+			wid.update_values();
+			
+			if (!wid.draw) { continue; }
+			
+			Font font = "AILIFONT";
+			
+			int w = screen.GetWidth() / wid.scale;
+			int h = screen.GetHeight() / wid.scale;
+
+			// Base coordinates
+			int x = 0;
+			int y = 0;
+			
+			// Adjusted Coords with Offset values
+			int x1 = 0;
+			int y1 = 0;
+			
+			String _disp;
+			
+			switch (wid.align_y)
+			{
+				case 0:	// Top
+					y = 0;
+					break;
+				case 1:	// Middle
+					y = (h / 2) - (font.GetHeight() / 2);
+					break;
+				case 2:	// Bottom
+					y = h - (font.GetHeight() * wid.lines.Size());
+					break;
+				default:
+					// Error, default to "0"
+					y = 0;
+					break;
+			}
+
+			for (int i = 0; i < wid.lines.Size(); i++)
+			{
+				_disp = wid.lines[i];
+				
+				switch (wid.align_x)
+				{
+					case 0:	// Left
+						x = 0;
+						break;
+					case 1:	// Center
+						x = (w / 2) - (font.StringWidth(_disp) / 2);
+						break;
+					case 2:	// Right
+						x = w - font.StringWidth(_disp);
+						break;
+					default:
+						// Error, default to "0"
+						x = 0;
+						break;
+				}
+				
+				x1 = clamp(x + wid.x, 0, w - font.StringWidth(_disp));
+				y1 = clamp(y + wid.y, 0 + (font.GetHeight() * i), h - (font.GetHeight() * (wid.lines.Size() - i)));
+
+				screen.DrawText(font, Font.CR_UNTRANSLATED, x1, y1, _disp, DTA_KeepRatio, true, DTA_VirtualWidth, w, DTA_VirtualHeight, h);
+				
+				y += font.GetHeight();
+			}
+		}
+	}
 }

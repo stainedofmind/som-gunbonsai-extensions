@@ -84,8 +84,20 @@ class SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo : object play
 
 class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 {
-	array<SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo> ammo_info;
+	som_gbx_hud_eventhandler hud;
+	int hud_idx;
 	
+	array<SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo> ammo_info;
+
+	void init_hud()
+	{
+		if (!hud)
+		{
+			hud = som_gbx_hud_eventhandler.Fetch();
+			hud_idx = hud.new_widget("som_gbx_upgr_ordinance_array_hud_");
+		}
+	}
+
 	SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo GetInfoFor(string _id) const
 	{
 		for (int i = 0; i < ammo_info.size(); ++i)
@@ -141,7 +153,18 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 	
 	override void Tick(Actor owner)
 	{
-		string evt = "som-gbx-upgr-ordinance-array-send-info";
+		// HUD Stuff
+		init_hud();
+		
+		som_gbx_hud_widget wid;
+		
+		wid = hud.get_widget(hud_idx);
+			
+		if (!wid)
+		{
+			console.printf("SoM GBX: Null HUD Widget in Upgrade Ordinance Array!");
+			return;
+		}
 		
 		if (enabled)
 		{
@@ -185,7 +208,15 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 				}
 			}
 			
-			// Gross Hack
+			// Build HUD
+			wid.draw = som_gbx_upgr_ordinance_array_hud_enabled;
+			
+			wid.lines.Clear();
+			
+			wid.lines.push("Ordinance Array");
+			
+			bool no_ord = true;
+
 			let pp = players[consoleplayer];
 			let weap = pp.readyweapon;
 			
@@ -199,7 +230,9 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 					
 					if (info)
 					{
-						evt = String.Format("%s:%s:%d:%d", evt, info.ammo_name, info.res_curr_amt, info.res_max_amt);
+						no_ord = false;
+						wid.lines.push(String.Format("%s:", info.ammo_name));
+						wid.lines.push(String.Format("%d/%d", info.res_curr_amt, info.res_max_amt));
 					}
 				}
 
@@ -211,26 +244,48 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 					
 					if (info)
 					{
-						evt = String.Format("%s:%s:%d:%d", evt, info.ammo_name, info.res_curr_amt, info.res_max_amt);
+						no_ord = false;
+						wid.lines.push(String.Format("%s:", info.ammo_name));
+						wid.lines.push(String.Format("%d/%d", info.res_curr_amt, info.res_max_amt));
 					}
 				}
 			}
+			
+			if (no_ord)
+			{
+				wid.lines.push("<NULL_AMMO>");
+			}
 		}
-		
-		EventHandler.SendNetworkEvent(evt);
 	}
 	
 	override void OnActivate(TFLV_PerPlayerStats stats, TFLV_WeaponInfo info)
 	{
-		super.OnActivate(stats, info);
+		init_hud();
+		
+		Let wid = hud.get_widget(hud_idx);
+			
+		if (!wid)
+		{
+			console.printf("SoM GBX: Null HUD Widget in Upgrade Ordinance Array!");
+			return;
+		}
+		
+		wid.draw = som_gbx_upgr_ordinance_array_hud_enabled;
 	}
 
 	override void OnDeactivate(TFLV_PerPlayerStats stats, TFLV_WeaponInfo info)
 	{
-		super.OnDeactivate(stats, info);
+		init_hud();
 		
-		// EventHandler.SendNetworkEvent("som-gbext-amres-display-info");
-		EventHandler.SendNetworkEvent("som-gbx-upgr-ordinance-array-send-info");
+		Let wid = hud.get_widget(hud_idx);
+			
+		if (!wid)
+		{
+			console.printf("SoM GBX: Null HUD Widget in Upgrade Ordinance Array!");
+			return;
+		}
+		
+		wid.draw = false;
 	}
 
 	override void GetTooltipFields(Dictionary fields, uint level)
