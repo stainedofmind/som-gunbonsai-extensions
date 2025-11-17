@@ -1,5 +1,5 @@
 Upgrades:
-Ammuneux (Bandoliers)
+Bandoliers
 	-Need to add bugfixing/config for Redux
 Pulse Reliquary (HP Boost)
 	-Need to investigate adding support for other gameplay mods, as needed
@@ -8,8 +8,8 @@ Continuance Field (Powerup Boost)
 LOL Rockitz
 	-Dumb. Don't use. Fun actually. Deadly.
 Ordinance Array (Ammo Reserves)
-	-Classic version implemented.
-	-Need to generalize display system
+	-Will need to add reserve explorer
+	-Eventually implement in game ammo tagger/lump reader
 
 Systems:
 Progress Keeper

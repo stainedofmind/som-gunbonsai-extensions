@@ -19,7 +19,7 @@ Decay Lattice: Shatterdrive Upgrade: Increase maximum flak time to live.
 
 Player Upgrades
 ---------------
-Ammuneux: Classic Bandoliers version from 0.10.6.
+Bandoliers: Classic Bandoliers version from 0.10.6.
 Pulse Reliquary: Max health booster.
 Continuance Field: Powerup Duration Booster.
 LOL Rawkitz: Dumb. Do not use.

@@ -30,7 +30,7 @@ OptionMenu "som_gbx_bonus_upgrades"
 	SubMenu "LOL Rawkitz", "som_gbx_lol_rawkitz"
 	StaticText " "
 	StaticText "Player Upgrades", FIRE
-	SubMenu "Ammuneux", "som_gbx_ammuneux"
+	SubMenu "Bandoliers", "som_gbx_bandoliers"
 }
 
 // Option Values
@@ -110,9 +110,9 @@ OptionMenu "som_gbx_ordinance_array"
 }
 
 // Bonus Upgrades
-OptionMenu "som_gbx_ammuneux"
+OptionMenu "som_gbx_bandoliers"
 {
-	Title "Ammuneux"
+	Title "Bandoliers"
 	StaticText "Legacy Upgrade: Bandoliers"
 	Option "Enabled", "som_gbx_upgr_bandoliers_enabled", "OnOff"
 }
