@@ -56,7 +56,7 @@ class SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo : object play
 	{
 		int new = res_curr_amt + amt;
 		
-		if (new > res_max_amt)
+		if (new > int(res_max_amt))
 		{
 			amt = res_max_amt - res_curr_amt;
 		}
@@ -84,18 +84,15 @@ class SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo : object play
 
 class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 {
-	som_gbx_hud_eventhandler hud;
-	int hud_idx;
+	const HUD_ID = "upgr-ordinance-array";
 	
 	array<SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo> ammo_info;
-
-	void init_hud()
+	
+	som_gbx_hud_widget init_hud()
 	{
-		if (!hud)
-		{
-			hud = som_gbx_hud_eventhandler.Fetch();
-			hud_idx = hud.new_widget("som_gbx_upgr_ordinance_array_hud_");
-		}
+		Let gc = som_gbx_global_container.Get();
+		
+		return (gc.g.hud.new_widget(HUD_ID, "som_gbx_upgr_ordinance_array_hud_"));
 	}
 
 	SOM_GBX_Upgrade_OrdinanceArray_AmmoInfo GetInfoFor(string _id) const
@@ -154,18 +151,15 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 	override void Tick(Actor owner)
 	{
 		// HUD Stuff
-		init_hud();
+		Let gc = som_gbx_global_container.Get();
 		
-		som_gbx_hud_widget wid;
+		som_gbx_hud_widget wid = gc.g.hud.get_widget(HUD_ID);
 		
-		wid = hud.get_widget(hud_idx);
-			
 		if (!wid)
 		{
-			console.printf("SoM GBX: Null HUD Widget in Upgrade Ordinance Array!");
-			return;
+			wid = init_hud();
 		}
-		
+			
 		if (enabled)
 		{
 			Let p = owner;
@@ -260,14 +254,13 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 	
 	override void OnActivate(TFLV_PerPlayerStats stats, TFLV_WeaponInfo info)
 	{
-		init_hud();
+		Let gc = som_gbx_global_container.Get();
 		
-		Let wid = hud.get_widget(hud_idx);
+		Let wid = gc.g.hud.get_widget(HUD_ID);
 			
 		if (!wid)
 		{
-			console.printf("SoM GBX: Null HUD Widget in Upgrade Ordinance Array!");
-			return;
+			wid = init_hud();
 		}
 		
 		wid.draw = som_gbx_upgr_ordinance_array_hud_enabled;
@@ -275,14 +268,13 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 
 	override void OnDeactivate(TFLV_PerPlayerStats stats, TFLV_WeaponInfo info)
 	{
-		init_hud();
+		Let gc = som_gbx_global_container.Get();
 		
-		Let wid = hud.get_widget(hud_idx);
-			
+		Let wid = gc.g.hud.get_widget(HUD_ID);
+		
 		if (!wid)
 		{
-			console.printf("SoM GBX: Null HUD Widget in Upgrade Ordinance Array!");
-			return;
+			wid = init_hud();
 		}
 		
 		wid.draw = false;

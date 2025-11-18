@@ -5,6 +5,19 @@
 server bool som_gbx_hud_enabled = true;
 
 // *****************************************************************************
+// * Systems                                                                   *
+// *****************************************************************************
+
+// Bonus XP Levels
+server bool som_gbx_sys_bxp_wup_map_unique = true;
+server int som_gbx_sys_bxp_wup_map_flat = 0;
+server int som_gbx_sys_bxp_wup_game_flat = 0;
+
+server bool som_gbx_sys_bxp_pup_map_unique = true;
+server int som_gbx_sys_bxp_pup_map_flat = 0;
+server int som_gbx_sys_bxp_pup_game_flat = 0;
+
+// *****************************************************************************
 // * Upgrades                                                                  *
 // *****************************************************************************
 

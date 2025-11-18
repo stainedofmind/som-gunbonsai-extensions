@@ -1,42 +1,47 @@
 Class som_gbx_eventhandler : EventHandler
 {
-	som_gbx_hud_eventhandler hud;
-	int hud_idx;
+	som_gbx_global_data g;
 	
-	void hello_world()
+	void save_globals()
 	{
-		Let wid = hud.get_widget(hud_idx);
+		Let gc = som_gbx_global_container.Get();
 		
-		if (!wid)
-		{
-			console.printf("SoM GBX: Null HUD Widget in Main Event Handler!");
-			return;
-		}
+		gc.g = g;
+	}
+	
+	void load_globals()
+	{
+		Let gc = som_gbx_global_container.Get();
 		
-		wid.draw = true;
-		wid.scale = 2;
-		wid.x = 8;
-		wid.y = 8;
-		wid.align_x = 0;
-		wid.align_y = 0;
-		
-		wid.lines.Clear();
-		wid.lines.Push("Hello, world!");
+		g = gc.g;
+	}
+	
+	// Event Overrides
+	override void OnRegister()
+	{
+		// Nada
 	}
 	
 	override void WorldTick()
 	{
-		//hello_world();
 	}
 	
 	override void WorldLoaded(WorldEvent e)
 	{
-		if (level.totaltime == 0)
-		{
-			hud = som_gbx_hud_eventhandler.Fetch();
-			hud_idx = hud.new_widget();
-		}
+		load_globals();
 		
-		hello_world();
+		g.master.debug_text("hi?");
+		
+		g.master.map_start_checks();
+	}
+	
+	override void WorldUnloaded(WorldEvent e)
+	{
+		save_globals();
+	}
+	
+	override void RenderOverlay(RenderEvent e)
+	{
+		g.hud.hud_render();
 	}
 }

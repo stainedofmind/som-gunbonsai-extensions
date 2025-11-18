@@ -1,0 +1,62 @@
+class som_gbx_bxp_wup : Inventory
+{
+	default
+	{
+		Tag "GunBonsai Weapon Upgrade";
+		+INVENTORY.INVBAR
+		Inventory.Icon "SWUGA0";
+		Inventory.MaxAmount 9999;
+		Inventory.InterHubAmount 9999;
+	}
+	
+	override bool use(bool pickup)
+	{
+		Let stats = TFLV_PerPlayerStats.GetStatsFor(owner);
+		
+		if (stats)
+		{
+			Let weap = stats.GetInfoForCurrentWeapon();
+			
+			if (weap)
+			{
+				uint lv = weap.level;
+				uint plv = weap.CountPendingLevels();
+				double bxp = weap.GetXPForLevel(1 + lv + plv);
+				
+				weap.AddXP(bxp);
+
+				return (true);
+			}
+		}
+		
+		console.printf("This will not work now.");
+		return (false);
+	}
+}
+
+class som_gbx_bxp_pup : Inventory
+{
+	default
+	{
+		Tag "GunBonsai Player Upgrade";
+		+INVENTORY.INVBAR
+		Inventory.Icon "SPUGA0";
+		Inventory.MaxAmount 9999;
+		Inventory.InterHubAmount 9999;
+	}
+	
+	override bool use(bool pickup)
+	{
+		Let stats = TFLV_PerPlayerStats.GetStatsFor(owner);
+		
+		if (stats)
+		{
+			stats.AddPlayerXP(bonsai_gun_levels_per_player_level);
+			
+			return (true);
+		}
+		
+		console.printf("This will not work now.");
+		return (false);
+	}
+}

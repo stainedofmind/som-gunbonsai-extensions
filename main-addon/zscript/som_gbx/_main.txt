@@ -1,6 +1,12 @@
 // Core Systems
 #include "zscript/som_gbx/event_handler.txt"
-#include "zscript/som_gbx/hud.txt"
+#include "zscript/som_gbx/globals.txt"
+
+// Actors
+#include "zscript/som_gbx/actors/_main.txt"
+
+// Sytems
+#include "zscript/som_gbx/systems/_main.txt"
 
 // Upgrades
 #include "zscript/som_gbx/upgrades/_main.txt"

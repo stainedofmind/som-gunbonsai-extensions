@@ -1,99 +1,39 @@
-class som_gbx_hud_widget : Object
+// HUD Manager
+
+class som_gbx_sys_core_hud : som_gbx_object_base
 {
-	string cvar_id;
-	bool draw;
-	double scale;
-	int align_x;
-	int align_y;
-	int x;
-	int y;
-	Array<String> lines;
-	
-	void init(string cid)
-	{
-		cvar_id = cid;
+	// Global Data
+	som_gbx_global_data g;
 
-		draw = false;
-		scale = 1;
-		align_x = 0;
-		align_y = 0;
-		x = 0;
-		y = 0;
-		lines.Clear();
-
-		update_values();
-	}
-	
-	void update_values()
-	{
-		if (cvar_id)
-		{
-			Cvar cv;
-			
-			// Disabling for now. Causes a few problems.
-			//cv = CVar.GetCVar(cvar_id.."enabled");
-			//draw = cv.GetBool();
-			
-			cv = CVar.GetCVar(cvar_id.."scale");
-			scale = cv.GetFloat();
-			
-			cv = CVar.GetCVar(cvar_id.."align_x");
-			align_x = cv.GetInt();
-			
-			cv = CVar.GetCVar(cvar_id.."align_y");
-			align_y = cv.GetInt();
-			
-			cv = CVar.GetCVar(cvar_id.."x");
-			x = cv.GetInt();
-			
-			cv = CVar.GetCVar(cvar_id.."y");
-			y = cv.GetInt();
-		}
-	}
-}
-
-class som_gbx_hud_eventhandler : StaticEventHandler
-{
 	Array<som_gbx_hud_widget> widgets;
 	
-	static clearscope som_gbx_hud_eventhandler Fetch()
-	{
-		return som_gbx_hud_eventhandler(Find("som_gbx_hud_eventhandler"));
-	}
-	
-	override void OnRegister()
-	{
-		// Initialize crap
-	}
-	
-	int new_widget(string cid = "")
+	som_gbx_hud_widget new_widget(string _id, string cid = "")
 	{
 		Let wid = new("som_gbx_hud_widget");
 		
-		wid.init(cid);
+		wid.init(_id, cid);
 		widgets.Push(wid);
 		
-		return (widgets.Size() - 1);
+		return (wid);
 	}
 	
-	som_gbx_hud_widget get_widget(int idx)
+	som_gbx_hud_widget get_widget(string _id)
 	{
-		if (widgets.Size() == 0)
+		som_gbx_hud_widget wid = null;
+		
+		for (int i = 0; i < widgets.Size(); i++)
 		{
-			console.printf("SoM GBX: No widgets defined!");
-			return (null);
+			if (_id ~== widgets[i].id)
+			{
+				wid = widgets[i];
+				break;
+			}
 		}
 		
-		if (idx < 0 || idx >= widgets.Size())
-		{
-			console.printf("SoM GBX: Widget index out of range!");
-			return (null);
-		}
-		
-		return (widgets[idx]);
+		return (wid);
 	}
 	
-	ui bool ShouldDrawHUD(uint p) const
+	bool ShouldDrawHUD(uint p) const
 	{
 		return playeringame[p] &&
 			som_gbx_hud_enabled &&
@@ -101,7 +41,7 @@ class som_gbx_hud_eventhandler : StaticEventHandler
 			!automapactive;
 	}
 
-	override void RenderOverlay(RenderEvent evt)
+	ui void hud_render()
 	{
 		if (!ShouldDrawHUD(consoleplayer)) return;
 		
@@ -173,6 +113,62 @@ class som_gbx_hud_eventhandler : StaticEventHandler
 				
 				y += font.GetHeight();
 			}
+		}
+	}
+}
+
+class som_gbx_hud_widget : Object
+{
+	string id;
+	string cvar_id;
+	bool draw;
+	double scale;
+	int align_x;
+	int align_y;
+	int x;
+	int y;
+	Array<String> lines;
+	
+	void init(string _id, string cid)
+	{
+		id = _id;
+		cvar_id = cid;
+
+		draw = false;
+		scale = 1;
+		align_x = 0;
+		align_y = 0;
+		x = 0;
+		y = 0;
+		lines.Clear();
+
+		update_values();
+	}
+	
+	void update_values()
+	{
+		if (cvar_id)
+		{
+			Cvar cv;
+			
+			// Disabling for now. Causes a few problems.
+			//cv = CVar.GetCVar(cvar_id.."enabled");
+			//draw = cv.GetBool();
+			
+			cv = CVar.GetCVar(cvar_id.."scale");
+			scale = cv.GetFloat();
+			
+			cv = CVar.GetCVar(cvar_id.."align_x");
+			align_x = cv.GetInt();
+			
+			cv = CVar.GetCVar(cvar_id.."align_y");
+			align_y = cv.GetInt();
+			
+			cv = CVar.GetCVar(cvar_id.."x");
+			x = cv.GetInt();
+			
+			cv = CVar.GetCVar(cvar_id.."y");
+			y = cv.GetInt();
 		}
 	}
 }

@@ -14,6 +14,8 @@ Ordinance Array (Ammo Reserves)
 Systems:
 Progress Keeper
 Respec
+	Not sure how this system will play with BXP Player Levels
+	Tested, works just fine, all values are as expected
 Starting Player Levels
 XP Bonuses
 

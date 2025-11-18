@@ -7,8 +7,11 @@ AddOptionMenu "OptionsMenu"
 OptionMenu "som_gbx"
 {
 	Title "SoM's GunBonsai eXtensions"
-	//StaticText "Settings"
+	//StaticText "Core Settings"
 	//StaticText " "
+	StaticText "Addon Systems", FIRE
+	SubMenu "XP Bonuses", "som_gbx_sys_bxp"
+	StaticText " "
 	StaticText "Weapon Upgrades", FIRE
 	SubMenu "Shatterdrive", "som_gbx_shatterdrive"
 	StaticText " "
@@ -46,6 +49,21 @@ OptionValue "som_gbx_align_y"
 	0, "Top"
 	1, "Middle"
 	2, "Bottom"
+}
+
+// Addon Systems
+OptionMenu "som_gbx_sys_bxp"
+{
+	Title "XP Bonuses"
+	StaticText "Player Bonuses"
+	Slider "Game Start Quantity", "som_gbx_sys_bxp_pup_game_flat", 0, 100, 1, 0
+	Slider "Quantity per map", "som_gbx_sys_bxp_pup_map_flat", 0, 100, 1, 0
+	Option "First visit only", "som_gbx_sys_bxp_pup_map_unique", "YesNo"
+	StaticText " "
+	StaticText "Weapon Bonuses"
+	Slider "Game Start Quantity", "som_gbx_sys_bxp_wup_game_flat", 0, 100, 1, 0
+	Slider "Quantity per map", "som_gbx_sys_bxp_wup_map_flat", 0, 100, 1, 0
+	Option "First visit only", "som_gbx_sys_bxp_wup_map_unique", "YesNo"
 }
 
 /* Template

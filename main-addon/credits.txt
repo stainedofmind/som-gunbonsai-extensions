@@ -14,6 +14,9 @@ https://www.realm667.com/component/docman/?task=doc_download&gid=439&Itemid=
 Flak Shot/Shatterdrive Projectile - StainedOfMind
 Ripped from (SNES) Super Mario World
 
+Weapon/Player Upgrades - StainedOfMind
+Cobbled together using Doom 2 assets (BlurSphere, Pistol Pickup, Player)
+
 Fonts
 -----
 Mementwo Small - Jimmy / Memento Mori 2 Team

@@ -1,0 +1,74 @@
+class som_gbx_global_container : Thinker
+{
+	som_gbx_global_data g;
+	
+	som_gbx_global_container Init()
+	{
+		if (!g)
+		{
+			g = new("som_gbx_global_data");
+			g.init();
+		}
+		
+		ChangeStatNum(STAT_STATIC);
+		return (self);
+	}
+
+	static som_gbx_global_container Get()
+	{
+		ThinkerIterator it = ThinkerIterator.Create("som_gbx_global_container", STAT_STATIC);
+		let p = som_gbx_global_container(it.Next());
+		
+		if (p == null)
+		{
+			p = new("som_gbx_global_container").Init();
+		}
+		
+		return p;
+	}
+}
+
+class som_gbx_global_data : som_gbx_object_base
+{
+	som_gbx_sys_core_master master;
+	som_gbx_sys_core_hud hud;
+	som_gbx_sys_addon_bxp bxp;
+
+	Array<String> visited_maps;
+	
+	// BXP
+	int bxp_lv;
+	int bxp_curr;
+	
+	void init()
+	{
+		master = new("som_gbx_sys_core_master");
+		master.g = self;
+		hud = new("som_gbx_sys_core_hud");
+		hud.g = self;
+		bxp = new("som_gbx_sys_addon_bxp");
+		bxp.g = self;
+		
+		// Hardcoded Map Blacklist
+		visited_maps.Push("TITLEMAP");
+		visited_maps.Push("MAPNE");
+		visited_maps.Push("MAPSE");
+		visited_maps.Push("shufflePort");
+		visited_maps.Push("Outpost");
+		visited_maps.Push("GZAPHUB");
+		
+		// BXP
+		bxp_lv = 1;
+	}
+	
+	bool map_has_visited(String map_id)
+	{
+		// Note: Since we're hardcoding a few maps to the list, this will never return a false positive when Id and Size both equal 0.
+		return (visited_maps.Find(map_id) != visited_maps.Size());
+	}
+	
+	void map_visit(String map_id)
+	{
+		visited_maps.Push(map_id);
+	}
+}

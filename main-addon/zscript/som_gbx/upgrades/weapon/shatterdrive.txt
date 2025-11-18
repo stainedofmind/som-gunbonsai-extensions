@@ -6,7 +6,7 @@ class SOM_GBX_Upgrade_Shatterdrive_Main: TFLV_Upgrade_BaseUpgrade
 	
 	uint Level(TFLV_WeaponInfo info, string cls) const
 	{
-		for (uint i = 0; i < info.upgrades.upgrades.Size(); ++i)
+		for (int i = 0; i < info.upgrades.upgrades.Size(); ++i)
 		{
 			if (info.upgrades.upgrades[i].GetClassName() == cls)
 			{

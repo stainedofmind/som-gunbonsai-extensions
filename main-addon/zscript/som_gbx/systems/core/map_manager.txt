@@ -1,0 +1,8 @@
+// Manages which maps have been visited, and executes code as needed
+
+class som_gbx_sys_core_map_manager : som_gbx_object_base
+{
+	// Global Data
+	som_gbx_global_data g;
+
+}

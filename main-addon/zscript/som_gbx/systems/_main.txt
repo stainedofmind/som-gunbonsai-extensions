@@ -1,0 +1,2 @@
+#include "zscript/som_gbx/systems/core/_main.txt"
+#include "zscript/som_gbx/systems/addon/_main.txt"

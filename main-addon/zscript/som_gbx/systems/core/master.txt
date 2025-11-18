@@ -1,0 +1,52 @@
+// The High Cheif, Master of Ceremonies, Big Boss Man, FINAL BOSS
+class som_gbx_object_base : OBject play {}
+
+class som_gbx_sys_core_master : som_gbx_object_base
+{
+	// Global Data
+	som_gbx_global_data g;
+	
+	// HUD
+	const HUD_ID = "eh-debug";
+	
+	// Functions
+	void debug_text(String msg = "")
+	{
+		Let wid = g.hud.get_widget(HUD_ID);
+		
+		if (!wid)
+		{
+			wid = init_hud();
+		}
+		
+		wid.draw = true;
+		wid.scale = 2;
+		wid.x = 8;
+		wid.y = 8;
+		wid.align_x = 0;
+		wid.align_y = 0;
+		
+		wid.lines.Clear();
+		wid.lines.Push(msg);
+	}
+	
+	som_gbx_hud_widget init_hud()
+	{
+		Let wid = g.hud.new_widget(HUD_ID);
+		
+		return (wid);
+	}
+	
+	void map_start_checks()
+	{
+		bool visited = g.map_has_visited(Level.MapName);
+		
+		if (!visited)
+		{
+			g.map_visit(Level.MapName);
+		}
+		
+		// Call Map Start Funcs here
+		g.bxp.bxp_map_start(visited);
+	}	
+}

@@ -1,4 +1,4 @@
 gameinfo
 {
-	AddEventHandlers = "som_gbx_eventhandler", "som_gbx_hud_eventhandler"
+	AddEventHandlers = "som_gbx_eventhandler"
 }

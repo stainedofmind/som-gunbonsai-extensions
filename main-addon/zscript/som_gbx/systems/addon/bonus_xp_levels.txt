@@ -1,0 +1,104 @@
+class som_gbx_sys_addon_bxp : som_gbx_object_base
+{
+	// Global Data
+	som_gbx_global_data g;
+
+	const HUD_ID = "sys-gbx";
+	
+	void bxp_map_start(bool visited)
+	{
+		PlayerPawn pp = players[consoleplayer].mo;
+		
+		// Check Player Bonuses
+		// Game Start
+		if (level.totaltime == 0)
+		{
+			if (som_gbx_sys_bxp_pup_game_flat)
+			{
+				pp.GiveInventory("som_gbx_bxp_pup", som_gbx_sys_bxp_pup_game_flat);
+			}
+		}
+		
+		if (!som_gbx_sys_bxp_pup_map_unique || (som_gbx_sys_bxp_pup_map_unique && !visited))
+		{
+			if (som_gbx_sys_bxp_pup_map_flat)
+			{
+				pp.GiveInventory("som_gbx_bxp_pup", som_gbx_sys_bxp_pup_map_flat);
+			}
+		}
+
+		// Check Weapon Bonuses
+		// Game Start
+		if (level.totaltime == 0)
+		{
+			if (som_gbx_sys_bxp_wup_game_flat)
+			{
+				pp.GiveInventory("som_gbx_bxp_wup", som_gbx_sys_bxp_wup_game_flat);
+			}
+		}
+		
+		if (!som_gbx_sys_bxp_wup_map_unique || (som_gbx_sys_bxp_wup_map_unique && !visited))
+		{
+			if (som_gbx_sys_bxp_wup_map_flat)
+			{
+				pp.GiveInventory("som_gbx_bxp_wup", som_gbx_sys_bxp_wup_map_flat);
+			}
+		}
+	}
+	
+	void gbx_init_hud()
+	{
+		
+	}
+}
+
+/*extend class som_gbx_eventhandler
+{
+	const HUD_ID_SYS_GBX = "sys-gbx";
+	
+	void bxp_map_start(bool visited)
+	{
+		PlayerPawn pp = players[consoleplayer].mo;
+		
+		// Check Player Bonuses
+		// Game Start
+		if (level.totaltime == 0)
+		{
+			if (som_gbx_sys_bxp_pup_game_flat)
+			{
+				pp.GiveInventory("som_gbx_bxp_pup", som_gbx_sys_bxp_pup_game_flat);
+			}
+		}
+		
+		if (!som_gbx_sys_bxp_pup_map_unique || (som_gbx_sys_bxp_pup_map_unique && !visited))
+		{
+			if (som_gbx_sys_bxp_pup_map_flat)
+			{
+				pp.GiveInventory("som_gbx_bxp_pup", som_gbx_sys_bxp_pup_map_flat);
+			}
+		}
+
+		// Check Weapon Bonuses
+		// Game Start
+		if (level.totaltime == 0)
+		{
+			if (som_gbx_sys_bxp_wup_game_flat)
+			{
+				pp.GiveInventory("som_gbx_bxp_wup", som_gbx_sys_bxp_wup_game_flat);
+			}
+		}
+		
+		if (!som_gbx_sys_bxp_wup_map_unique || (som_gbx_sys_bxp_wup_map_unique && !visited))
+		{
+			if (som_gbx_sys_bxp_wup_map_flat)
+			{
+				pp.GiveInventory("som_gbx_bxp_wup", som_gbx_sys_bxp_wup_map_flat);
+			}
+		}
+	}
+	
+	void gbx_init_hud()
+	{
+		
+	}
+}
