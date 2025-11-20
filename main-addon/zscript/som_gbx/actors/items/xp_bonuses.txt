@@ -2,11 +2,13 @@ class som_gbx_bxp_wup : Inventory
 {
 	default
 	{
-		Tag "GunBonsai Weapon Upgrade";
+		Tag "$SOM_GBX_Actor_Item_WUP_Name";
 		+INVENTORY.INVBAR
 		Inventory.Icon "SWUGA0";
 		Inventory.MaxAmount 9999;
 		Inventory.InterHubAmount 9999;
+		Inventory.PickupMessage "$SOM_GBX_Actor_Item_WUP_PickupMsg";
+		Inventory.PickupSound "misc/p_pkup";
 	}
 	
 	override bool use(bool pickup)
@@ -32,17 +34,27 @@ class som_gbx_bxp_wup : Inventory
 		console.printf("This will not work now.");
 		return (false);
 	}
+	
+	States
+	{
+		Spawn:
+			SWUG A 6 Bright;
+			SWUG A 6;
+			Loop;
+	}
 }
 
 class som_gbx_bxp_pup : Inventory
 {
 	default
 	{
-		Tag "GunBonsai Player Upgrade";
+		Tag "$SOM_GBX_Actor_Item_PUP_Name";
 		+INVENTORY.INVBAR
 		Inventory.Icon "SPUGA0";
 		Inventory.MaxAmount 9999;
 		Inventory.InterHubAmount 9999;
+		Inventory.PickupMessage "$SOM_GBX_Actor_Item_PUP_PickupMsg";
+		Inventory.PickupSound "misc/p_pkup";
 	}
 	
 	override bool use(bool pickup)
@@ -58,5 +70,13 @@ class som_gbx_bxp_pup : Inventory
 		
 		console.printf("This will not work now.");
 		return (false);
+	}
+
+	States
+	{
+		Spawn:
+			SPUG A 6 Bright;
+			SPUG A 6;
+			Loop;
 	}
 }

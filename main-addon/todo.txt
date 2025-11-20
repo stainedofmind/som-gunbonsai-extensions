@@ -17,7 +17,12 @@ Respec
 	Not sure how this system will play with BXP Player Levels
 	Tested, works just fine, all values are as expected
 Starting Player Levels
+	-Merged with XP Bonuses
 XP Bonuses
+	-Folded in Starting Player Levels
+	-Add alternative gain methods (campfire, map spawning in secrets)
+	-Split menu into submenus to reduce clutter
+	-Add alternative XP methods (for awards)
 
 Patches Todo
 ------------

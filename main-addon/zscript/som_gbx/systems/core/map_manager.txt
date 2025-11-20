@@ -5,4 +5,27 @@ class som_gbx_sys_core_map_manager : som_gbx_object_base
 	// Global Data
 	som_gbx_global_data g;
 
+	Array<String> visited_maps;
+	
+	void init()
+	{
+		// Hardcoded Map Blacklist
+		visited_maps.Push("TITLEMAP");
+		visited_maps.Push("MAPNE");
+		visited_maps.Push("MAPSE");
+		visited_maps.Push("shufflePort");
+		visited_maps.Push("Outpost");
+		visited_maps.Push("GZAPHUB");
+	}
+	
+	bool map_has_visited(String map_id)
+	{
+		// Note: Since we're hardcoding a few maps to the list, this will never return a false positive when Id and Size both equal 0.
+		return (visited_maps.Find(map_id) != visited_maps.Size());
+	}
+	
+	void map_visit(String map_id)
+	{
+		visited_maps.Push(map_id);
+	}
 }

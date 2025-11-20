@@ -8,14 +8,14 @@ https://github.com/stainedofmind/som-gunbonsai-extensions
 
 Sprites
 -------
-PDA - scalliano
+(Unused) PDA - scalliano
 https://www.realm667.com/component/docman/?task=doc_download&gid=439&Itemid=
 
 Flak Shot/Shatterdrive Projectile - StainedOfMind
-Ripped from (SNES) Super Mario World
+Modified from Doom 2 asset (APLSA0, APLSB0)
 
 Weapon/Player Upgrades - StainedOfMind
-Cobbled together using Doom 2 assets (BlurSphere, Pistol Pickup, Player)
+Cobbled together using Doom 2 assets (PINSD0, PISTA0, PLAYA1)
 
 Fonts
 -----

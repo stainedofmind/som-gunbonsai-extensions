@@ -13,9 +13,48 @@ server bool som_gbx_sys_bxp_wup_map_unique = true;
 server int som_gbx_sys_bxp_wup_map_flat = 0;
 server int som_gbx_sys_bxp_wup_game_flat = 0;
 
+server bool som_gbx_sys_bxp_wup_bonus_mons_track = true;
+server float som_gbx_sys_bxp_wup_bonus_mons_percent = 1.0;
+server int som_gbx_sys_bxp_wup_bonus_mons_award = 1;
+
+server bool som_gbx_sys_bxp_wup_bonus_secs_track = true;
+server float som_gbx_sys_bxp_wup_bonus_secs_percent = 1.0;
+server int som_gbx_sys_bxp_wup_bonus_secs_award = 1;
+
+server bool som_gbx_sys_bxp_wup_bonus_items_track = true;
+server float som_gbx_sys_bxp_wup_bonus_items_percent = 1.0;
+server int som_gbx_sys_bxp_wup_bonus_items_award = 1;
+
+server bool som_gbx_sys_bxp_wup_bonus_clear_track = true;
+server int som_gbx_sys_bxp_wup_bonus_clear_award = 1;
+
 server bool som_gbx_sys_bxp_pup_map_unique = true;
 server int som_gbx_sys_bxp_pup_map_flat = 0;
 server int som_gbx_sys_bxp_pup_game_flat = 0;
+
+server bool som_gbx_sys_bxp_pup_bonus_mons_track = true;
+server float som_gbx_sys_bxp_pup_bonus_mons_percent = 1.0;
+server int som_gbx_sys_bxp_pup_bonus_mons_award = 1;
+
+server bool som_gbx_sys_bxp_pup_bonus_secs_track = true;
+server float som_gbx_sys_bxp_pup_bonus_secs_percent = 1.0;
+server int som_gbx_sys_bxp_pup_bonus_secs_award = 1;
+
+server bool som_gbx_sys_bxp_pup_bonus_items_track = true;
+server float som_gbx_sys_bxp_pup_bonus_items_percent = 1.0;
+server int som_gbx_sys_bxp_pup_bonus_items_award = 1;
+
+server bool som_gbx_sys_bxp_pup_bonus_clear_track = true;
+server int som_gbx_sys_bxp_pup_bonus_clear_award = 1;
+
+server int som_gbx_sys_bxp_hud_pop_time = 5;
+
+server bool som_gbx_sys_bxp_hud_enabled = true;
+server float som_gbx_sys_bxp_hud_x = 0;
+server float som_gbx_sys_bxp_hud_y = 0;
+server int som_gbx_sys_bxp_hud_scale = 1;
+server int som_gbx_sys_bxp_hud_align_x = 0;
+server int som_gbx_sys_bxp_hud_align_y = 1;
 
 // *****************************************************************************
 // * Upgrades                                                                  *

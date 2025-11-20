@@ -1,0 +1,6 @@
+[en default]
+SOM_GBX_Actor_Item_WUP_Name = "GunBonsai Weapon Upgrade";
+SOM_GBX_Actor_Item_WUP_PickupMsg = "Picked up a GunBonsai Weapon Upgrade!";
+
+SOM_GBX_Actor_Item_PUP_Name = "GunBonsai Player Upgrade";
+SOM_GBX_Actor_Item_PUP_PickupMsg = "Picked up a GunBonsai Player Upgrade!";

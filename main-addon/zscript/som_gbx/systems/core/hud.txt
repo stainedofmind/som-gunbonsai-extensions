@@ -7,6 +7,11 @@ class som_gbx_sys_core_hud : som_gbx_object_base
 
 	Array<som_gbx_hud_widget> widgets;
 	
+	void init()
+	{
+		// Null
+	}
+	
 	som_gbx_hud_widget new_widget(string _id, string cid = "")
 	{
 		Let wid = new("som_gbx_hud_widget");
@@ -33,7 +38,7 @@ class som_gbx_sys_core_hud : som_gbx_object_base
 		return (wid);
 	}
 	
-	bool ShouldDrawHUD(uint p) const
+	bool should_draw_hud(uint p) const
 	{
 		return playeringame[p] &&
 			som_gbx_hud_enabled &&
@@ -41,9 +46,9 @@ class som_gbx_sys_core_hud : som_gbx_object_base
 			!automapactive;
 	}
 
-	ui void hud_render()
+	ui void render()
 	{
-		if (!ShouldDrawHUD(consoleplayer)) return;
+		if (!should_draw_hud(consoleplayer)) return;
 		
 		for (int ii = 0; ii < widgets.Size(); ii++)
 		{

@@ -4,10 +4,105 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 	som_gbx_global_data g;
 
 	const HUD_ID = "sys-gbx";
+
+	int wup_lv;
+	int wup_xp;
 	
-	void bxp_map_start(bool visited)
+	int pup_lv;
+	int pup_xp;
+
+	bool award_wup_mons;
+	bool award_wup_secs;
+	bool award_wup_items;
+	bool award_wup_clear;
+	
+	bool award_pup_mons;
+	bool award_pup_secs;
+	bool award_pup_items;
+	bool award_pup_clear;
+	
+	int wup_timer;
+	bool wup_up;
+	int wup_count;
+	
+	int pup_timer;
+	bool pup_up;
+	int pup_count;
+	
+	void init()
+	{
+		wup_lv = 1;
+		pup_lv = 1;
+		
+		Let wid = g.hud.new_widget(HUD_ID, "som_gbx_sys_bxp_hud_");
+		
+		wid.draw = som_gbx_sys_bxp_hud_enabled;
+
+		build_hud();
+	}
+	
+	void build_hud()
+	{
+		string line = "";
+		
+		Let wid = g.hud.get_widget(HUD_ID);
+		
+		wid.draw = som_gbx_sys_bxp_hud_enabled;
+
+		wid.lines.Clear();
+		
+		if (som_gbx_sys_bxp_wup_bonus_mons_track || som_gbx_sys_bxp_wup_bonus_secs_track || som_gbx_sys_bxp_wup_bonus_items_track || som_gbx_sys_bxp_wup_bonus_clear_track)
+		{
+			line = "Weapon BXP:";
+			
+			if (wup_up)
+			{
+				line = String.Format("%s\c[GREEN]", line);
+			}
+			
+			line = String.Format("%s %d/%d", line, wup_xp, wup_lv);
+			
+			if (wup_count)
+			{
+				line = String.Format("\c[GOLD]%s \c[GOLD]+%dUP!", line, wup_count);
+			}
+			
+			wid.lines.Push(line);
+		}
+
+		if (som_gbx_sys_bxp_pup_bonus_mons_track || som_gbx_sys_bxp_pup_bonus_secs_track || som_gbx_sys_bxp_pup_bonus_items_track || som_gbx_sys_bxp_pup_bonus_clear_track)
+		{
+			line = "Player BXP:";
+			
+			if (pup_up)
+			{
+				line = String.Format("%s\c[GREEN]", line);
+			}
+			
+			line = String.Format("%s %d/%d", line, pup_xp, pup_lv);
+			
+			if (pup_count)
+			{
+				line = String.Format("\c[GOLD]%s \c[GOLD]+%dUP!", line, pup_count);
+			}
+			
+			wid.lines.Push(line);
+		}
+	}
+	
+	void map_start(bool visited)
 	{
 		PlayerPawn pp = players[consoleplayer].mo;
+		
+		award_wup_mons = false;
+		award_wup_secs = false;
+		award_wup_items = false;
+		award_wup_clear = false;
+		
+		award_pup_mons = false;
+		award_pup_secs = false;
+		award_pup_items = false;
+		award_pup_clear = false;
 		
 		// Check Player Bonuses
 		// Game Start
@@ -46,59 +141,306 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 		}
 	}
 	
-	void gbx_init_hud()
+	bool is_clear(int curr, int total, float percent)
 	{
+		total = round(total * percent);
 		
-	}
-}
-
-/*extend class som_gbx_eventhandler
-{
-	const HUD_ID_SYS_GBX = "sys-gbx";
-	
-	void bxp_map_start(bool visited)
-	{
-		PlayerPawn pp = players[consoleplayer].mo;
-		
-		// Check Player Bonuses
-		// Game Start
-		if (level.totaltime == 0)
-		{
-			if (som_gbx_sys_bxp_pup_game_flat)
-			{
-				pp.GiveInventory("som_gbx_bxp_pup", som_gbx_sys_bxp_pup_game_flat);
-			}
-		}
-		
-		if (!som_gbx_sys_bxp_pup_map_unique || (som_gbx_sys_bxp_pup_map_unique && !visited))
-		{
-			if (som_gbx_sys_bxp_pup_map_flat)
-			{
-				pp.GiveInventory("som_gbx_bxp_pup", som_gbx_sys_bxp_pup_map_flat);
-			}
-		}
-
-		// Check Weapon Bonuses
-		// Game Start
-		if (level.totaltime == 0)
-		{
-			if (som_gbx_sys_bxp_wup_game_flat)
-			{
-				pp.GiveInventory("som_gbx_bxp_wup", som_gbx_sys_bxp_wup_game_flat);
-			}
-		}
-		
-		if (!som_gbx_sys_bxp_wup_map_unique || (som_gbx_sys_bxp_wup_map_unique && !visited))
-		{
-			if (som_gbx_sys_bxp_wup_map_flat)
-			{
-				pp.GiveInventory("som_gbx_bxp_wup", som_gbx_sys_bxp_wup_map_flat);
-			}
-		}
+		return (curr >= total);
 	}
 	
-	void gbx_init_hud()
+	bool is_enabled(bool toggle, float percent, int num)
 	{
+		return ((toggle) && (percent != 0.0) && (num != 0));
+	}
+	
+	void reset_wup_timer()
+	{
+		wup_timer = 35 * som_gbx_sys_bxp_hud_pop_time;
+	}
+	
+	void reset_pup_timer()
+	{
+		pup_timer = 35 * som_gbx_sys_bxp_hud_pop_time;
+	}
+	
+	void add_wup_xp(int amt)
+	{
+		reset_wup_timer();
+		wup_xp += amt;
+		wup_up = true;
 		
+		while (wup_xp >= wup_lv)
+		{
+			add_wup_bonus();
+			
+			wup_xp -= wup_lv;
+			wup_lv++;
+			wup_count++;
+		}
+		
+		build_hud();
+	}
+	
+	void add_wup_bonus(int amt = 1)
+	{
+		Let p = players[consoleplayer].mo;
+		
+		p.GiveInventory("som_gbx_bxp_wup", amt);
+	}
+
+	void add_pup_xp(int amt)
+	{
+		reset_pup_timer();
+		pup_xp += amt;
+		pup_up = true;
+		
+		while (pup_xp >= pup_lv)
+		{
+			add_pup_bonus();
+			
+			pup_xp -= pup_lv;
+			pup_lv++;
+			pup_count++;
+		}
+		
+		build_hud();
+	}
+	
+	void add_pup_bonus(int amt = 1)
+	{
+		Let p = players[consoleplayer].mo;
+		
+		p.GiveInventory("som_gbx_bxp_pup", amt);
+	}
+
+	void check_completion()
+	{
+		int secs = level.found_secrets;
+		int mons = level.killed_monsters;
+		int items = level.found_items;
+		int total_secs = level.total_secrets;
+		int total_mons = level.total_monsters;
+		int total_items = level.total_items;
+		
+		int amt;
+		
+		// WUP Secrets Check
+		if (!award_wup_secs && is_enabled(som_gbx_sys_bxp_wup_bonus_secs_track, som_gbx_sys_bxp_wup_bonus_secs_percent, total_secs))
+		{
+			if (is_clear(secs, total_secs, som_gbx_sys_bxp_wup_bonus_secs_percent))
+			{
+				award_wup_secs = true;
+				
+				if (som_gbx_sys_bxp_wup_bonus_secs_award > 0)
+				{
+					add_wup_xp(som_gbx_sys_bxp_wup_bonus_secs_award);
+					// Msg
+					Console.Printf("WUP SECRET");
+				}
+			}
+		}
+		
+		// PUP Secrets Check
+		if (!award_pup_secs && is_enabled(som_gbx_sys_bxp_pup_bonus_secs_track, som_gbx_sys_bxp_pup_bonus_secs_percent, total_secs))
+		{
+			if (is_clear(secs, total_secs, som_gbx_sys_bxp_pup_bonus_secs_percent))
+			{
+				award_pup_secs = true;
+				
+				if (som_gbx_sys_bxp_pup_bonus_secs_award > 0)
+				{
+					add_pup_xp(som_gbx_sys_bxp_pup_bonus_secs_award);
+					// Msg
+					Console.Printf("PUP SECRET");
+				}
+			}
+		}
+
+		// WUP Kills Check
+		if (!award_wup_mons && is_enabled(som_gbx_sys_bxp_wup_bonus_mons_track, som_gbx_sys_bxp_wup_bonus_mons_percent, total_mons))
+		{
+			if (is_clear(mons, total_mons, som_gbx_sys_bxp_wup_bonus_mons_percent))
+			{
+				award_wup_mons = true;
+				
+				if (som_gbx_sys_bxp_wup_bonus_mons_award > 0)
+				{
+					add_wup_xp(som_gbx_sys_bxp_wup_bonus_mons_award);
+					// Msg
+					Console.Printf("WUP KILLS");
+				}
+			}
+		}
+		
+		// PUP Kills Check
+		if (!award_pup_mons && is_enabled(som_gbx_sys_bxp_pup_bonus_mons_track, som_gbx_sys_bxp_pup_bonus_mons_percent, total_mons))
+		{
+			if (is_clear(mons, total_mons, som_gbx_sys_bxp_pup_bonus_mons_percent))
+			{
+				award_pup_mons = true;
+				
+				if (som_gbx_sys_bxp_pup_bonus_mons_award > 0)
+				{
+					add_pup_xp(som_gbx_sys_bxp_pup_bonus_mons_award);
+					// Msg
+					Console.Printf("PUP KILLS");
+				}
+			}
+		}
+
+		// WUP Pickups Check
+		if (!award_wup_items && is_enabled(som_gbx_sys_bxp_wup_bonus_items_track, som_gbx_sys_bxp_wup_bonus_items_percent, total_items))
+		{
+			if (is_clear(items, total_items, som_gbx_sys_bxp_wup_bonus_items_percent))
+			{
+				award_wup_items = true;
+				
+				if (som_gbx_sys_bxp_wup_bonus_items_award > 0)
+				{
+					add_wup_xp(som_gbx_sys_bxp_wup_bonus_items_award);
+					// Msg
+					Console.Printf("WUP PICKUPS");
+				}
+			}
+		}
+
+		// PUP Pickups Check
+		if (!award_pup_items && is_enabled(som_gbx_sys_bxp_pup_bonus_items_track, som_gbx_sys_bxp_pup_bonus_items_percent, total_items))
+		{
+			if (is_clear(items, total_items, som_gbx_sys_bxp_pup_bonus_items_percent))
+			{
+				award_pup_items = true;
+				
+				if (som_gbx_sys_bxp_pup_bonus_items_award > 0)
+				{
+					add_pup_xp(som_gbx_sys_bxp_pup_bonus_items_award);
+					// Msg
+					Console.Printf("PUP PICKUPS");
+				}
+			}
+		}
+
+		// All Clear
+		int total = 0;
+		int checks = 0;
+		
+		// WUP All Clear Check
+		if (som_gbx_sys_bxp_pup_bonus_clear_track && !award_wup_clear)
+		{
+			if (is_enabled(som_gbx_sys_bxp_wup_bonus_secs_track, som_gbx_sys_bxp_wup_bonus_secs_percent, total_secs))
+			{
+				total++;
+				
+				if (award_wup_secs)
+				{
+					checks++;
+				}
+			}
+
+			if (is_enabled(som_gbx_sys_bxp_wup_bonus_mons_track, som_gbx_sys_bxp_wup_bonus_mons_percent, total_mons))
+			{
+				total++;
+				
+				if (award_wup_mons)
+				{
+					checks++;
+				}
+			}
+
+			if (is_enabled(som_gbx_sys_bxp_wup_bonus_items_track, som_gbx_sys_bxp_wup_bonus_items_percent, total_items))
+			{
+				total++;
+				
+				if (award_wup_items)
+				{
+					checks++;
+				}
+			}
+			
+			if (checks == total)
+			{
+				award_wup_clear = true;
+				
+				if (som_gbx_sys_bxp_pup_bonus_clear_award != 0)
+				{
+					add_wup_xp(som_gbx_sys_bxp_pup_bonus_clear_award);
+					Console.Printf("WUP ALL CLEAR");
+				}
+			}
+			
+			total = 0;
+			checks = 0;
+			
+			if (som_gbx_sys_bxp_pup_bonus_clear_track && !award_pup_clear)
+			{
+				if (is_enabled(som_gbx_sys_bxp_pup_bonus_secs_track, som_gbx_sys_bxp_pup_bonus_secs_percent, total_secs))
+				{
+					total++;
+					
+					if (award_pup_secs)
+					{
+						checks++;
+					}
+				}
+
+				if (is_enabled(som_gbx_sys_bxp_pup_bonus_mons_track, som_gbx_sys_bxp_pup_bonus_mons_percent, total_mons))
+				{
+					total++;
+					
+					if (award_pup_mons)
+					{
+						checks++;
+					}
+				}
+
+				if (is_enabled(som_gbx_sys_bxp_pup_bonus_items_track, som_gbx_sys_bxp_pup_bonus_items_percent, total_items))
+				{
+					total++;
+					
+					if (award_pup_items)
+					{
+						checks++;
+					}
+				}
+				
+				if (checks == total)
+				{
+					award_pup_clear = true;
+					
+					if (som_gbx_sys_bxp_pup_bonus_clear_award != 0)
+					{
+						add_pup_xp(som_gbx_sys_bxp_pup_bonus_clear_award);
+						Console.Printf("PUP ALL CLEAR");
+					}
+				}
+			}
+		}
+	}
+	
+	void process_timers()
+	{
+		if (wup_timer)
+		{
+			wup_timer--;
+			
+			if (wup_timer = 0)
+			{
+				wup_count = 0;
+				wup_up = false;
+				build_hud();
+			}
+		}
+		
+		if (pup_timer)
+		{
+			pup_timer--;
+			
+			if (pup_timer = 0)
+			{
+				pup_count = 0;
+				pup_up = false;
+				build_hud();
+			}
+		}
 	}
 }

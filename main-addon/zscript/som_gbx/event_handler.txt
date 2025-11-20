@@ -1,3 +1,6 @@
+// Most systems will inherit from this
+Class som_gbx_object_base : Object play {}
+
 Class som_gbx_eventhandler : EventHandler
 {
 	som_gbx_global_data g;
@@ -24,15 +27,15 @@ Class som_gbx_eventhandler : EventHandler
 	
 	override void WorldTick()
 	{
+		g.bxp.check_completion();
+		g.bxp.process_timers();
 	}
 	
 	override void WorldLoaded(WorldEvent e)
 	{
 		load_globals();
 		
-		g.master.debug_text("hi?");
-		
-		g.master.map_start_checks();
+		g.master.map_start();
 	}
 	
 	override void WorldUnloaded(WorldEvent e)
@@ -42,6 +45,6 @@ Class som_gbx_eventhandler : EventHandler
 	
 	override void RenderOverlay(RenderEvent e)
 	{
-		g.hud.hud_render();
+		g.hud.render();
 	}
 }

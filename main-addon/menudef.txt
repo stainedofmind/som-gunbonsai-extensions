@@ -55,15 +55,67 @@ OptionValue "som_gbx_align_y"
 OptionMenu "som_gbx_sys_bxp"
 {
 	Title "XP Bonuses"
-	StaticText "Player Bonuses"
+	StaticText "Weapon Bonuses", FIRE
+	Slider "Game Start Quantity", "som_gbx_sys_bxp_wup_game_flat", 0, 100, 1, 0
+	Slider "Quantity per map", "som_gbx_sys_bxp_wup_map_flat", 0, 100, 1, 0
+	Option "First visit only", "som_gbx_sys_bxp_wup_map_unique", "YesNo"
+	StaticText " "
+	StaticText "Awards - Kills", GOLD
+	Option "Track Kills", "som_gbx_sys_bxp_wup_bonus_mons_track", "YesNo"
+	Slider "Award Threshold", "som_gbx_sys_bxp_wup_bonus_mons_percent", 0.00, 1.00, 0.01, 2
+	Slider "Award Value", "som_gbx_sys_bxp_wup_bonus_mons_award", 0, 100, 1, 0
+	StaticText " "
+	StaticText "Awards - Secrets", GOLD
+	Option "Track Secrets", "som_gbx_sys_bxp_wup_bonus_secs_track", "YesNo"
+	Slider "Award Threshold", "som_gbx_sys_bxp_wup_bonus_secs_percent", 0.00, 1.00, 0.01, 2
+	Slider "Award Value", "som_gbx_sys_bxp_wup_bonus_secs_award", 0, 100, 1, 0
+	StaticText " "
+	StaticText "Awards - Pickups", GOLD
+	Option "Track Pickups", "som_gbx_sys_bxp_wup_bonus_items_track", "YesNo"
+	Slider "Award Threshold", "som_gbx_sys_bxp_wup_bonus_items_percent", 0.00, 1.00, 0.01, 2
+	Slider "Award Value", "som_gbx_sys_bxp_wup_bonus_items_award", 0, 100, 1, 0
+	StaticText " "
+	StaticText "Awards - All Clear", GOLD
+	Option "Track All Clear", "som_gbx_sys_bxp_wup_bonus_clear_track", "YesNo"
+	Slider "Award Value", "som_gbx_sys_bxp_wup_bonus_clear_award", 0, 100, 1, 0
+	StaticText " "
+	StaticText "Player Bonuses", FIRE
 	Slider "Game Start Quantity", "som_gbx_sys_bxp_pup_game_flat", 0, 100, 1, 0
 	Slider "Quantity per map", "som_gbx_sys_bxp_pup_map_flat", 0, 100, 1, 0
 	Option "First visit only", "som_gbx_sys_bxp_pup_map_unique", "YesNo"
 	StaticText " "
-	StaticText "Weapon Bonuses"
-	Slider "Game Start Quantity", "som_gbx_sys_bxp_wup_game_flat", 0, 100, 1, 0
-	Slider "Quantity per map", "som_gbx_sys_bxp_wup_map_flat", 0, 100, 1, 0
-	Option "First visit only", "som_gbx_sys_bxp_wup_map_unique", "YesNo"
+	StaticText "Awards - Kills", GOLD
+	Option "Track Kills", "som_gbx_sys_bxp_pup_bonus_mons_track", "YesNo"
+	Slider "Award Threshold", "som_gbx_sys_bxp_pup_bonus_mons_percent", 0.00, 1.00, 0.01, 2
+	Slider "Award Value", "som_gbx_sys_bxp_pup_bonus_mons_award", 0, 100, 1, 0
+	StaticText " "
+	StaticText "Awards - Secrets", GOLD
+	Option "Track Secrets", "som_gbx_sys_bxp_pup_bonus_secs_track", "YesNo"
+	Slider "Award Threshold", "som_gbx_sys_bxp_pup_bonus_secs_percent", 0.00, 1.00, 0.01, 2
+	Slider "Award Value", "som_gbx_sys_bxp_pup_bonus_secs_award", 0, 100, 1, 0
+	StaticText " "
+	StaticText "Awards - Pickups", GOLD
+	Option "Track Pickups", "som_gbx_sys_bxp_pup_bonus_items_track", "YesNo"
+	Slider "Award Threshold", "som_gbx_sys_bxp_pup_bonus_items_percent", 0.00, 1.00, 0.01, 2
+	Slider "Award Value", "som_gbx_sys_bxp_pup_bonus_items_award", 0, 100, 1, 0
+	StaticText " "
+	StaticText "Awards - All Clear", GOLD
+	Option "Track All Clear", "som_gbx_sys_bxp_pup_bonus_clear_track", "YesNo"
+	Slider "Award Value", "som_gbx_sys_bxp_pup_bonus_clear_award", 0, 100, 1, 0
+	StaticText " "
+	StaticText "HUD", FIRE
+	Slider "XP + Award Inform Time (Seconds)", "som_gbx_sys_bxp_hud_pop_time", 1, 60, 1, 0
+	StaticText " "
+	Option "Show HUD", "som_gbx_sys_bxp_hud_enabled", "YesNo"
+	Slider "Scale", "som_gbx_sys_bxp_hud_scale", 1, 4, 1, 0
+	Option "X Alignment", "som_gbx_sys_bxp_hud_align_x", "som_gbx_align_x"
+	Option "Y Alignment", "som_gbx_sys_bxp_hud_align_y", "som_gbx_align_y"
+	StaticText " "
+	Slider "X Offset", "som_gbx_sys_bxp_hud_x", -1920, 1920, 8, 0
+	Slider "Y Offset", "som_gbx_sys_bxp_hud_y", -1080, 1080, 8, 0
+	StaticText " "
+	TextField "X Offset", "som_gbx_sys_bxp_hud_x"
+	TextField "Y Offset", "som_gbx_sys_bxp_hud_y"
 }
 
 /* Template
@@ -115,10 +167,11 @@ OptionMenu "som_gbx_ordinance_array"
 	Slider "Reserve Size per Level", "som_gbx_upgr_ordinance_array_inc", 0.00, 1.00, 0.01, 2
 	Slider "Pivot Threshold", "som_gbx_upgr_ordinance_array_pivot", 0.00, 1.00, 0.01, 2
 	StaticText " "
-	Option "Show Display", "som_gbx_upgr_ordinance_array_hud_enabled", "YesNo"
-	Slider "Display Scale", "som_gbx_upgr_ordinance_array_hud_scale", 1, 4, 1, 0
-	Option "Display X Alignment", "som_gbx_upgr_ordinance_array_hud_align_x", "som_gbx_align_x"
-	Option "Display Y Alignment", "som_gbx_upgr_ordinance_array_hud_align_y", "som_gbx_align_y"
+	StaticText "HUD", FIRE
+	Option "Show HUD", "som_gbx_upgr_ordinance_array_hud_enabled", "YesNo"
+	Slider "Scale", "som_gbx_upgr_ordinance_array_hud_scale", 1, 4, 1, 0
+	Option "X Alignment", "som_gbx_upgr_ordinance_array_hud_align_x", "som_gbx_align_x"
+	Option "Y Alignment", "som_gbx_upgr_ordinance_array_hud_align_y", "som_gbx_align_y"
 	StaticText " "
 	Slider "X Offset", "som_gbx_upgr_ordinance_array_hud_x", -1920, 1920, 8, 0
 	Slider "Y Offset", "som_gbx_upgr_ordinance_array_hud_y", -1080, 1080, 8, 0

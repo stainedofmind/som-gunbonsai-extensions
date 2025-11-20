@@ -36,7 +36,8 @@ Todo
 
 Compatibility
 -------------
-Haven't tested this with multiplayer, and I'm not sure if it will work.
+Haven't tested this with multiplayer, and I'm not sure if it will work, as this
+wasn't designed for multipler in mind.
 
 License
 -------
