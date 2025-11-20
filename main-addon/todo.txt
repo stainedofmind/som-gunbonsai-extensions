@@ -16,13 +16,10 @@ Progress Keeper
 Respec
 	Not sure how this system will play with BXP Player Levels
 	Tested, works just fine, all values are as expected
-Starting Player Levels
-	-Merged with XP Bonuses
 XP Bonuses
-	-Folded in Starting Player Levels
-	-Add alternative gain methods (campfire, map spawning in secrets)
-	-Split menu into submenus to reduce clutter
-	-Add alternative XP methods (for awards)
+	Folded in Starting Player Levels
+	Add alternative gain methods (campfire, map spawning in secrets)
+	Add alternative XP methods (for awards)
 
 Patches Todo
 ------------
@@ -51,3 +48,8 @@ Compat Addons
 -------------
 Angelic Aviary Leech Compat (Unstable)
 War Trophies (In Unstalbe, but keep for legacy purposes)
+
+Completed
+---------
+Starting Player Levels
+	-Merged with XP Bonuses

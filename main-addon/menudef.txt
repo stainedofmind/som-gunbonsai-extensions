@@ -55,7 +55,15 @@ OptionValue "som_gbx_align_y"
 OptionMenu "som_gbx_sys_bxp"
 {
 	Title "XP Bonuses"
-	StaticText "Weapon Bonuses", FIRE
+	SubMenu "Weapon Upgrades", "som_gbx_sys_bxp_wpn"
+	SubMenu "Player Upgrades", "som_gbx_sys_bxp_play"
+	SubMenu "HUD", "som_gbx_sys_bxp_hud"
+}
+
+OptionMenu "som_gbx_sys_bxp_wpn"
+{
+	Title "BXP - Weapon Bonuses"
+	StaticText "Starting Awards", GOLD
 	Slider "Game Start Quantity", "som_gbx_sys_bxp_wup_game_flat", 0, 100, 1, 0
 	Slider "Quantity per map", "som_gbx_sys_bxp_wup_map_flat", 0, 100, 1, 0
 	Option "First visit only", "som_gbx_sys_bxp_wup_map_unique", "YesNo"
@@ -78,8 +86,12 @@ OptionMenu "som_gbx_sys_bxp"
 	StaticText "Awards - All Clear", GOLD
 	Option "Track All Clear", "som_gbx_sys_bxp_wup_bonus_clear_track", "YesNo"
 	Slider "Award Value", "som_gbx_sys_bxp_wup_bonus_clear_award", 0, 100, 1, 0
-	StaticText " "
-	StaticText "Player Bonuses", FIRE
+}
+
+OptionMenu "som_gbx_sys_bxp_play"
+{
+	Title "BXP - Player Bonuses"
+	StaticText "Starting Awards", GOLD
 	Slider "Game Start Quantity", "som_gbx_sys_bxp_pup_game_flat", 0, 100, 1, 0
 	Slider "Quantity per map", "som_gbx_sys_bxp_pup_map_flat", 0, 100, 1, 0
 	Option "First visit only", "som_gbx_sys_bxp_pup_map_unique", "YesNo"
@@ -102,8 +114,11 @@ OptionMenu "som_gbx_sys_bxp"
 	StaticText "Awards - All Clear", GOLD
 	Option "Track All Clear", "som_gbx_sys_bxp_pup_bonus_clear_track", "YesNo"
 	Slider "Award Value", "som_gbx_sys_bxp_pup_bonus_clear_award", 0, 100, 1, 0
-	StaticText " "
-	StaticText "HUD", FIRE
+}
+
+OptionMenu "som_gbx_sys_bxp_hud"
+{
+	Title "BXP - HUD"
 	Slider "XP + Award Inform Time (Seconds)", "som_gbx_sys_bxp_hud_pop_time", 1, 60, 1, 0
 	StaticText " "
 	Option "Show HUD", "som_gbx_sys_bxp_hud_enabled", "YesNo"
