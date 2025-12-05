@@ -12,15 +12,13 @@ class som_gbx_sys_addon_respec : som_gbx_object_base
 	{
 		if (!info.wpn)
 		{
-			// TODO: Add option here to try to spawn a copy of the weapon to rebind it to.
-			// Skip unbound weapons
-			//return;
 			switch (som_gbx_sys_respec_missing_wpn_mode)
 			{
 				case 0:	// Skip
 					console.printf("Skipping missing weapon '%s', please respec later.", info.wpnClass);
 					return;
 				case 1:	// Spawn and Attempt Rebind
+					// TODO: Investigate a better way to do this
 					Weapon _wpn;
 					
 					_wpn = Weapon(Actor.spawn(info.wpnClass, (0,0,0)));
