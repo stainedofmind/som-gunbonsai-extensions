@@ -30,11 +30,11 @@ class som_gbx_sys_core_master : som_gbx_object_base
 	
 	void map_start()
 	{
-		bool visited = g.map_mng.map_has_visited(Level.MapName);
+		bool visited = g.map_man.map_has_visited(Level.MapName);
 		
 		if (!visited)
 		{
-			g.map_mng.map_visit(Level.MapName);
+			g.map_man.map_visit(Level.MapName);
 		}
 		
 		// Call Map Start Funcs here

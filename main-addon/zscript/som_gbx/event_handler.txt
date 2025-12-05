@@ -29,6 +29,8 @@ Class som_gbx_eventhandler : EventHandler
 	{
 		g.bxp.check_completion();
 		g.bxp.process_timers();
+		
+		g.gbug_man.check_maxxp_reset();
 	}
 	
 	override void WorldLoaded(WorldEvent e)
@@ -36,6 +38,7 @@ Class som_gbx_eventhandler : EventHandler
 		load_globals();
 		
 		g.master.map_start();
+		g.gbug_man.init();
 	}
 	
 	override void WorldUnloaded(WorldEvent e)
@@ -46,5 +49,82 @@ Class som_gbx_eventhandler : EventHandler
 	override void RenderOverlay(RenderEvent e)
 	{
 		g.hud.render();
+	}
+	
+    override void NetworkProcess(ConsoleEvent e)
+    {
+		// Debug
+		if (e.Name ~== "som-gbx-test")
+		{
+			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
+
+			if (stats && players[e.Player].readyweapon) 
+			{
+				//g.gbug_man.weapon_respec(stats, stats.GetInfoFor(players[e.Player].readyweapon));
+				// g.gbug_man.weapon_respec_all(stats);
+				// g.gbug_man.player_respec(stats);
+				//g.gbug_man.respec_full(stats);
+				g.respec.full(stats);
+			}
+		}
+
+		if (e.Name ~== "som-gbx-test2")
+		{
+			g.gbug_man.reset_base_xp_cost();
+
+			return;
+			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
+
+			if (stats && players[e.Player].readyweapon) 
+			{
+				//g.gbug_man.weapon_respec(stats, stats.GetInfoFor(players[e.Player].readyweapon));
+				// g.gbug_man.weapon_respec_all(stats);
+				// g.gbug_man.player_respec(stats);
+				//g.gbug_man.respec_full(stats);
+				//g.gbug_man.weapons_reset_max_xp(stats);
+			}
+		}
+		
+		// Systems
+		// Respec
+		if (e.Name ~== "som-gbx-respec-weap-curr")
+		{
+			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
+
+			if (stats && players[e.Player].readyweapon) 
+			{
+				g.respec.weapon_single(stats, stats.GetInfoFor(players[e.Player].readyweapon));
+			}
+		}
+
+		if (e.Name ~== "som-gbx-respec-weap-all")
+		{
+			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
+
+			if (stats) 
+			{
+				g.respec.weapon_all(stats);
+			}
+		}
+
+		if (e.Name ~== "som-gbx-respec-player")
+		{
+			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
+
+			if (stats) 
+			{
+				g.respec.player(stats);
+			}
+		}
+
+		if (e.Name ~== "som-gbx-respec-full")
+		{
+			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
+
+			if (stats) 
+			{
+				g.respec.full(stats);
+			}
+		}
 	}
 }

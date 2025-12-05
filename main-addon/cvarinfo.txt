@@ -8,6 +8,10 @@ server bool som_gbx_hud_enabled = true;
 // * Systems                                                                   *
 // *****************************************************************************
 
+// Respec
+server int som_gbx_sys_respec_mxp_new_value = -1;
+server int som_gbx_sys_respec_missing_wpn_mode = 0;
+
 // Bonus XP Levels
 server bool som_gbx_sys_bxp_wup_map_unique = true;
 server int som_gbx_sys_bxp_wup_map_flat = 0;

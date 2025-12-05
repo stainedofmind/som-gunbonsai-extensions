@@ -1,3 +1,4 @@
 #include "zscript/som_gbx/systems/core/master.txt"
 #include "zscript/som_gbx/systems/core/hud.txt"
 #include "zscript/som_gbx/systems/core/map_manager.txt"
+#include "zscript/som_gbx/systems/core/gbug_manager.txt"

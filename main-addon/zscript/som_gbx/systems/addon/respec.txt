@@ -1,0 +1,82 @@
+class som_gbx_sys_addon_respec : som_gbx_object_base
+{
+	// Global Data
+	som_gbx_global_data g;
+
+	void init()
+	{
+		// PAWG
+	}
+	
+	void weapon_single(TFLV_PerPlayerStats stats, TFLV_WeaponInfo info)
+	{
+		if (!info.wpn)
+		{
+			// TODO: Add option here to try to spawn a copy of the weapon to rebind it to.
+			// Skip unbound weapons
+			//return;
+			switch (som_gbx_sys_respec_missing_wpn_mode)
+			{
+				case 0:	// Skip
+					console.printf("Skipping missing weapon '%s', please respec later.", info.wpnClass);
+					return;
+				case 1:	// Spawn and Attempt Rebind
+					Weapon _wpn;
+					
+					_wpn = Weapon(Actor.spawn(info.wpnClass, (0,0,0)));
+					
+					_wpn.ClearCounters();
+					
+					if (_wpn.GetClassName() != info.wpnClass)
+					{
+						console.printf("Unable to rebind '%s', please respec later.", info.wpnClass);
+						_wpn.Destroy();
+						return;
+					}
+					
+					info.wpn = _wpn;
+					break;
+			}
+		}
+		
+		int xp = g.gbug_man.weapon_get_full_xp(info);
+		int lv = info.level;
+		
+		g.gbug_man.weapon_clear_upgrades(info);
+		
+		info.level = 0;
+		info.xp = xp;
+		info.MaxXP = info.GetXPForLevel(info.level + 1);
+		
+		// Re-adjust PXP
+		stats.XP -= lv;
+	}
+	
+	void weapon_all(TFLV_PerPlayerStats stats)
+	{
+		for (int i = 0; i < stats.weapons.Size(); i++)
+		{
+			Let info = stats.weapons[i];
+			
+			if (info)
+			{
+				weapon_single(stats, info);
+			}
+		}
+	}
+	
+	void player(TFLV_PerPlayerStats stats)
+	{
+		uint lv = stats.level;
+		
+		stats.level = 0;
+		g.gbug_man.player_clear_upgrades(stats);
+		stats.xp += lv * bonsai_gun_levels_per_player_level;
+	}
+	
+	void full(TFLV_PerPlayerStats stats)
+	{
+		weapon_all(stats);
+		player(stats);
+	}
+}

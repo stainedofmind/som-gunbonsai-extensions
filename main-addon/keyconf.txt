@@ -1,0 +1,9 @@
+AddKeySection "SoM GBX" SoMGBX
+AddMenuKey "Test" som-gbx-test
+
+Alias som-gbx-test "NetEvent som-gbx-test;"
+
+AddKeySection "SoM GBX" SoMGBX
+AddMenuKey "Test2" som-gbx-test2
+
+Alias som-gbx-test2 "NetEvent som-gbx-test2;"

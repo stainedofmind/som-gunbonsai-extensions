@@ -30,9 +30,12 @@ class SOM_GBX_Upgrade_Shatterdrive_Main: TFLV_Upgrade_BaseUpgrade
 		
 		let info = TFLV_PerPlayerStats.GetStatsFor(owner).GetInfoForCurrentWeapon();
 		
-		qty = som_gbx_upgr_flak_shot_flaks_base + (som_gbx_upgr_flak_shot_flaks_inc * Level(info, "SOM_GBX_Upgrade_Shatterdrive_Qty"));
-		ttl = som_gbx_upgr_flak_shot_ttl_base + (som_gbx_upgr_flak_shot_ttl_inc * float(Level(info, "SOM_GBX_Upgrade_Shatterdrive_Ttl")));
-		dmg = som_gbx_upgr_flak_shot_dmg_base + (som_gbx_upgr_flak_shot_dmg_inc * Level(info, "SOM_GBX_Upgrade_Shatterdrive_Dmg"));
+		if (info)
+		{
+			qty = som_gbx_upgr_flak_shot_flaks_base + (som_gbx_upgr_flak_shot_flaks_inc * Level(info, "SOM_GBX_Upgrade_Shatterdrive_Qty"));
+			ttl = som_gbx_upgr_flak_shot_ttl_base + (som_gbx_upgr_flak_shot_ttl_inc * float(Level(info, "SOM_GBX_Upgrade_Shatterdrive_Ttl")));
+			dmg = som_gbx_upgr_flak_shot_dmg_base + (som_gbx_upgr_flak_shot_dmg_inc * Level(info, "SOM_GBX_Upgrade_Shatterdrive_Dmg"));
+		}
 	}
 	
 	override TFLV_Upgrade_UpgradePriority Priority()

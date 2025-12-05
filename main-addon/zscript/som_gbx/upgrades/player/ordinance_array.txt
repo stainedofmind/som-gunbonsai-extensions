@@ -211,12 +211,11 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 			
 			bool no_ord = true;
 
-			let pp = players[consoleplayer];
-			let weap = pp.readyweapon;
+			let weap = owner.player.readyweapon;
 			
 			if (weap)
 			{
-				Let ammo = pp.readyweapon.ammotype1;
+				Let ammo = weap.ammotype1;
 				
 				if (ammo)
 				{
@@ -230,7 +229,7 @@ class SOM_GBX_Upgrade_OrdinanceArray : TFLV_Upgrade_BaseUpgrade
 					}
 				}
 
-				ammo = pp.readyweapon.ammotype2;
+				ammo = weap.ammotype2;
 				
 				if (ammo)
 				{

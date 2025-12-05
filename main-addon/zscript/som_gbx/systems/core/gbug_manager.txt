@@ -1,0 +1,116 @@
+// GunBonsai Upgrade Manager, for adding/removing Player and Weapon Upgrades
+
+class som_gbx_sys_core_gbug_manager : som_gbx_object_base
+{
+	// Global Data
+	som_gbx_global_data g;
+	
+	Array<int> mxp_pid;
+	Array<int> mxp_target;
+	
+	void init()
+	{
+		// Null
+	}
+	
+	void check_maxxp_reset()
+	{
+		for (int i = 0; i < mxp_pid.Size(); i++)
+		{
+			if (bonsai_base_level_cost == mxp_target[i])
+			{
+				int pid = mxp_pid[i];
+			
+				Let stats = TFLV_PerPlayerStats.GetStatsFor(players[pid].mo);
+				
+				if (stats)
+				{
+					weapons_reset_max_xp(stats);
+				}
+				
+				mxp_pid.Delete(i);
+				mxp_target.Delete(i);
+				i--;
+			}
+		}
+	}
+	
+	void queue_maxxp_reset(int pid, int target)
+	{
+		mxp_pid.push(pid);
+		mxp_target.Push(target);
+	}
+	
+	// TODO: Weapon Reset, Player Reset
+	
+	void weapon_clear_upgrades(TFLV_WeaponInfo info)
+	{
+		// First Deactivate all upgrades
+		for (uint i = 0; i < info.upgrades.upgrades.Size(); ++i)
+		{
+			info.upgrades.upgrades[i].OnDeactivate(info.stats, info);
+		}
+		
+		info.upgrades.upgrades.Clear();
+	}
+	
+	int weapon_get_full_xp(TFLV_WeaponInfo info)
+	{
+		int lv = info.level;
+		int xp = info.xp;
+		
+		for (int i = 0; i < lv; i++)
+		{
+			xp += info.GetXPForLevel(1 + i);
+		}
+		
+		return (xp);
+	}
+	
+	void player_clear_upgrades(TFLV_PerPlayerStats stats)
+	{
+		// First Deactivate all upgrades
+		for (uint i = 0; i < stats.upgrades.upgrades.Size(); ++i)
+		{
+			stats.upgrades.upgrades[i].OnDeactivate(stats, null);
+		}
+		
+		stats.upgrades.upgrades.Clear();
+	}
+	
+	void weapons_reset_max_xp(TFLV_PerPlayerStats stats)
+	{
+		for (int i = 0; i < stats.weapons.Size(); i++)
+		{
+			Let info = stats.weapons[i];
+			
+			if (info)
+			{
+				// TODO: Some non-weapons will trigger a VM Abort when IsMelee is called, eg: "som_som_LedgeGrabWeapon"
+				info.MaxXP = info.GetXPForLevel(info.level + 1);
+			}
+		}
+	}
+	
+	void reset_base_xp_cost(int cost = -1)
+	{
+		if (cost != -1)
+		{
+			CVar gb_lv_cost = CVar.FindCVar('bonsai_base_level_cost');
+			
+			gb_lv_cost.SetInt(cost);
+		}
+		else
+		{
+			cost = bonsai_base_level_cost;
+		}
+		
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			if (PlayerInGame[i] && players[i].mo)
+			{
+				queue_maxxp_reset(i, cost);
+			}
+		}
+	}
+}

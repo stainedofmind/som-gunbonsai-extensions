@@ -33,7 +33,9 @@ class som_gbx_global_data : som_gbx_object_base
 	som_gbx_sys_core_master master;
 	som_gbx_sys_core_hud hud;
 	som_gbx_sys_addon_bxp bxp;
-	som_gbx_sys_core_map_manager map_mng;
+	som_gbx_sys_core_map_manager map_man;
+	som_gbx_sys_core_gbug_manager gbug_man;
+	som_gbx_sys_addon_respec respec;
 
 	void init()
 	{
@@ -49,9 +51,16 @@ class som_gbx_global_data : som_gbx_object_base
 		bxp.g = self;
 		bxp.init();
 
-		map_mng = new("som_gbx_sys_core_map_manager");
-		map_mng.g = self;
-		map_mng.init();
+		map_man = new("som_gbx_sys_core_map_manager");
+		map_man.g = self;
+		map_man.init();
+		
+		gbug_man = new("som_gbx_sys_core_gbug_manager");
+		gbug_man.g = self;
+		gbug_man.init();
+		
+		respec = new("som_gbx_sys_addon_respec");
+		respec.g = self;
+		respec.init();
 	}
-	
 }

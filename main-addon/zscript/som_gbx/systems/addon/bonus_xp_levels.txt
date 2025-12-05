@@ -90,10 +90,19 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 		}
 	}
 	
+	void players_give_inventory(string inv, int qty)
+	{
+		for (uint i = 0; i < MAXPLAYERS; ++i)
+		{
+			if (playeringame[i])
+			{
+				players[i].mo.GiveInventory(inv, qty);
+			}
+		}
+	}
+	
 	void map_start(bool visited)
 	{
-		PlayerPawn pp = players[consoleplayer].mo;
-		
 		award_wup_mons = false;
 		award_wup_secs = false;
 		award_wup_items = false;
@@ -110,7 +119,7 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 		{
 			if (som_gbx_sys_bxp_pup_game_flat)
 			{
-				pp.GiveInventory("som_gbx_bxp_pup", som_gbx_sys_bxp_pup_game_flat);
+				add_pup_bonus(som_gbx_sys_bxp_pup_game_flat);
 			}
 		}
 		
@@ -118,7 +127,7 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 		{
 			if (som_gbx_sys_bxp_pup_map_flat)
 			{
-				pp.GiveInventory("som_gbx_bxp_pup", som_gbx_sys_bxp_pup_map_flat);
+				add_pup_bonus(som_gbx_sys_bxp_pup_map_flat);
 			}
 		}
 
@@ -128,7 +137,7 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 		{
 			if (som_gbx_sys_bxp_wup_game_flat)
 			{
-				pp.GiveInventory("som_gbx_bxp_wup", som_gbx_sys_bxp_wup_game_flat);
+				add_wup_bonus(som_gbx_sys_bxp_wup_game_flat);
 			}
 		}
 		
@@ -136,7 +145,7 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 		{
 			if (som_gbx_sys_bxp_wup_map_flat)
 			{
-				pp.GiveInventory("som_gbx_bxp_wup", som_gbx_sys_bxp_wup_map_flat);
+				add_wup_bonus(som_gbx_sys_bxp_wup_map_flat);
 			}
 		}
 	}
@@ -183,9 +192,7 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 	
 	void add_wup_bonus(int amt = 1)
 	{
-		Let p = players[consoleplayer].mo;
-		
-		p.GiveInventory("som_gbx_bxp_wup", amt);
+		players_give_inventory("som_gbx_bxp_wup", amt);
 	}
 
 	void add_pup_xp(int amt)
@@ -208,9 +215,7 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 	
 	void add_pup_bonus(int amt = 1)
 	{
-		Let p = players[consoleplayer].mo;
-		
-		p.GiveInventory("som_gbx_bxp_pup", amt);
+		players_give_inventory("som_gbx_bxp_pup", amt);
 	}
 
 	void check_completion()

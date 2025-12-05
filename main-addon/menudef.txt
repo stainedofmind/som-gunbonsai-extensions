@@ -11,6 +11,7 @@ OptionMenu "som_gbx"
 	//StaticText " "
 	StaticText "Addon Systems", FIRE
 	SubMenu "XP Bonuses", "som_gbx_sys_bxp"
+	SubMenu "Respec", "som_gbx_sys_respec"
 	StaticText " "
 	StaticText "Weapon Upgrades", FIRE
 	SubMenu "Shatterdrive", "som_gbx_shatterdrive"
@@ -133,11 +134,29 @@ OptionMenu "som_gbx_sys_bxp_hud"
 	TextField "Y Offset", "som_gbx_sys_bxp_hud_y"
 }
 
-/* Template
-OptionMenu "som_gbx_"
+// Respec
+OptionMenu "som_gbx_sys_respec"
 {
+	Title "Respec"
+	//StaticText "Note: A value of -1 will use the current value of 'bonsai_base_level_cost'"
+	//TextField "MXP New Val", "som_gbx_sys_respec_mxp_new_value"
+	Option "Missing Weapon Mode", "som_gbx_sys_respec_missing_wpn_mode", "som_gbx_respec_mode"
+	//Option "Auto-Clear GB Data on Pistol Start?", "som_gb_respec_auto_clear", "YesNo"
+	StaticText " "
+	StaticText "WARNING! RESPECS CANNOT BE UNDONE!", FIRE
+	SafeCommand "Respec Current Weapon", "netevent som-gbx-respec-weap-curr", "Are you sure you want to Respec your current weapon?"
+	SafeCommand "Respec All Weapons", "netevent som-gbx-respec-weap-all", "Are you sure you want to Respec *ALL* of your weapons?"
+	SafeCommand "Respec Player Upgrades", "netevent som-gbx-respec-player", "Are you sure you want to Respec your Player Upgrades?"
+	StaticText " "
+	SafeCommand "Full Respec", "netevent som-gbx-respec-full", "Are you sure you want to do a FULL Weapon AND Player Respec?"
+	//SafeCommand "Reset GunBonsai Data", "netevent som-gb-respec-reset", "Removes all Player and Weapon Upgrades and XP, are you sure?"
 }
-*/
+
+OptionValue "som_gbx_respec_mode"
+{
+	0, "Skip"
+	1, "Attempt Rebind"
+}
 
 // Weapon Upgrades
 OptionMenu "som_gbx_shatterdrive"

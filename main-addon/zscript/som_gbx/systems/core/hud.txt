@@ -48,6 +48,7 @@ class som_gbx_sys_core_hud : som_gbx_object_base
 
 	ui void render()
 	{
+		// consoleplayer shouls be good here, cause UI?
 		if (!should_draw_hud(consoleplayer)) return;
 		
 		for (int ii = 0; ii < widgets.Size(); ii++)
