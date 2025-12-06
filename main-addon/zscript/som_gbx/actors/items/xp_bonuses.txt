@@ -1,3 +1,4 @@
+// TODO: Rename actors to project standard (_sys_bxp_) and refactor code used
 class som_gbx_bxp_wup : Inventory
 {
 	default
