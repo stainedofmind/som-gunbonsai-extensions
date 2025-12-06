@@ -143,7 +143,7 @@ OptionMenu "som_gbx_sys_respec"
 	StaticText " "
 	StaticText "Note: A value of -1 will use the current value of 'bonsai_base_level_cost'"
 	TextField "Weapon Max XP Recalculate Value", "som_gbx_sys_respec_mxp_recalc_val"
-	StaticText "Warning! Recalculating Max XP should only be done with all weapons at Level zero!"
+	StaticText "WARNING! Recalculating Max XP should only be done with *all* weapons at Level zero!", FIRE
 	SafeCommand "Recalculate Weapon Max XP", "netevent som-gbx-sys-respec-recalc-maxxp", "Are you sure you want to recalculate Maxc XP?"
 	StaticText " "
 	StaticText "WARNING! RESPECS CANNOT BE UNDONE!", FIRE
@@ -151,7 +151,7 @@ OptionMenu "som_gbx_sys_respec"
 	SafeCommand "Respec All Weapons", "netevent som-gbx-sys-respec-weap-all", "Are you sure you want to Respec *ALL* of your weapons?"
 	SafeCommand "Respec Player Upgrades", "netevent som-gbx-sys-respec-player", "Are you sure you want to Respec your Player Upgrades?"
 	StaticText " "
-	SafeCommand "Full Respec", "netevent som-gbx-sys-respec-full", "Are you sure you want to do a FULL Weapon AND Player Respec?"
+	SafeCommand "Full Respec", "netevent som-gbx-sys-respec-full", "Are you sure you want to do a *FULL* Weapon *AND* Player Respec?"
 	StaticText " "
 	SafeCommand "Reset GunBonsai Data", "netevent som-gbx-sys-respec-reset", "Removes all Player and Weapon Upgrades and XP, are you sure?"
 }
