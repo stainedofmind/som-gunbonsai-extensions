@@ -54,3 +54,5 @@ Completed
 ---------
 Starting Player Levels
 	-Merged with XP Bonuses
+Respec
+	-Complete?
