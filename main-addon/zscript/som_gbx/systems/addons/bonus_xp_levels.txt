@@ -192,7 +192,7 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 	
 	void add_wup_bonus(int amt = 1)
 	{
-		players_give_inventory("som_gbx_bxp_wup", amt);
+		players_give_inventory("som_gbx_sys_bxp_wup", amt);
 	}
 
 	void add_pup_xp(int amt)
@@ -215,7 +215,7 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 	
 	void add_pup_bonus(int amt = 1)
 	{
-		players_give_inventory("som_gbx_bxp_pup", amt);
+		players_give_inventory("som_gbx_sys_bxp_pup", amt);
 	}
 
 	void check_completion()
