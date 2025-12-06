@@ -87,7 +87,7 @@ Class som_gbx_eventhandler : EventHandler
 		
 		// Systems
 		// Respec
-		if (e.Name ~== "som-gbx-respec-weap-curr")
+		if (e.Name ~== "som-gbx-sys-respec-weap-curr")
 		{
 			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
 
@@ -97,7 +97,7 @@ Class som_gbx_eventhandler : EventHandler
 			}
 		}
 
-		if (e.Name ~== "som-gbx-respec-weap-all")
+		if (e.Name ~== "som-gbx-sys-respec-weap-all")
 		{
 			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
 
@@ -107,7 +107,7 @@ Class som_gbx_eventhandler : EventHandler
 			}
 		}
 
-		if (e.Name ~== "som-gbx-respec-player")
+		if (e.Name ~== "som-gbx-sys-respec-player")
 		{
 			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
 
@@ -117,7 +117,7 @@ Class som_gbx_eventhandler : EventHandler
 			}
 		}
 
-		if (e.Name ~== "som-gbx-respec-full")
+		if (e.Name ~== "som-gbx-sys-respec-full")
 		{
 			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
 
@@ -127,7 +127,7 @@ Class som_gbx_eventhandler : EventHandler
 			}
 		}
 		
-		if (e.Name ~== "som-gbx-respec-reset")
+		if (e.Name ~== "som-gbx-sys-respec-reset")
 		{
 			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
 
