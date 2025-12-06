@@ -239,8 +239,6 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 				if (som_gbx_sys_bxp_wup_bonus_secs_award > 0)
 				{
 					add_wup_xp(som_gbx_sys_bxp_wup_bonus_secs_award);
-					// Msg
-					Console.Printf("WUP SECRET");
 				}
 			}
 		}
@@ -255,8 +253,6 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 				if (som_gbx_sys_bxp_pup_bonus_secs_award > 0)
 				{
 					add_pup_xp(som_gbx_sys_bxp_pup_bonus_secs_award);
-					// Msg
-					Console.Printf("PUP SECRET");
 				}
 			}
 		}
@@ -271,8 +267,6 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 				if (som_gbx_sys_bxp_wup_bonus_mons_award > 0)
 				{
 					add_wup_xp(som_gbx_sys_bxp_wup_bonus_mons_award);
-					// Msg
-					Console.Printf("WUP KILLS");
 				}
 			}
 		}
@@ -287,8 +281,6 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 				if (som_gbx_sys_bxp_pup_bonus_mons_award > 0)
 				{
 					add_pup_xp(som_gbx_sys_bxp_pup_bonus_mons_award);
-					// Msg
-					Console.Printf("PUP KILLS");
 				}
 			}
 		}
@@ -303,8 +295,6 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 				if (som_gbx_sys_bxp_wup_bonus_items_award > 0)
 				{
 					add_wup_xp(som_gbx_sys_bxp_wup_bonus_items_award);
-					// Msg
-					Console.Printf("WUP PICKUPS");
 				}
 			}
 		}
@@ -319,8 +309,6 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 				if (som_gbx_sys_bxp_pup_bonus_items_award > 0)
 				{
 					add_pup_xp(som_gbx_sys_bxp_pup_bonus_items_award);
-					// Msg
-					Console.Printf("PUP PICKUPS");
 				}
 			}
 		}
@@ -369,7 +357,6 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 				if (som_gbx_sys_bxp_pup_bonus_clear_award != 0)
 				{
 					add_wup_xp(som_gbx_sys_bxp_pup_bonus_clear_award);
-					Console.Printf("WUP ALL CLEAR");
 				}
 			}
 			
@@ -415,7 +402,6 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 					if (som_gbx_sys_bxp_pup_bonus_clear_award != 0)
 					{
 						add_pup_xp(som_gbx_sys_bxp_pup_bonus_clear_award);
-						Console.Printf("PUP ALL CLEAR");
 					}
 				}
 			}
