@@ -1,0 +1,7 @@
+class som_gbx_sys_respec_auto_reset_token : Inventory
+{
+	default
+	{
+		Inventory.MaxAmount 1;
+	}
+}

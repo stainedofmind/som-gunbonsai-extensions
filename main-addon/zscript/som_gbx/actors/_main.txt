@@ -1,1 +1,2 @@
 #include "zscript/som_gbx/actors/items/_main.txt"
+#include "zscript/som_gbx/actors/addons/_main.txt"

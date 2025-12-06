@@ -39,6 +39,7 @@ Class som_gbx_eventhandler : EventHandler
 		
 		g.master.map_start();
 		g.gbug_man.init();
+		g.respec.handle_auto_reset();
 	}
 	
 	override void WorldUnloaded(WorldEvent e)

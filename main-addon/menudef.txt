@@ -141,7 +141,7 @@ OptionMenu "som_gbx_sys_respec"
 	//StaticText "Note: A value of -1 will use the current value of 'bonsai_base_level_cost'"
 	//TextField "MXP New Val", "som_gbx_sys_respec_mxp_new_value"
 	Option "Missing Weapon Mode", "som_gbx_sys_respec_missing_wpn_mode", "som_gbx_respec_mode"
-	//Option "Auto-Clear GB Data on Pistol Start?", "som_gb_respec_auto_clear", "YesNo"
+	Option "Auto-Reset GB Data on Pistol Start?", "som_gbx_sys_respec_auto_reset", "YesNo"
 	StaticText " "
 	StaticText "WARNING! RESPECS CANNOT BE UNDONE!", FIRE
 	SafeCommand "Respec Current Weapon", "netevent som-gbx-sys-respec-weap-curr", "Are you sure you want to Respec your current weapon?"
