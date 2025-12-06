@@ -3,6 +3,7 @@ Bandoliers
 	-Need to add bugfixing/config for Redux
 Pulse Reliquary (HP Boost)
 	-Need to investigate adding support for other gameplay mods, as needed
+	-Pistol starts don't seem to correctly start at boosted levels
 Continuance Field (Powerup Boost)
 	-Need to figure out a way to fix Addative Powerups
 LOL Rockitz
@@ -13,13 +14,13 @@ Ordinance Array (Ammo Reserves)
 
 Systems:
 Progress Keeper
+	-Pending...
 Respec
-	Not sure how this system will play with BXP Player Levels
-	Tested, works just fine, all values are as expected
+	-Feature complete?
 XP Bonuses
-	Folded in Starting Player Levels
-	Add alternative gain methods (campfire, map spawning in secrets)
-	Add alternative XP methods (for awards)
+	-Folded in Starting Player Levels
+	-Add alternative gain methods (campfire, map spawning in secrets)
+	-Add alternative XP methods (for awards)
 
 Patches Todo
 ------------
