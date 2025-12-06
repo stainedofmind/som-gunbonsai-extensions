@@ -67,6 +67,11 @@ Class som_gbx_eventhandler : EventHandler
 		
 		// Systems
 		// Respec
+		if (e.Name ~== "som-gbx-sys-respec-recalc-maxxp")
+		{
+			g.gbug_man.reset_base_xp_cost(som_gbx_sys_respec_mxp_recalc_val);
+		}
+		
 		if (e.Name ~== "som-gbx-sys-respec-weap-curr")
 		{
 			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);

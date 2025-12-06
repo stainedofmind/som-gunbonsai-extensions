@@ -19,6 +19,7 @@ class som_gbx_sys_core_gbug_manager : som_gbx_object_base
 		{
 			if (bonsai_base_level_cost == mxp_target[i])
 			{
+				Console.Printf("Resetiing Max Xp.");
 				int pid = mxp_pid[i];
 			
 				Let stats = TFLV_PerPlayerStats.GetStatsFor(players[pid].mo);
@@ -31,6 +32,10 @@ class som_gbx_sys_core_gbug_manager : som_gbx_object_base
 				mxp_pid.Delete(i);
 				mxp_target.Delete(i);
 				i--;
+			}
+			else
+			{
+				Console.Printf("Cvar not set, skipping...");
 			}
 		}
 	}
@@ -104,6 +109,8 @@ class som_gbx_sys_core_gbug_manager : som_gbx_object_base
 		{
 			cost = bonsai_base_level_cost;
 		}
+		
+		console.printf("Cost: %d", cost);
 		
 		for (int i = 0; i < MAXPLAYERS; i++)
 		{
