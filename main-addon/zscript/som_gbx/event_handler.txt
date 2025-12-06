@@ -57,33 +57,12 @@ Class som_gbx_eventhandler : EventHandler
 		// Debug
 		if (e.Name ~== "som-gbx-test")
 		{
-			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
-
-			if (stats && players[e.Player].readyweapon) 
-			{
-				//g.gbug_man.weapon_respec(stats, stats.GetInfoFor(players[e.Player].readyweapon));
-				// g.gbug_man.weapon_respec_all(stats);
-				// g.gbug_man.player_respec(stats);
-				//g.gbug_man.respec_full(stats);
-				g.respec.full(stats);
-			}
+			// Pending...
 		}
 
 		if (e.Name ~== "som-gbx-test2")
 		{
 			g.gbug_man.reset_base_xp_cost();
-
-			return;
-			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
-
-			if (stats && players[e.Player].readyweapon) 
-			{
-				//g.gbug_man.weapon_respec(stats, stats.GetInfoFor(players[e.Player].readyweapon));
-				// g.gbug_man.weapon_respec_all(stats);
-				// g.gbug_man.player_respec(stats);
-				//g.gbug_man.respec_full(stats);
-				//g.gbug_man.weapons_reset_max_xp(stats);
-			}
 		}
 		
 		// Systems
