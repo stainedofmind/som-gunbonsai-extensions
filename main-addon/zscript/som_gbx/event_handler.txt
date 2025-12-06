@@ -63,7 +63,7 @@ Class som_gbx_eventhandler : EventHandler
 
 		if (e.Name ~== "som-gbx-test2")
 		{
-			g.gbug_man.reset_base_xp_cost();
+			// Pending...
 		}
 		
 		// Systems
