@@ -1,2 +1,2 @@
-#include "zscript/som_gbx/systems/addon/bonus_xp_levels.txt"
-#include "zscript/som_gbx/systems/addon/respec.txt"
+#include "zscript/som_gbx/systems/addons/bonus_xp_levels.txt"
+#include "zscript/som_gbx/systems/addons/respec.txt"
