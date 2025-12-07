@@ -46,7 +46,7 @@ class som_gbx_sys_core_gbug_manager : som_gbx_object_base
 	void weapon_clear_upgrades(TFLV_WeaponInfo info)
 	{
 		// First Deactivate all upgrades
-		for (uint i = 0; i < info.upgrades.upgrades.Size(); ++i)
+		for (int i = 0; i < info.upgrades.upgrades.Size(); ++i)
 		{
 			info.upgrades.upgrades[i].OnDeactivate(info.stats, info);
 		}
@@ -70,7 +70,7 @@ class som_gbx_sys_core_gbug_manager : som_gbx_object_base
 	void player_clear_upgrades(TFLV_PerPlayerStats stats)
 	{
 		// First Deactivate all upgrades
-		for (uint i = 0; i < stats.upgrades.upgrades.Size(); ++i)
+		for (int i = 0; i < stats.upgrades.upgrades.Size(); ++i)
 		{
 			stats.upgrades.upgrades[i].OnDeactivate(stats, null);
 		}
