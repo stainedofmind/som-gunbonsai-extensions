@@ -414,7 +414,7 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 		{
 			wup_timer--;
 			
-			if (wup_timer = 0)
+			if (wup_timer == 0)
 			{
 				wup_count = 0;
 				wup_up = false;
@@ -426,7 +426,7 @@ class som_gbx_sys_addon_bxp : som_gbx_object_base
 		{
 			pup_timer--;
 			
-			if (pup_timer = 0)
+			if (pup_timer == 0)
 			{
 				pup_count = 0;
 				pup_up = false;
