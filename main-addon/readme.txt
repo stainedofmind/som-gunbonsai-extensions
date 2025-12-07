@@ -36,8 +36,12 @@ Todo
 
 Compatibility
 -------------
-Haven't tested this with multiplayer, and I'm not sure if it will work, as this
-wasn't designed for multipler in mind.
+I've done my best to make as many multiplayer safe choices as I can, but
+currently can't guarentee it will work.
+
+The current implementation of Progress Keeper is designed exclusively for
+single player, thus is NOT multiplayer friendly. That said, if disabled, there
+should be no harm in running it on a networked game. 
 
 License
 -------
