@@ -1,2 +1,3 @@
 #include "zscript/som_gbx/systems/addons/bonus_xp_levels.txt"
 #include "zscript/som_gbx/systems/addons/respec.txt"
+#include "zscript/som_gbx/systems/addons/progress_keeper.txt"

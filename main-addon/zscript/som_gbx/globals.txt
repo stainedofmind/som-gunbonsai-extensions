@@ -36,6 +36,7 @@ class som_gbx_global_data : som_gbx_object_base
 	som_gbx_sys_core_map_manager map_man;
 	som_gbx_sys_core_gbug_manager gbug_man;
 	som_gbx_sys_addon_respec respec;
+	som_gbx_sys_addon_progress_keeper prog_keep;
 
 	void init()
 	{
@@ -62,5 +63,9 @@ class som_gbx_global_data : som_gbx_object_base
 		respec = new("som_gbx_sys_addon_respec");
 		respec.g = self;
 		respec.init();
+		
+		prog_keep = new("som_gbx_sys_addon_progress_keeper");
+		prog_keep.g = self;
+		prog_keep.init();
 	}
 }

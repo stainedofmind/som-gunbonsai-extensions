@@ -14,7 +14,7 @@ Ordinance Array (Ammo Reserves)
 
 Systems:
 Progress Keeper
-	-Pending...
+	-Add support for saving upgrades that aren't currently loaded
 Respec
 	-Feature complete?
 XP Bonuses

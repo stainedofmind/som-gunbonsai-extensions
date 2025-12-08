@@ -12,6 +12,7 @@ OptionMenu "som_gbx"
 	StaticText "Addon Systems", FIRE
 	SubMenu "XP Bonuses", "som_gbx_sys_bxp"
 	SubMenu "Respec", "som_gbx_sys_respec"
+	SubMenu "Progress Keeper", "som_gbx_prog_keep"
 	StaticText " "
 	StaticText "Weapon Upgrades", FIRE
 	SubMenu "Shatterdrive", "som_gbx_shatterdrive"
@@ -160,6 +161,25 @@ OptionValue "som_gbx_respec_mode"
 {
 	0, "Skip"
 	1, "Attempt Rebind"
+}
+
+// Progress Keeper
+OptionMenu "som_gbx_prog_keep"
+{
+	Title "Progress Keeper"
+	//SafeCommand "Save GunBonsai Build", "netevent som-gb-progkeep-save", "Are you sure you want to save your current GunBonsai build?  This cannot be undone!"
+	//SafeCommand "Load GunBonsai Build", "netevent som-gb-progkeep-load", "Are you sure you want to load your current GunBonsai build?  This cannot be undone!"
+	//StaticText " "
+	//SafeCommand "Clear Save Data?", "interfaceevent som-gb-progkeep-clear", "Are you sure you want to clear you Save Data?  This cannot be undone!"
+	//StaticText " "
+	//StaticText "Auto Save Settings"
+	//Option "Save at Map End?", "som_gbx_sys_prog_keep_save_map", "OnOff"
+	//Option "Save after Death?", "som_gbx_sys_prog_keep_save_death", "OnOff"
+	//StaticText " "
+	//StaticText "Auto Load Settings"
+	//Option "Load at Map Start?", "som_gbx_sys_prog_keep_load_map", "OnOff"
+	//Option "Load at Game Start?", "som_gbx_sys_prog_keep_load_game", "OnOff"
+	//Option "Load at Open Save File?", "som_gbx_sys_prog_keep_load_save", "OnOff"
 }
 
 // Weapon Upgrades

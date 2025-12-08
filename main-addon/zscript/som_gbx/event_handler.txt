@@ -112,7 +112,18 @@ Class som_gbx_eventhandler : EventHandler
 				g.respec.full(stats);
 			}
 		}
+	}
+	
+	override void InterfaceProcess (ConsoleEvent e)
+	{
+		if (e.Name ~== "som-gbx-sys-prog-keep-clear")
 		{
+			/*CVar pk_data;
+		
+			pk_data = CVar.FindCVar('som_gb_progkeep_data');
+			pk_data.SetString("");
+			
+			console.Printf("Data cleared!");*/
 		}
 	}
 }

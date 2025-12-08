@@ -8,6 +8,17 @@ server bool som_gbx_hud_enabled = true;
 // * Systems                                                                   *
 // *****************************************************************************
 
+// Progress Keeper
+// Settings
+server bool som_gbx_sys_prog_keep_save_map = false;
+server bool som_gbx_sys_prog_keep_save_death = false;
+
+server bool som_gbx_sys_prog_keep_load_map = false;
+server bool som_gbx_sys_prog_keep_load_game = false;
+server bool som_gbx_sys_prog_keep_load_save = false;
+
+nosave string som_gbx_sys_prog_keep_data = "";
+
 // Respec
 server int som_gbx_sys_respec_mxp_recalc_val = -1;
 server int som_gbx_sys_respec_missing_wpn_mode = 0;
@@ -102,10 +113,7 @@ server float som_gbx_upgr_ordinance_array_hud_x = 0;
 server float som_gbx_upgr_ordinance_array_hud_y = 0;
 server int som_gbx_upgr_ordinance_array_hud_scale = 1;
 
-// 0: Left,  1: Center, 2: Right
 server int som_gbx_upgr_ordinance_array_hud_align_x = 0;
-
-// 0: Top, 1: Middle, 2: Bottom
 server int som_gbx_upgr_ordinance_array_hud_align_y = 1;
 
 // *****************************************************************************

@@ -1,0 +1,244 @@
+class som_gbx_sys_addon_progress_keeper : som_gbx_object_base
+{
+	// Global Data
+	som_gbx_global_data g;
+
+	void init()
+	{
+		// khgkdhfgkjdklgm
+	}
+	
+	// TEMP: Will eventually redesign the system to work with multiplayer
+	// Finds the first actuve player number
+	// Note: We will not assume ID 0 is the single player for posterity
+	int player_number()
+	{
+		for (uint i = 0; i < MAXPLAYERS; ++i)
+		{
+			if (playeringame[i])
+			{
+				return (i);
+			}
+		}
+		
+		// Shouldn't be possible, but ZScript be strange...
+		return (-1);
+	}
+	
+	void save_build()
+	{
+		Cvar pk_data;
+		String data;
+		TFLV_PerPlayerStats stats;
+		int pid;
+		
+		pk_data = CVar.FindCVar('som_gbx_sys_prog_keep_data');
+		
+		if (!pk_data)
+		{
+			// Not sure how this could happen, but ZScript yo...
+			Console.Printf("Save Error: Unable to Find CVar!");
+			return;
+		}
+		
+		pid = player_number();
+		
+		stats = TFLV_PerPlayerStats.GetStatsFor(players[pid].mo);
+		
+		if (stats)
+		{
+			Let lv = stats.level;
+			Let xp = stats.xp;
+
+			// Main Player Info
+			data = String.Format("player;%d,%d;", lv, xp);
+			
+			// Player Upgrades
+			// TODO: Insert upgrades not currently in load order here, before processing loaded upgrades
+			for (int i = 0; i < stats.upgrades.upgrades.Size(); i++)
+			{
+				Let up = stats.upgrades.upgrades[i];	// Current Upgrade
+				
+				Let uid = up.GetClassName();			// Upgrade ID
+				Let ulv = up.level;						// Upgrade Level
+				Let umlv = up.max_level;				// Upgrade Max Level
+				
+				String uens = "f";						// Upgrade Enabled String (gross)
+				
+				if (up.enabled) { uens = "t"; };
+				
+				data = data..String.Format("%s,%d,%d,%s;", uid, ulv, umlv, uens);
+			}
+			
+			// Weapons
+			for (int i = 0; i < stats.weapons.Size(); i++)
+			{
+				Let info = stats.weapons[i];	// Current Weapon
+				
+				// Main Weapon Info
+				Let wid = info.wpnClass;		// Weapon ID
+				Let wlv = info.level;			// Weapon Level
+				Let wxp = info.xp;				// Weapon XP
+				Let wmxp = info.maxxp;			// Weapon Max XP
+				
+				data = data..String.Format("weapon;%s,%d,%d,%d;", wid, wlv, wxp, wmxp);
+				
+				// TODO: Insert upgrades not currently in load order here, before processing loaded upgrades
+				for (int j = 0; j < info.upgrades.upgrades.Size(); j++)
+				{
+					Let up = info.upgrades.upgrades[j];		// Current Upgrade
+					
+					Let uid = up.GetClassName();			// Upgrade ID
+					Let ulv = up.level;						// Upgrade Level
+					Let umlv = up.max_level;				// Upgrade Max Level
+					
+					String uens = "f";						// Upgrade Enabled String (still fuckin gross...)
+					
+					if (up.enabled) { uens = "t"; };
+					
+					data = data..String.Format("%s,%d,%d,%s;", uid, ulv, umlv, uens);
+				}
+			}
+			
+			data = data.."eof;";
+			
+			pk_data.SetString(data);
+		}
+		else
+		{
+			Console.Printf("Save Error: GunBonsai Data Not Found!");
+		}
+	}
+	
+	void load_build()
+	{
+		
+		/*
+		CVar pk_data;
+		
+		pk_data = CVar.FindCVar('som_gb_progkeep_data');
+		
+		String str = pk_data.GetString();
+		
+		if (str == "")
+		{
+			Console.Printf("Error: GunBonsai Save Data not found!");
+			Return;
+		}
+		
+		Array<String> data;
+
+		str.split(data, ";", false);
+		
+		if (data[0] != "player")
+		{
+			Console.Printf("Error: Invalid GunBonsai Save Data!");
+			Return;
+		}
+		
+		Let p = players[consoleplayer].mo;
+					
+		TFLV_PerPlayerStats stats;
+		
+		stats = TFLV_PerPlayerStats.GetStatsFor(p);
+		
+		if (stats)
+		{
+			TFLV_WeaponInfo weap;
+			
+			// Clear GunBonsai Data
+			stats.level = 0;
+			stats.xp = 0;
+			stats.upgrades.upgrades.Clear();
+			stats.weapons.Clear();
+
+			// Rebuild GB Data
+			Array<String> pdata;
+			int i = 2;
+			
+			data[1].split(pdata, ",", false);
+
+			stats.level = pdata[0].ToInt();
+			stats.xp = pdata[1].ToInt();
+			
+			pdata.Clear();
+			data[i].split(pdata, ",", false);
+			
+			while ((pdata[0] != "weapon") && (pdata[0] != "eof"))
+			{
+				class<TFLV_Upgrade_BaseUpgrade> cls = pdata[0];
+				
+				if (cls)
+				{
+					Let up = stats.upgrades.Add(pdata[0], pdata[1].ToInt());
+					up.max_level = pdata[2].ToInt();
+					up.enabled = true;
+					
+					if (pdata[3] == "f") { up.enabled = false; }
+				}
+				else
+				{
+					Console.Printf("Unknown upgrade '%s' detected, skipping...", pdata[0]);
+				}
+				
+				i++;
+				pdata.Clear();
+				data[i].split(pdata, ",", false);
+			}
+			
+			while (pdata[0] != "eof")
+			{
+				if (pdata[0] == "weapon")
+				{
+					weap = new("TFLV_WeaponInfo");
+					weap.stats = stats;
+					weap.upgrades = new("TFLV_Upgrade_UpgradeBag");
+					weap.ld_info = new("TFLV_LegendoomWeaponInfo");
+					weap.ld_info.Init(weap);
+					weap.ResetTypeInference();
+					
+					i++;
+					pdata.Clear();
+					data[i].split(pdata, ",", false);
+					
+					weap.wpnClass = pdata[0];
+					weap.level = pdata[1].ToInt();
+					weap.xp = pdata[2].ToInt();
+					weap.maxxp = pdata[3].ToInt();
+					
+					stats.weapons.Push(weap);
+				}
+				else
+				{
+					class<TFLV_Upgrade_BaseUpgrade> cls = pdata[0];
+					
+					if (cls)
+					{
+						Let up = weap.upgrades.Add(pdata[0]);
+						up.level = pdata[1].ToInt();
+						up.max_level = pdata[2].ToInt();
+						up.enabled = true;
+						
+						if (pdata[3] == "f") { up.enabled = false; }
+					}
+					else
+					{
+						Console.Printf("Unknown upgrade '%s' detected, skipping...", pdata[0]);
+					}
+
+				}
+				
+				i++;
+				pdata.Clear();
+				data[i].split(pdata, ",", false);
+			}
+			
+			// Rebuild weapons
+			stats.weaponinfo_dirty = true;
+			stats.RebuildWeaponInfo();
+		}
+		*/
+	}
+	
+	
+}
