@@ -94,25 +94,13 @@ class som_gbx_sys_addon_respec : som_gbx_object_base
 		g.gbug_man.player_clear_upgrades(stats);
 		
 		// Clear
-		stats.level = 0;
-		stats.xp = 0;
-		stats.upgrades.upgrades.Clear();
 		stats.weapons.Clear();
-		
-		stats.weaponinfo_dirty = true;
-		stats.RebuildWeaponInfo();
-	}
-	
-	/*  GunBonsai's Reset Code
-		console.printf("Fully resetting all weapon info.");
-		let stats = TFLV_PerPlayerStats.GetStatsFor(players[player].mo);
-		stats.weapons.clear();
 		stats.weaponinfo_dirty = true;
 		stats.XP = 0;
 		stats.level = 0;
 		stats.upgrades = null;
 		stats.Initialize(stats.proxy);
-	*/
+	}
 	
 	void handle_auto_reset()
 	{
