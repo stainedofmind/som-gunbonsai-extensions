@@ -112,15 +112,7 @@ Class som_gbx_eventhandler : EventHandler
 				g.respec.full(stats);
 			}
 		}
-		
-		if (e.Name ~== "som-gbx-sys-respec-reset")
 		{
-			Let stats = TFLV_PerPlayerStats.GetStatsFor(players[e.Player].mo);
-
-			if (stats) 
-			{
-				g.respec.reset(stats);
-			}
 		}
 	}
 }

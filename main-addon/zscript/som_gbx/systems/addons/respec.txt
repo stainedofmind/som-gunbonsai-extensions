@@ -78,6 +78,8 @@ class som_gbx_sys_addon_respec : som_gbx_object_base
 		player(stats);
 	}
 	
+	// Depreciated, support already built into GunBonsai
+	// Keeping for posterity
 	void reset(TFLV_PerPlayerStats stats)
 	{
 		// Run Deactivation on all Upgrades
