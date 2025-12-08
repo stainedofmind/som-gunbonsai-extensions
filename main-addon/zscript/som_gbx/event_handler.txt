@@ -121,6 +121,7 @@ Class som_gbx_eventhandler : EventHandler
 			{
 				g.respec.reset(stats);
 			}
+		}
 	}
 	
 	override void InterfaceProcess (ConsoleEvent e)
