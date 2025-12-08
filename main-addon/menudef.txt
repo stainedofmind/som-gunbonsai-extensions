@@ -154,7 +154,7 @@ OptionMenu "som_gbx_sys_respec"
 	StaticText " "
 	SafeCommand "Full Respec", "netevent som-gbx-sys-respec-full", "Are you sure you want to do a *FULL* Weapon *AND* Player Respec?"
 	StaticText " "
-	SafeCommand "Reset GunBonsai Data", "netevent bonsai-debug,reset", "Removes all Player and Weapon Upgrades and XP, are you sure?"
+	SafeCommand "Reset GunBonsai Data", "netevent som-gbx-sys-respec-reset", "Removes all Player and Weapon Upgrades and XP, are you sure?"
 }
 
 OptionValue "som_gbx_respec_mode"
