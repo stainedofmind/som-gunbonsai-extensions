@@ -17,6 +17,7 @@ Progress Keeper
 	-Add support for saving upgrades that aren't currently loaded
 Respec
 	-Feature complete?
+	-Note: We're not using GBs built in reset feature, as it doesn't disable upgrades first
 XP Bonuses
 	-Folded in Starting Player Levels
 	-Add alternative gain methods (campfire, map spawning in secrets)
